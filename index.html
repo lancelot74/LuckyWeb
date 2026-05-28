@@ -888,18 +888,13 @@
       display: inline-block;
     }
     .lang-float .lang { background: transparent; border: 0; padding: 0; gap: 1px; }
-    .float-divider { width: 1px; height: 16px; background: var(--line); display: inline-block; }
-    .theme-toggle {
-      display: inline-flex; align-items: center; justify-content: center;
-      width: 24px; height: 24px; padding: 0;
-      border: 0; border-radius: 3px;
-      background: transparent; color: var(--ink-soft);
-      cursor: pointer; line-height: 1;
-      transition: color .2s ease, background .2s ease;
+    .lang-float .lang-sep {
+      display: inline-block;
+      width: 1px;
+      height: 16px;
+      background: var(--line);
+      margin: 0 4px;
     }
-    .theme-toggle:hover { color: var(--ink); background: var(--bg-soft); }
-    /* Keep the sun/moon glyph crisp even in pixel display mode */
-    .theme-toggle-glyph { font-family: ui-sans-serif, system-ui, -apple-system, sans-serif; font-size: 14px; }
     @media (max-width: 640px) {
       .lang-float { top: auto; bottom: 16px; left: 16px; right: auto; }
     }
@@ -1013,18 +1008,19 @@
     </div>
   </header>
 
-  <!-- Floating controls: theme toggle + language switcher (always visible) -->
-  <div class="lang-float" role="group" aria-label="Site preferences">
-    <button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="true" aria-label="Switch to light theme" title="Toggle light / dark">
-      <span class="theme-toggle-glyph" aria-hidden="true">☀</span>
-    </button>
-    <span class="float-divider" aria-hidden="true"></span>
+  <!-- Floating language switcher + font toggle (always visible) -->
+  <div class="lang-float" role="group" aria-label="Language">
     <span class="lang-icon" aria-hidden="true"></span>
     <div class="lang">
       <button class="lang-btn active" type="button" onclick="setLang('en')">EN</button>
       <button class="lang-btn" type="button" onclick="setLang('zh')">ZH</button>
       <button class="lang-btn" type="button" onclick="setLang('mn')">MN</button>
       <button class="lang-btn" type="button" onclick="setLang('hy')">HY</button>
+    </div>
+    <span class="lang-sep" aria-hidden="true"></span>
+    <div class="lang" role="group" aria-label="Font">
+      <button id="font-btn-normal" class="lang-btn active" type="button" onclick="setFont('sans')" title="Normal font">Aa</button>
+      <button id="font-btn-pixel" class="lang-btn" type="button" onclick="setFont('pixel')" title="Pixelated font">8‑bit</button>
     </div>
   </div>
 
@@ -1036,7 +1032,7 @@
           <div class="hero-content">
             <div class="hero-top reveal">
               <span class="dot" aria-hidden="true"></span>
-              <span class="mono" data-t="hero_eyebrow">Independent studio — est. 2025</span>
+              <span class="mono" data-t="hero_eyebrow">Independent studio — est. 2026</span>
               <span class="line" aria-hidden="true"></span>
             </div>
             <h1 class="headline reveal" data-t="hero_h1_html">
@@ -1079,7 +1075,7 @@
         <div class="hero-meta reveal">
           <div>
             <div class="label" data-t="meta1_l">Founded</div>
-            <div class="value" data-comment-anchor="39c70acd86-div">2025</div>
+            <div class="value" data-comment-anchor="39c70acd86-div">2026</div>
           </div>
           <div>
             <div class="label" data-t="meta2_l">Sites shipped</div>
@@ -1197,7 +1193,7 @@
             </div>
           </a>
 
-          <a href="bluefin.html" class="work-item half reveal">
+          <a href="bluefin.html" class="work-item third reveal">
             <div class="work-thumb">
               <img class="work-img" src="images/bluefin.png" alt="Bluefin website" loading="lazy" />
             </div>
@@ -1210,7 +1206,20 @@
             </div>
           </a>
 
-          <a href="#contact" class="work-item half reveal">
+          <a href="https://luckywebtemplate.org" target="_blank" rel="noopener" class="work-item third reveal">
+            <div class="work-thumb">
+              <img class="work-img" src="images/etuga.png" alt="Etuga Guesthouse website" loading="lazy" />
+            </div>
+            <div class="work-meta">
+              <div>
+                <div class="work-name">Etuga</div>
+                <span class="work-cat">Guesthouse</span>
+              </div>
+              <div class="work-link"><span>Visit</span><span class="work-link-arrow">↗</span></div>
+            </div>
+          </a>
+
+          <a href="#contact" class="work-item third reveal">
             <div class="work-thumb work-thumb-landscape">
               <canvas id="landscape-scene" width="200" height="120"></canvas>
               <div class="landscape-overlay">
@@ -2515,14 +2524,14 @@
     })();
   </script>
 
-  <!-- Apply theme before first paint (ink/dark by default; remembers the toggle) -->
+  <!-- Apply theme before first paint -->
   <script>
     (function () {
-      var saved;
-      try { saved = localStorage.getItem('lw-theme'); } catch (e) {}
-      document.documentElement.setAttribute('data-theme',   saved === 'warm' ? 'warm' : 'ink');
+      var savedDisplay;
+      try { savedDisplay = localStorage.getItem('lw-display'); } catch (e) {}
+      document.documentElement.setAttribute('data-theme',   'ink');
       document.documentElement.setAttribute('data-accent',  'ochre');
-      document.documentElement.setAttribute('data-display', 'pixel');
+      document.documentElement.setAttribute('data-display', savedDisplay === 'pixel' ? 'pixel' : 'sans');
     })();
   </script>
 
@@ -2533,7 +2542,7 @@
       en: {
         nav_services:'Services', nav_work:'Work', nav_process:'Process', nav_contact:'Contact', nav_cta:'Start a project',
         status_label:'Booking Q3',
-        hero_eyebrow:'Independent studio — est. 2025',
+        hero_eyebrow:'Independent studio — est. 2026',
         hero_h1_html:'Websites for businesses that <em>mean it.</em>',
         hero_sub:"We design and build calm, considered websites for restaurants, shops, and small studios — usually in a week, sometimes faster.",
         hero_cta1:'Start a project', hero_cta2:'See our work',
@@ -2576,7 +2585,7 @@
       zh: {
         nav_services:'服务', nav_work:'作品', nav_process:'流程', nav_contact:'联系', nav_cta:'开启项目',
         status_label:'接单中 · Q3',
-        hero_eyebrow:'独立工作室 — 创立于 2025',
+        hero_eyebrow:'独立工作室 — 创立于 2026',
         hero_h1_html:'为<em>认真做事</em>的企业打造网站。',
         hero_sub:'我们为餐厅、商店和小型工作室设计并构建沉静、考究的网站 — 通常一周内完成。',
         hero_cta1:'开启项目', hero_cta2:'查看作品',
@@ -2619,7 +2628,7 @@
       mn: {
         nav_services:'Үйлчилгээ', nav_work:'Ажлууд', nav_process:'Үйл явц', nav_contact:'Холбоо', nav_cta:'Төсөл эхлүүлэх',
         status_label:'Захиалга авч байна',
-        hero_eyebrow:'Бие даасан студи — 2025 онд үүсгэгдсэн',
+        hero_eyebrow:'Бие даасан студи — 2026 онд үүсгэгдсэн',
         hero_h1_html:'Бизнестээ <em>үнэхээр итгэдэг</em> хүмүүст зориулсан вэбсайт.',
         hero_sub:'Ресторан, дэлгүүр, жижиг студид зориулж нямбай, цэвэрхэн вэбсайт хийдэг — ихэвчлэн долоо хоногт.',
         hero_cta1:'Төсөл эхлүүлэх', hero_cta2:'Ажлуудыг үзэх',
@@ -2662,7 +2671,7 @@
       hy: {
         nav_services:'Ծառայություններ', nav_work:'Աշխատանքներ', nav_process:'Գործընթաց', nav_contact:'Կապ', nav_cta:'Սկսել նախագիծ',
         status_label:'Երրորդ եռամսյակ',
-        hero_eyebrow:'Անկախ ստուդիա — հիմն. 2025',
+        hero_eyebrow:'Անկախ ստուդիա — հիմն. 2026',
         hero_h1_html:'Կայքեր այն բիզնեսների համար, ովքեր <em>լուրջ են վերաբերվում.</em>',
         hero_sub:'Մենք նախագծում և կառուցում ենք հանգիստ, մտածված կայքեր ռեստորանների, խանութների և փոքր ստուդիաների համար։',
         hero_cta1:'Սկսել նախագիծ', hero_cta2:'Տեսնել աշխատանքները',
@@ -2713,7 +2722,7 @@
         if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') el.placeholder = v;
         else el.innerHTML = v;
       });
-      document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.textContent.trim().toLowerCase() === lang));
+      document.querySelectorAll('.lang-float > .lang:first-of-type .lang-btn').forEach(b => b.classList.toggle('active', b.textContent.trim().toLowerCase() === lang));
       document.documentElement.lang = lang === 'mn' ? 'mn' : lang === 'hy' ? 'hy' : lang === 'zh' ? 'zh' : 'en';
     }
     window.__T_DICT__ = T.en;
@@ -2757,25 +2766,28 @@
     window.setLang = setLang;
   </script>
 
-  <!-- Theme toggle (ink ⇄ warm), remembered across visits -->
+  <!-- Font toggle (normal ↔ pixel), remembered across visits -->
   <script>
-    (function () {
-      var btn = document.getElementById('theme-toggle');
-      if (!btn) return;
-      var glyph = btn.querySelector('.theme-toggle-glyph');
-      function sync() {
-        var dark = document.documentElement.getAttribute('data-theme') === 'ink';
-        if (glyph) glyph.textContent = dark ? '☀' : '☾';
-        btn.setAttribute('aria-pressed', String(dark));
-        btn.setAttribute('aria-label', dark ? 'Switch to light theme' : 'Switch to dark theme');
+    function setFont(mode) {
+      if (mode !== 'pixel' && mode !== 'sans') return;
+      document.documentElement.setAttribute('data-display', mode);
+      const normal = document.getElementById('font-btn-normal');
+      const pixel  = document.getElementById('font-btn-pixel');
+      if (normal && pixel) {
+        normal.classList.toggle('active', mode === 'sans');
+        pixel.classList.toggle('active',  mode === 'pixel');
       }
-      sync();
-      btn.addEventListener('click', function () {
-        var next = document.documentElement.getAttribute('data-theme') === 'ink' ? 'warm' : 'ink';
-        document.documentElement.setAttribute('data-theme', next);
-        try { localStorage.setItem('lw-theme', next); } catch (e) {}
-        sync();
-      });
+      try { localStorage.setItem('lw-display', mode); } catch (e) {}
+    }
+    window.setFont = setFont;
+
+    (function initFontToggle() {
+      const mode = document.documentElement.getAttribute('data-display') || 'sans';
+      const normal = document.getElementById('font-btn-normal');
+      const pixel  = document.getElementById('font-btn-pixel');
+      if (!normal || !pixel) return;
+      normal.classList.toggle('active', mode !== 'pixel');
+      pixel.classList.toggle('active',  mode === 'pixel');
     })();
   </script>
 
