@@ -1,0 +1,1792 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#070407" />
+<title>Jerric · Shanghai Nightlife Concierge · INS</title>
+<meta name="description" content="Private nightlife concierge for Shanghai's six-story superclub INS — tables, bottles, KTV. English-speaking. One message and I handle the rest." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+SC:wght@300;400;500&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" />
+
+<style>
+  html, body { margin:0; padding:0; background:#070407; color:#f4eef6;
+               font-family:'Space Grotesk', system-ui, sans-serif;
+               -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+  body { overflow-x: hidden; }
+
+  /* Booting splash so the page never shows raw markup before React mounts */
+  .splash { position:fixed; inset:0; background:#070407; color:#ff2d8d;
+            display:flex; align-items:center; justify-content:center;
+            font-family:'JetBrains Mono', monospace; font-size:12px; letter-spacing:.3em;
+            text-transform:uppercase; z-index:10000; transition:opacity .4s; }
+  .splash.gone { opacity:0; pointer-events:none; }
+
+  /* ── responsive layer (mobile + tablet overrides for the Neon Pulse site) ──
+     The component injects its <style> AFTER this block, so rules are prefixed
+     with `body` to win the specificity tie. */
+  html, body { overflow-x: hidden; }
+  #root { width: 100%; max-width: 1280px; margin: 0 auto; }
+  body .vA { width: 100% !important; max-width: 1280px; }
+
+  @media (max-width: 1280px) {
+    body .vA-hero { padding: 28px 40px 48px; }
+  }
+
+  @media (max-width: 1100px) {
+    body .vA-hero { height: auto; min-height: 900px; padding: 28px 36px 40px; }
+    body .vA-hero-mid { grid-template-columns: 1fr 320px; gap: 32px; padding-top: 48px; }
+    body .vA-h1 { font-size: 140px; }
+    body .vA-portrait, body .vA-club { height: 360px; }
+
+    body .vA-section { padding: 72px 36px; }
+    body .vA-h2 { font-size: 68px; }
+
+    body .vA-services { grid-template-columns: 1fr 1fr; gap: 18px; }
+    body .vA-svc { height: 460px; padding: 28px; }
+    body .vA-svc-name { font-size: 96px; }
+
+    body .vA-contact { padding: 96px 36px; }
+    body .vA-contact-h2 { font-size: 120px; }
+    body .vA-contact-cards { grid-template-columns: 1fr 1fr; }
+    body .vA-contact-cards .vA-cc.cta { grid-column: 1 / -1; }
+  }
+
+  @media (max-width: 760px) {
+    body .vA-hero { min-height: auto; padding: 20px 20px 40px; }
+
+    body .vA-nav { flex-wrap: wrap; gap: 12px; }
+    body .vA-nav-links { display: none; }
+    body .vA-nav > div:last-child { margin-left: auto; }
+    body .vA-nav-cta { padding: 8px 14px; font-size: 12px; }
+    body .vA-replay { display: none; }
+
+    body .vA-hero-mid { grid-template-columns: 1fr; gap: 28px; padding-top: 32px; }
+    body .vA-right { flex-direction: column; gap: 18px; }
+    body .vA-portrait { display: none; }
+    body .vA-club { height: 380px; }
+
+    body .vA-kicker { gap: 10px; font-size: 10px; }
+    body .vA-kicker .bar { width: 24px; }
+
+    body .vA-h1 { font-size: 72px; margin-top: 18px; line-height: .94; }
+    body .vA-sub { font-size: 15px; margin-top: 20px; max-width: none; }
+    body .vA-cta-row { flex-direction: column; gap: 10px; margin-top: 22px; align-items: stretch; }
+    body .vA-btn { justify-content: center; padding: 14px 20px; font-size: 13px; }
+
+    body .vA-burst { left: -60px; top: 60px; width: 360px; height: 360px; }
+
+    body .vA-hero-foot { padding-top: 32px; flex-wrap: wrap; gap: 12px; }
+    body .vA-hero-foot .big { font-size: 56px; order: -1; flex-basis: 100%; }
+    body .vA-hero-foot .mono { font-size: 10px; }
+
+    body .vA-section { padding: 64px 20px; }
+    body .vA-tag { font-size: 10px; }
+    body .vA-h2 { font-size: 44px; line-height: .96; }
+
+    body .vA-about { grid-template-columns: 1fr; gap: 28px; }
+    body .vA-about-body { font-size: 15px; max-width: none; }
+    body .vA-stats { grid-template-columns: 1fr; }
+    body .vA-stat:nth-child(odd),
+    body .vA-stat:nth-child(even) { padding: 18px 0; border-right: none; }
+    body .vA-stat .v { font-size: 40px; }
+    body .vA-stat .k { font-size: 10px; }
+
+    body .vA-services { grid-template-columns: 1fr; gap: 16px; margin-top: 32px; }
+    body .vA-svc { height: auto; min-height: 380px; padding: 28px; }
+    body .vA-svc-name { font-size: 76px; }
+    body .vA-svc-sub { font-size: 12px; }
+    body .vA-svc-body { font-size: 14px; }
+    body .vA-svc-stats { flex-wrap: wrap; gap: 18px; padding-top: 20px; }
+
+    body .vA-why { grid-template-columns: 1fr 1fr; margin-top: 32px; }
+    body .vA-why-cell { padding: 24px 14px 0 0; min-height: 160px; }
+    body .vA-why-cell:nth-child(2n) { border-right: none; padding-right: 0; }
+    body .vA-why-cell:nth-child(n+3) { border-top: 1px solid rgba(244,238,246,.12); }
+    body .vA-why-cell .t { font-size: 22px; }
+    body .vA-why-cell .b { font-size: 13px; }
+
+    body .vA-steps { grid-template-columns: 1fr; margin-top: 32px; gap: 8px; }
+    body .vA-steps::before { display: none; }
+    body .vA-step { padding-right: 0; padding-top: 18px; padding-bottom: 18px;
+                     border-top: 1px solid rgba(244,238,246,.12); }
+    body .vA-step .n { font-size: 36px; }
+    body .vA-step .t { font-size: 22px; margin-top: 14px; }
+    body .vA-step .b { font-size: 14px; }
+
+    body .vA-contact { padding: 72px 20px; }
+    body .vA-contact-h2 { font-size: 60px; line-height: .94; }
+    body .vA-contact-sub { font-size: 15px; }
+    body .vA-contact-cards { grid-template-columns: 1fr; gap: 12px; margin-top: 32px; }
+    body .vA-cc { padding: 20px; }
+    body .vA-cc .id { font-size: 26px; }
+    body .vA-cc.cta .label { font-size: 26px; }
+    body .vA-cc.cta .arrow { font-size: 28px; }
+
+    body .vA-marquee { padding: 14px 0; font-size: 22px; }
+
+    body .vA-foot { flex-direction: column; gap: 10px; padding: 24px 20px; }
+
+    /* KANPAI ANIMATION — match the SVG's 1280:780 ratio so all 3 cups stay
+       on-screen instead of getting clipped by xMidYMid slice. */
+    body .kp { height: auto; aspect-ratio: 1280 / 780; min-height: 380px; }
+    body .kp-overlay { padding: 20px; }
+    body .kp-tag { font-size: 9px; }
+    body .kp-meta { font-size: 9px; }
+    body .kp-mid { left: 20px; right: 20px; width: auto; }
+    body .kp-h { font-size: 56px; max-width: none; }
+    body .kp-h .han { font-size: 28px; }
+    body .kp-h .lbl { font-size: 9px; margin-bottom: 12px; }
+    body .kp-pill { font-size: 9px; padding: 5px 8px; }
+    body .kp-bot-right { font-size: 9px; }
+    body .kp-bar { left: 20px; right: 20px; bottom: 18px; }
+  }
+
+  @media (max-width: 380px) {
+    body .vA-h1 { font-size: 60px; }
+    body .vA-club { height: 300px; }
+    body .vA-svc-name { font-size: 60px; }
+    body .vA-contact-h2 { font-size: 48px; }
+    body .kp-h { font-size: 44px; }
+  }
+
+  /* ── language toggle (EN / 中文) ── */
+  .lang-toggle { position:fixed; right:18px; bottom:18px; z-index:9999; display:flex;
+                 border:1px solid rgba(244,238,246,.25); border-radius:999px; overflow:hidden;
+                 font-family:'JetBrains Mono', monospace; font-size:12px; letter-spacing:.12em;
+                 background:rgba(7,4,7,.7); backdrop-filter:blur(8px); }
+  .lang-toggle button { background:transparent; color:rgba(244,238,246,.6); border:none;
+                        padding:9px 16px; cursor:pointer; font:inherit; letter-spacing:inherit; }
+  .lang-toggle button.active { background:#ff2d8d; color:#070407; }
+  @media (max-width: 760px) { .lang-toggle { right:12px; bottom:12px; font-size:11px; } }
+</style>
+</head>
+<body>
+
+<div id="splash" class="splash">▶ Booting INS feed…</div>
+<div id="root"></div>
+
+<!-- React + Babel -->
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<!-- ─────────────────────────  CONTENT  ───────────────────────── -->
+<script>
+// Shared content. Two languages — toggled via the on-page language switch.
+window.JERRIC_CONTENT = {
+  en: {
+    name: "JERRIC",
+    role: "Shanghai Nightlife Guide",
+    city: "Shanghai",
+    citySub: "上海",
+    heroKicker: "Private nightlife concierge · Shanghai",
+    heroLead: "Tables. Bottles.\nKTV. No queue.",
+    heroSub: "Your private line into Shanghai's six-story superclub INS and the city's best private karaoke lounges. One message — I handle the rest.",
+    heroCTA: "Message on WeChat",
+    heroCTA2: "See tonight",
+    marquee: [
+      "INS · 6 FLOORS",
+      "KTV LOUNGES",
+      "ENGLISH-SPEAKING",
+      "OPEN 7 NIGHTS",
+      "TABLE GUARANTEED",
+      "WECHAT: JERRIC1225"
+    ],
+    aboutTag: "01 — Who",
+    aboutTitle: "Born here.\nKnows every door.",
+    aboutBody: "Send me a private message and I'll tell you the most interesting bars and KTVs in Shanghai. English-speaking, on-call seven nights a week. I handle the bookings, the bottle minimums, the door — you just show up.",
+    aboutStats: [
+      { k: "Nights/week", v: "7" },
+      { k: "Venues", v: "20+" },
+      { k: "Languages", v: "EN · 中" },
+      { k: "Years on the scene", v: "5+" }
+    ],
+    servicesTag: "02 — What",
+    servicesTitle: "Two doors.\nOne fixer.",
+    serviceINS: {
+      label: "Flagship",
+      name: "INS",
+      sub: "Six-story superclub",
+      body: "The biggest, loudest, most photographed club in Shanghai. I get you a reserved table on the floor of your choice — main room, hip-hop floor, rooftop. Bottle minimum sorted in advance. Skip the door entirely.",
+      stats: [
+        ["Floors", "6"],
+        ["Capacity", "3,000+"],
+        ["Music", "EDM · HIP-HOP · COMMERCIAL"]
+      ]
+    },
+    serviceKTV: {
+      label: "After-hours",
+      name: "KTV",
+      sub: "Private karaoke lounges",
+      body: "Premium private rooms with bottle service, English-speaking hostesses, and song books that actually have your songs. Birthdays, bachelor parties, after-club, corporate — I match the venue to the night.",
+      stats: [
+        ["Rooms", "Suite · Mid · Mega"],
+        ["Catalog", "EN · CN · KR · JP"],
+        ["Hours", "Til sunrise"]
+      ]
+    },
+    whyTag: "03 — Why",
+    whyTitle: "What you actually get",
+    why: [
+      { n: "→", t: "Zero door drama", b: "No line. No cover negotiation. You walk straight to your booth." },
+      { n: "→", t: "English-speaking", b: "Every text, every booking, every venue intro — handled in English." },
+      { n: "→", t: "Real connections", b: "I work with the venues, not for them. Honest recommendations only." },
+      { n: "→", t: "Built around you", b: "Group of 4 or 24. Birthday, business, bachelor — custom every time." }
+    ],
+    stepsTag: "04 — How",
+    stepsTitle: "How a night works",
+    steps: [
+      { n: "01", t: "DM me", b: "WeChat Jerric1225 or @shanghaiinsjerric. Date, group size, vibe, budget — that's all I need." },
+      { n: "02", t: "I pick the spot", b: "INS main floor? Rooftop? KTV after? I match the venue to the night." },
+      { n: "03", t: "Table confirmed", b: "Booking confirmation lands on your phone. Bottle minimum, arrival window, all set." },
+      { n: "04", t: "Walk in like a regular", b: "I meet you at the door or hand you to the host. From there — enjoy." }
+    ],
+    contactTag: "05 — Tonight",
+    contactTitle: "Out tonight?",
+    contactSub: "Message me before the sun sets. I'll have your table sorted before the city wakes up.",
+    contactWeChat: "WeChat",
+    contactWeChatId: "Jerric1225",
+    contactIG: "Instagram",
+    contactIGId: "@shanghaiinsjerric",
+    contactCTA: "Message on WeChat",
+    footRights: "© 2026 Jerric · Shanghai nightlife concierge",
+    footQuote: "上海的夜,等你来"
+  },
+  zh: {
+    name: "JERRIC",
+    role: "上海夜生活向导",
+    city: "上海",
+    citySub: "Shanghai",
+    heroKicker: "上海 · 私人夜生活管家",
+    heroLead: "订桌 · 酒水\nKTV · 免排队",
+    heroSub: "通往上海六层超级夜店 INS 与城中顶级 KTV 包房的私人通道。一条消息,剩下交给我。",
+    heroCTA: "微信联系我",
+    heroCTA2: "看今晚",
+    marquee: [
+      "INS · 六层夜店",
+      "KTV 包房",
+      "英文流畅",
+      "全周营业",
+      "保留桌位",
+      "微信: JERRIC1225"
+    ],
+    aboutTag: "01 — 关于",
+    aboutTitle: "土生土长。\n熟悉每一扇门。",
+    aboutBody: "私信我,我会告诉你上海最好玩的酒吧和 KTV。中英文流畅,一周七晚在线。订位、最低消费、门口接待 — 全部由我处理,你只管来玩。",
+    aboutStats: [
+      { k: "营业/周", v: "7 晚" },
+      { k: "合作场所", v: "20+" },
+      { k: "语言", v: "中 · EN" },
+      { k: "从业经验", v: "5+ 年" }
+    ],
+    servicesTag: "02 — 服务",
+    servicesTitle: "两个去处。\n一个向导。",
+    serviceINS: {
+      label: "招牌",
+      name: "INS",
+      sub: "六层超级夜店",
+      body: "上海最大、最热、最出片的夜店。任意楼层保留桌位 — 主场、嘻哈层、屋顶。酒水最低消费提前安排好,门口直接进入。",
+      stats: [
+        ["楼层", "6"],
+        ["容量", "3,000+"],
+        ["音乐", "EDM · 嘻哈 · 流行"]
+      ]
+    },
+    serviceKTV: {
+      label: "夜后",
+      name: "KTV",
+      sub: "私人卡拉OK包房",
+      body: "顶级私人包房,配套酒水服务、英文流畅的服务人员、真正齐全的中英日韩歌单。生日、单身派对、夜店后场、商务 — 按夜定制。",
+      stats: [
+        ["包房", "豪华 · 中型 · 巨型"],
+        ["曲库", "中 · EN · 韩 · 日"],
+        ["营业", "至日出"]
+      ]
+    },
+    whyTag: "03 — 为什么",
+    whyTitle: "你真正得到的",
+    why: [
+      { n: "→", t: "零门口麻烦", b: "免排队,免谈门票,直接走到你的卡座。" },
+      { n: "→", t: "英文流畅", b: "每一条信息、每一次预订、每一次场所介绍 — 全程英文沟通。" },
+      { n: "→", t: "真实关系", b: "我与场所合作,不为他们工作。只推荐真正值得去的地方。" },
+      { n: "→", t: "为你定制", b: "4 人或 24 人;生日、商务、单身派对 — 每一次都量身定制。" }
+    ],
+    stepsTag: "04 — 流程",
+    stepsTitle: "一个晚上的流程",
+    steps: [
+      { n: "01", t: "私信我", b: "微信 Jerric1225 或 @shanghaiinsjerric。日期、人数、风格、预算 — 这些信息就够了。" },
+      { n: "02", t: "我选场地", b: "INS 主场?屋顶?之后转 KTV?我帮你匹配今晚的最佳组合。" },
+      { n: "03", t: "桌位确认", b: "预订确认发到你手机。最低消费、到场时间,全部安排好。" },
+      { n: "04", t: "像熟客一样进门", b: "我在门口接你或交给场内主管。剩下的 — 尽情享受。" }
+    ],
+    contactTag: "05 — 今晚",
+    contactTitle: "今晚出门?",
+    contactSub: "天黑前给我发消息,城市醒来之前帮你把桌位安排妥当。",
+    contactWeChat: "微信",
+    contactWeChatId: "Jerric1225",
+    contactIG: "Instagram",
+    contactIGId: "@shanghaiinsjerric",
+    contactCTA: "微信联系我",
+    footRights: "© 2026 Jerric · 上海夜生活管家",
+    footQuote: "Shanghai. Where the night never sleeps."
+  }
+};
+</script>
+
+<!-- ─────────────────────────  KANPAI POUR ANIMATION  ───────────────────────── -->
+<script type="text/babel">
+// KanpaiPour — SVG/CSS auto-loop animation for the Neon Pulse hero.
+// A bottle descends, pours three shot glasses one by one. The glasses then
+// slide to the center for a kanpai (干杯) clink — a flash + splash droplets
+// shoot out, the headline reads KANPAI, then the whole scene fades and the
+// loop restarts. ~10s loop, no scroll dependency.
+(function () {
+  const css = `
+  /* ── stage ──────────────────────────────────────── */
+  .kp { position:relative; width:100%; background:#000; overflow:hidden;
+        font-family:'Space Grotesk', sans-serif; color:#fff; isolation:isolate;
+        height:780px; }
+
+  .kp-bg { position:absolute; inset:0; z-index:0;
+           background:
+             radial-gradient(ellipse 70% 38% at 50% 18%, rgba(255,45,141,.34), transparent 65%),
+             radial-gradient(ellipse 50% 50% at 12% 78%, rgba(0,240,255,.22), transparent 60%),
+             radial-gradient(ellipse 55% 50% at 88% 70%, rgba(255,170,80,.20), transparent 60%),
+             linear-gradient(180deg, #0a0410 0%, #150916 50%, #050306 100%); }
+
+  .kp-bokeh { position:absolute; inset:0; pointer-events:none; z-index:1;
+              background:
+                radial-gradient(circle at 8%  16%, rgba(255,200,80,.55)  0 4px, transparent 5px),
+                radial-gradient(circle at 22% 9%,  rgba(255,80,160,.45)  0 3px, transparent 4px),
+                radial-gradient(circle at 38% 22%, rgba(255,200,180,.4)  0 4px, transparent 5px),
+                radial-gradient(circle at 56% 11%, rgba(0,240,255,.4)    0 3px, transparent 4px),
+                radial-gradient(circle at 72% 16%, rgba(255,140,180,.5)  0 5px, transparent 6px),
+                radial-gradient(circle at 88% 25%, rgba(255,200,80,.4)   0 3px, transparent 4px),
+                radial-gradient(circle at 14% 32%, rgba(255,140,180,.35) 0 2px, transparent 3px),
+                radial-gradient(circle at 46% 6%,  rgba(0,240,255,.3)    0 2px, transparent 3px);
+              filter: blur(1.6px);
+              animation: kpBokeh 5s ease-in-out infinite alternate; }
+  @keyframes kpBokeh {
+    0%   { opacity:.6; transform: translateX(0)  }
+    100% { opacity:1;  transform: translateX(10px) }
+  }
+
+  /* warm wood table */
+  .kp-table { position:absolute; left:0; right:0; bottom:0; height:32%; z-index:2;
+              background:
+                linear-gradient(180deg, rgba(40,20,14,0) 0%,
+                                          rgba(38,20,14,.85) 12%,
+                                          rgba(22,12,8,1) 32%,
+                                          rgba(10,6,4,1) 100%);
+              border-top:1px solid rgba(255,150,80,.3);
+              box-shadow:inset 0 1px 0 rgba(255,190,110,.35),
+                         inset 0 30px 60px -20px rgba(0,0,0,.55); }
+  .kp-table::before { content:""; position:absolute; left:18%; right:18%; top:-50px; height:140px;
+                       background: radial-gradient(ellipse at 50% 100%, rgba(255,170,80,.3), transparent 75%);
+                       pointer-events:none; }
+
+  .kp-svg { position:absolute; inset:0; width:100%; height:100%; display:block; z-index:3; }
+
+  /* === bottle === */
+  .kp-bottle-pos { animation: kp-bottlePos 10s ease-in-out infinite; }
+  .kp-bottle-rot { animation: kp-bottleRot 10s ease-in-out infinite;
+                    transform-origin: 0 0; transform-box: view-box; }
+
+  @keyframes kp-bottlePos {
+    0%        { transform: translate(640px, 120px); }
+    6%        { transform: translate(640px, 300px); }
+    8%, 21%   { transform: translate(360px, 300px); }
+    24%, 37%  { transform: translate(640px, 300px); }
+    40%, 53%  { transform: translate(920px, 300px); }
+    58%, 100% { transform: translate(640px, 120px); }
+  }
+  @keyframes kp-bottleRot {
+    0%,  9%   { transform: rotate(0deg); }
+    11%, 19%  { transform: rotate(60deg); }
+    21%, 25%  { transform: rotate(0deg); }
+    27%, 35%  { transform: rotate(60deg); }
+    37%, 41%  { transform: rotate(0deg); }
+    43%, 51%  { transform: rotate(60deg); }
+    53%, 100% { transform: rotate(0deg); }
+  }
+
+  /* === pour streams === */
+  .kp-stream { animation-duration:10s; animation-timing-function:linear;
+               animation-iteration-count:infinite;
+               transform-box: fill-box; transform-origin: 50% 0%; opacity:0; }
+  .kp-stream-1 { animation-name: kp-stream1; }
+  .kp-stream-2 { animation-name: kp-stream2; }
+  .kp-stream-3 { animation-name: kp-stream3; }
+  @keyframes kp-stream1 {
+    0%, 11%   { opacity:0; transform: scaleY(0); }
+    13%, 18%  { opacity:1; transform: scaleY(1); }
+    20%, 100% { opacity:0; transform: scaleY(0); }
+  }
+  @keyframes kp-stream2 {
+    0%, 27%   { opacity:0; transform: scaleY(0); }
+    29%, 34%  { opacity:1; transform: scaleY(1); }
+    36%, 100% { opacity:0; transform: scaleY(0); }
+  }
+  @keyframes kp-stream3 {
+    0%, 43%   { opacity:0; transform: scaleY(0); }
+    45%, 50%  { opacity:1; transform: scaleY(1); }
+    52%, 100% { opacity:0; transform: scaleY(0); }
+  }
+
+  /* === cup fill levels === */
+  .kp-fill { transform-box: fill-box; transform-origin: 50% 100%;
+              animation-duration:10s; animation-timing-function:ease-out;
+              animation-iteration-count:infinite;
+              transform: scaleY(0); }
+  .kp-fill-1 { animation-name: kp-fill1; }
+  .kp-fill-2 { animation-name: kp-fill2; }
+  .kp-fill-3 { animation-name: kp-fill3; }
+  @keyframes kp-fill1 {
+    0%, 11%  { transform: scaleY(0); }
+    20%      { transform: scaleY(1); }
+    60%      { transform: scaleY(1); }
+    63%      { transform: scaleY(.78); }
+    100%     { transform: scaleY(.78); }
+  }
+  @keyframes kp-fill2 {
+    0%, 27%  { transform: scaleY(0); }
+    36%      { transform: scaleY(1); }
+    60%      { transform: scaleY(1); }
+    63%      { transform: scaleY(.74); }
+    100%     { transform: scaleY(.74); }
+  }
+  @keyframes kp-fill3 {
+    0%, 43%  { transform: scaleY(0); }
+    52%      { transform: scaleY(1); }
+    60%      { transform: scaleY(1); }
+    63%      { transform: scaleY(.8); }
+    100%     { transform: scaleY(.8); }
+  }
+
+  /* === cup convergence + clink === */
+  .kp-cup { transform-box: fill-box; transform-origin: 50% 100%;
+            animation-duration:10s; animation-timing-function:ease-in-out;
+            animation-iteration-count:infinite; }
+  .kp-cup-1 { animation-name: kp-cup1; }
+  .kp-cup-2 { animation-name: kp-cup2; }
+  .kp-cup-3 { animation-name: kp-cup3; }
+  @keyframes kp-cup1 {
+    0%, 56%   { transform: translateX(0)     rotate(0deg); }
+    62%       { transform: translateX(220px) rotate(-14deg); }
+    64%       { transform: translateX(208px) rotate(-10deg); }
+    78%       { transform: translateX(208px) rotate(-10deg); }
+    86%, 100% { transform: translateX(0)     rotate(0deg); }
+  }
+  @keyframes kp-cup2 {
+    0%, 56%   { transform: translateY(0); }
+    62%       { transform: translateY(-10px); }
+    64%       { transform: translateY(-2px); }
+    78%       { transform: translateY(-2px); }
+    86%, 100% { transform: translateY(0); }
+  }
+  @keyframes kp-cup3 {
+    0%, 56%   { transform: translateX(0)      rotate(0deg); }
+    62%       { transform: translateX(-220px) rotate(14deg); }
+    64%       { transform: translateX(-208px) rotate(10deg); }
+    78%       { transform: translateX(-208px) rotate(10deg); }
+    86%, 100% { transform: translateX(0)      rotate(0deg); }
+  }
+
+  /* === clink flash === */
+  .kp-flash { transform-box: fill-box; transform-origin: 50% 50%; opacity:0;
+              animation: kp-flash 10s linear infinite; }
+  @keyframes kp-flash {
+    0%, 61%   { opacity:0; transform: scale(.2); }
+    63%       { opacity:1;  transform: scale(1); }
+    66%       { opacity:.6; transform: scale(1.4); }
+    72%       { opacity:0;  transform: scale(1.9); }
+    100%      { opacity:0; }
+  }
+  .kp-rays { transform-box: fill-box; transform-origin: 50% 50%; opacity:0;
+              animation: kp-rays 10s linear infinite; }
+  @keyframes kp-rays {
+    0%, 62%   { opacity:0; transform: scale(.4) rotate(0deg); }
+    63%       { opacity:1; transform: scale(1) rotate(15deg); }
+    68%       { opacity:.5; transform: scale(1.35) rotate(40deg); }
+    74%, 100% { opacity:0; transform: scale(1.7) rotate(60deg); }
+  }
+  .kp-rays2 { transform-box: fill-box; transform-origin: 50% 50%; opacity:0;
+              animation: kp-rays2 10s linear infinite; }
+  @keyframes kp-rays2 {
+    0%, 62%   { opacity:0; transform: scale(.3); }
+    64%       { opacity:.9; transform: scale(1); }
+    72%       { opacity:0; transform: scale(1.7); }
+    100%      { opacity:0; transform: scale(1.7); }
+  }
+
+  /* === splash droplets === */
+  .kp-drop { transform-box: fill-box; transform-origin: 50% 50%; opacity:0;
+              animation-duration:10s; animation-timing-function:cubic-bezier(.25,.6,.4,1);
+              animation-iteration-count:infinite; }
+  @keyframes kp-drop {
+    0%, 62%   { opacity:0; transform: translate(0,0) scale(.4); }
+    64%       { opacity:1; transform: translate(0,0) scale(1); }
+    74%       { opacity:0; transform: var(--end) scale(.6); }
+    100%      { opacity:0; }
+  }
+
+  /* fade scene at loop boundary */
+  .kp-scene { animation: kp-scene 10s ease-in-out infinite; transform-origin: 50% 50%; }
+  @keyframes kp-scene {
+    0%       { opacity:0; }
+    4%, 92%  { opacity:1; }
+    98%, 100%{ opacity:0; }
+  }
+
+  /* ── overlay chrome ────────────────────────────────── */
+  .kp-overlay { position:absolute; inset:0; padding:40px 56px;
+                display:flex; flex-direction:column; justify-content:space-between;
+                pointer-events:none; z-index:6; }
+  .kp-top  { display:flex; justify-content:space-between; align-items:start; }
+  .kp-tag  { font-family:'JetBrains Mono', monospace; font-size:11px;
+             letter-spacing:.22em; text-transform:uppercase; color:#00f0ff;
+             display:flex; gap:12px; align-items:center; }
+  .kp-tag .dot { width:8px; height:8px; border-radius:50%; background:#ff2d8d;
+                  box-shadow:0 0 14px #ff2d8d; animation: kpBlink 1.2s infinite; }
+  @keyframes kpBlink { 0%,100% { opacity:1 } 50% { opacity:.3 } }
+  .kp-meta { font-family:'JetBrains Mono', monospace; font-size:11px;
+             letter-spacing:.18em; color:#f4eef6; text-align:right; }
+  .kp-meta .ts { color:#ff2d8d; }
+
+  .kp-mid { position:absolute; left:56px; top:0; bottom:0; width:560px;
+             display:flex; flex-direction:column; justify-content:center;
+             pointer-events:none; z-index:5; }
+  .kp-h  { position:absolute; opacity:0; max-width:560px;
+            font-family:'Anton', sans-serif; font-size:124px; line-height:.88;
+            text-transform:uppercase; letter-spacing:-.005em;
+            text-shadow:0 0 30px rgba(255,45,141,.5);
+            animation-duration:10s; animation-timing-function:ease-in-out;
+            animation-iteration-count:infinite; }
+  .kp-h .pink { color:#ff2d8d; }
+  .kp-h .out  { color:transparent; -webkit-text-stroke:1.5px #00f0ff; }
+  .kp-h .lbl  { display:block; font-family:'JetBrains Mono', monospace;
+                font-size:11px; letter-spacing:.28em; color:#ff2d8d;
+                margin-bottom:22px; }
+  .kp-h .han  { display:block; font-family:'Noto Sans SC', sans-serif;
+                 font-size:54px; letter-spacing:.5em; color:#00f0ff;
+                 margin-top:14px; font-weight:300; }
+
+  .kp-h1 { animation-name: kpH1; }
+  .kp-h2 { animation-name: kpH2; }
+  .kp-h3 { animation-name: kpH3; }
+  @keyframes kpH1 {
+    0%       { opacity:0; transform: translateY(12px); }
+    5%, 50%  { opacity:1; transform: translateY(0); }
+    55%, 100%{ opacity:0; transform: translateY(0); }
+  }
+  @keyframes kpH2 {
+    0%, 53%   { opacity:0; transform: translateY(12px); }
+    57%, 60%  { opacity:1; transform: translateY(0); }
+    63%, 100% { opacity:0; transform: translateY(-8px); }
+  }
+  @keyframes kpH3 {
+    0%, 62%   { opacity:0; transform: scale(.96); }
+    65%       { opacity:1; transform: scale(1.02); }
+    72%, 90%  { opacity:1; transform: scale(1); }
+    95%, 100% { opacity:0; transform: scale(1.04); }
+  }
+
+  .kp-bot { display:flex; justify-content:space-between; align-items:end; }
+  .kp-pill { padding:6px 10px; border:1px solid rgba(0,240,255,.45); color:#00f0ff;
+              font-family:'JetBrains Mono', monospace; font-size:11px; letter-spacing:.2em; }
+  .kp-bot-right { font-family:'JetBrains Mono', monospace; font-size:11px;
+                   letter-spacing:.22em; color:rgba(244,238,246,.6); text-align:right; }
+
+  /* progress sweep — visualizes the 10s loop */
+  .kp-bar { position:absolute; left:56px; right:56px; bottom:34px; height:2px;
+             background:rgba(244,238,246,.18); z-index:6; }
+  .kp-bar .fill { height:100%; width:0%; background:linear-gradient(90deg, #00f0ff, #ff2d8d);
+                   animation: kpBar 10s linear infinite; }
+  @keyframes kpBar {
+    0%   { width:0%; }
+    100% { width:100%; }
+  }
+  `;
+
+  const DROPS = [
+    { x: -120, y: -90, r: 4, d: 0 },
+    { x:  -70, y: -130, r: 3.2, d: 0.02 },
+    { x:   -30, y: -150, r: 2.6, d: 0.04 },
+    { x:   40, y: -140, r: 3.5, d: 0.0 },
+    { x:   90, y: -110, r: 4, d: 0.03 },
+    { x:  140, y: -70, r: 3, d: 0.06 },
+    { x: -180, y: -40, r: 2.5, d: 0.08 },
+    { x:  180, y: -30, r: 2.5, d: 0.07 }
+  ];
+
+  function Cup({ fillClass }) {
+    return (
+      <>
+        <ellipse cx="0" cy="606" rx="46" ry="7" fill="rgba(0,0,0,.55)" />
+        <path d="M-32 542 L-30 600 L30 600 L32 542 Z"
+              fill="rgba(60,40,30,.45)" />
+        <g clipPath="url(#cupClip)" transform="translate(0,0)">
+          <g className={`kp-fill ${fillClass}`}>
+            <rect x="-29" y="548" width="58" height="48" fill="url(#amber)" />
+            <ellipse cx="0" cy="548" rx="29" ry="3.5" fill="rgba(255,210,140,.85)" />
+          </g>
+        </g>
+        <path d="M-34 542 L-30 600 L30 600 L34 542"
+              fill="none" stroke="rgba(255,220,180,.7)" strokeWidth="1.6"
+              strokeLinejoin="round" />
+        <ellipse cx="0" cy="542" rx="34" ry="6"
+                 fill="rgba(20,10,8,.3)"
+                 stroke="rgba(255,220,180,.85)" strokeWidth="1.6" />
+        <path d="M-30 545 L-26 598" stroke="rgba(255,255,255,.35)" strokeWidth="1.2"
+              strokeLinecap="round" />
+        <path d="M 30 545 L 26 598" stroke="rgba(255,255,255,.18)" strokeWidth="1"
+              strokeLinecap="round" />
+      </>
+    );
+  }
+
+  function Bottle() {
+    return (
+      <g>
+        <path d="M-32 -160 Q-32 -170 -22 -170 L22 -170 Q32 -170 32 -160 L32 -50 Q32 -42 22 -42 L-22 -42 Q-32 -42 -32 -50 Z"
+              fill="url(#bottleBody)" stroke="rgba(0,0,0,.55)" strokeWidth="1" />
+        <path d="M-32 -50 Q-32 -42 -22 -42 L22 -42 Q32 -42 32 -50"
+              fill="none" stroke="rgba(0,0,0,.4)" strokeWidth="1" />
+        <rect x="-7" y="-42" width="14" height="32" fill="url(#bottleNeck)"
+              stroke="rgba(0,0,0,.45)" strokeWidth="1" />
+        <rect x="-9" y="-13" width="18" height="6" rx="1.5" fill="#1c0a05"
+              stroke="rgba(0,0,0,.5)" strokeWidth="1" />
+        <rect x="-10" y="-7" width="20" height="3" rx="1" fill="#0c0503" />
+        <rect x="-23" y="-135" width="46" height="58" rx="2"
+              fill="#ecdfb6" stroke="#a07a3a" strokeWidth=".6" />
+        <text x="0" y="-118" textAnchor="middle"
+              fontFamily="'Cormorant Garamond', serif" fontSize="9"
+              fontWeight="700" letterSpacing="1" fill="#3a1d09">KANPAI</text>
+        <line x1="-16" y1="-112" x2="16" y2="-112" stroke="#a07a3a" strokeWidth=".4" />
+        <text x="0" y="-101" textAnchor="middle"
+              fontFamily="'Cormorant Garamond', serif" fontStyle="italic" fontSize="6"
+              fill="#6a4317">est. 上海</text>
+        <text x="0" y="-89" textAnchor="middle"
+              fontFamily="'JetBrains Mono', monospace" fontSize="5"
+              letterSpacing="1.2" fill="#6a4317">SHANGHAI · 03</text>
+        <rect x="-26" y="-155" width="3" height="100" fill="rgba(255,255,255,.32)" rx="1.5" />
+        <rect x="20" y="-155" width="2" height="80" fill="rgba(255,255,255,.12)" rx="1" />
+      </g>
+    );
+  }
+
+  function KanpaiPour() {
+    return (
+      <>
+        <style>{css}</style>
+        <div className="kp">
+          <div className="kp-bg" />
+          <div className="kp-bokeh" />
+          <div className="kp-table" />
+
+          <svg className="kp-svg" viewBox="0 0 1280 780"
+               preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <linearGradient id="amber" x1="0" x2="0" y1="0" y2="1">
+                <stop offset="0%"  stopColor="#ffcf7a" />
+                <stop offset="50%" stopColor="#e89a3d" />
+                <stop offset="100%" stopColor="#7a3f12" />
+              </linearGradient>
+              <linearGradient id="bottleBody" x1="0" x2="1" y1="0" y2="0">
+                <stop offset="0%"  stopColor="#1c0805" />
+                <stop offset="25%" stopColor="#5a210e" />
+                <stop offset="55%" stopColor="#3a1408" />
+                <stop offset="100%" stopColor="#120403" />
+              </linearGradient>
+              <linearGradient id="bottleNeck" x1="0" x2="1" y1="0" y2="0">
+                <stop offset="0%"  stopColor="#1c0805" />
+                <stop offset="50%" stopColor="#4a1c0b" />
+                <stop offset="100%" stopColor="#120403" />
+              </linearGradient>
+              <linearGradient id="stream" x1="0" x2="0" y1="0" y2="1">
+                <stop offset="0%"  stopColor="#ffd17a" stopOpacity=".95" />
+                <stop offset="55%" stopColor="#e89a3d" stopOpacity=".95" />
+                <stop offset="100%" stopColor="#c2731a" stopOpacity=".7" />
+              </linearGradient>
+              <radialGradient id="flashG" cx="50%" cy="50%" r="50%">
+                <stop offset="0%"   stopColor="rgba(255,235,180,1)" />
+                <stop offset="40%"  stopColor="rgba(255,180,90,.7)" />
+                <stop offset="100%" stopColor="rgba(255,80,140,0)" />
+              </radialGradient>
+              <clipPath id="cupClip">
+                <path d="M-30 542 L-28 598 L28 598 L30 542 Z" />
+              </clipPath>
+            </defs>
+
+            <g className="kp-scene">
+              <g className="kp-stream kp-stream-1">
+                <rect x="357" y="305" width="6" height="240" fill="url(#stream)" rx="3" />
+                <ellipse cx="360" cy="540" rx="6" ry="2.5" fill="#e89a3d" opacity=".85" />
+              </g>
+              <g className="kp-stream kp-stream-2">
+                <rect x="637" y="305" width="6" height="240" fill="url(#stream)" rx="3" />
+                <ellipse cx="640" cy="540" rx="6" ry="2.5" fill="#e89a3d" opacity=".85" />
+              </g>
+              <g className="kp-stream kp-stream-3">
+                <rect x="917" y="305" width="6" height="240" fill="url(#stream)" rx="3" />
+                <ellipse cx="920" cy="540" rx="6" ry="2.5" fill="#e89a3d" opacity=".85" />
+              </g>
+
+              <g transform="translate(360,0)"><g className="kp-cup kp-cup-1">
+                <Cup fillClass="kp-fill-1" />
+              </g></g>
+              <g transform="translate(640,0)"><g className="kp-cup kp-cup-2">
+                <Cup fillClass="kp-fill-2" />
+              </g></g>
+              <g transform="translate(920,0)"><g className="kp-cup kp-cup-3">
+                <Cup fillClass="kp-fill-3" />
+              </g></g>
+
+              <g className="kp-bottle-pos">
+                <g className="kp-bottle-rot">
+                  <Bottle />
+                </g>
+              </g>
+
+              <g transform="translate(640,520)"><g className="kp-rays">
+                {Array.from({length: 18}).map((_, i) => {
+                  const a = (i / 18) * Math.PI * 2;
+                  const long = i % 2 === 0;
+                  const r1 = long ? 18 : 14;
+                  const r2 = long ? 90 : 60;
+                  const x1 = Math.cos(a) * r1;
+                  const y1 = Math.sin(a) * r1;
+                  const x2 = Math.cos(a) * r2;
+                  const y2 = Math.sin(a) * r2;
+                  return (
+                    <line key={i} x1={x1} y1={y1} x2={x2} y2={y2}
+                          stroke="#ffe3a6" strokeWidth={long ? 2.4 : 1.6}
+                          strokeLinecap="round"
+                          opacity={long ? 1 : .8} />
+                  );
+                })}
+              </g></g>
+
+              {/* secondary slow ring — wider, magenta */}
+              <g transform="translate(640,520)"><g className="kp-rays2">
+                <circle cx="0" cy="0" r="40" fill="none"
+                        stroke="#ff2d8d" strokeWidth="2" opacity=".7" />
+                <circle cx="0" cy="0" r="66" fill="none"
+                        stroke="#ff7ab6" strokeWidth="1.5" opacity=".5" />
+              </g></g>
+
+              <g transform="translate(640,520)"><g className="kp-flash">
+                <circle cx="0" cy="0" r="100" fill="url(#flashG)" />
+                <circle cx="0" cy="0" r="40" fill="rgba(255,255,255,.95)" />
+                <circle cx="0" cy="0" r="16" fill="#ffffff" />
+              </g></g>
+
+              {DROPS.map((d, i) => (
+                <circle
+                  key={i}
+                  className="kp-drop"
+                  cx="640" cy="510" r={d.r}
+                  fill="url(#amber)"
+                  style={{
+                    '--end': `translate(${d.x}px, ${d.y}px)`,
+                    animationName: 'kp-drop',
+                    animationDelay: `${d.d}s`
+                  }}
+                />
+              ))}
+              <circle className="kp-drop" cx="540" cy="600" r="5"
+                      fill="url(#amber)" opacity=".9"
+                      style={{ '--end': 'translate(-30px, 6px)',
+                               animationName: 'kp-drop', animationDelay: '0.04s' }} />
+              <circle className="kp-drop" cx="740" cy="600" r="5"
+                      fill="url(#amber)" opacity=".9"
+                      style={{ '--end': 'translate(30px, 6px)',
+                               animationName: 'kp-drop', animationDelay: '0.04s' }} />
+            </g>
+          </svg>
+
+          <div className="kp-overlay">
+            <div className="kp-top">
+              <div className="kp-tag"><span className="dot" />LIVE · 干杯 · 上海</div>
+              <div className="kp-meta">
+                AUTO LOOP · <span className="ts">10.0s</span>
+              </div>
+            </div>
+
+            <div className="kp-bot">
+              <div className="kp-pill">▶ BOTTLE · POURED · CLINKED</div>
+              <div className="kp-bot-right">
+                JACKSON'S NIGHT · INS 新乐园<br />
+                BOTTLE SERVICE · 6 / 8
+              </div>
+            </div>
+          </div>
+
+          <div className="kp-mid">
+            <div className="kp-h kp-h1">
+              <span className="lbl">01 — Bottle</span>
+              <span className="pink">Bottles</span><br/>
+              <span className="out">poured.</span>
+            </div>
+            <div className="kp-h kp-h2">
+              <span className="lbl">02 — Together</span>
+              The whole<br/>
+              <span className="pink">table.</span>
+            </div>
+            <div className="kp-h kp-h3">
+              <span className="lbl">03 — Cheers</span>
+              <span className="pink">KANPAI.</span>
+              <span className="han">干杯</span>
+            </div>
+          </div>
+
+          <div className="kp-bar"><div className="fill" /></div>
+        </div>
+      </>
+    );
+  }
+
+  window.KanpaiPour = KanpaiPour;
+  window.VideoScrub = KanpaiPour;
+})();
+</script>
+
+<!-- ─────────────────────────  CLUB BUILDING  ───────────────────────── -->
+<script type="text/babel">
+// ClubBuilding — playful animated SVG of the 6-story INS superclub for the hero.
+(function () {
+  const css = `
+  .cb { position:relative; width:100%; height:100%;
+        font-family:'Anton', sans-serif; color:#fff;
+        background:
+          radial-gradient(ellipse 70% 40% at 50% 95%, rgba(255,45,141,.45), transparent 65%),
+          radial-gradient(ellipse 60% 50% at 30% 30%, rgba(0,240,255,.18), transparent 70%),
+          linear-gradient(180deg, #110512 0%, #060309 90%);
+        border:1px solid rgba(244,238,246,.14);
+        overflow:hidden;
+        box-shadow: 0 30px 60px -20px rgba(255,45,141,.35),
+                    0 0 0 1px rgba(0,240,255,.18) inset; }
+
+  .cb-stars { position:absolute; inset:0; pointer-events:none;
+              background:
+                radial-gradient(circle at 10% 12%, rgba(255,255,255,.7) 0 1px, transparent 2px),
+                radial-gradient(circle at 22% 6%,  rgba(255,255,255,.6) 0 1px, transparent 2px),
+                radial-gradient(circle at 40% 8%,  rgba(0,240,255,.6)   0 1px, transparent 2px),
+                radial-gradient(circle at 60% 4%,  rgba(255,255,255,.5) 0 1px, transparent 2px),
+                radial-gradient(circle at 78% 10%, rgba(255,45,141,.5)  0 1px, transparent 2px),
+                radial-gradient(circle at 92% 6%,  rgba(255,255,255,.6) 0 1px, transparent 2px),
+                radial-gradient(circle at 14% 24%, rgba(255,255,255,.4) 0 1px, transparent 2px),
+                radial-gradient(circle at 86% 22%, rgba(0,240,255,.4)   0 1px, transparent 2px);
+              animation: cb-stars 4s ease-in-out infinite alternate; }
+  @keyframes cb-stars { 0% { opacity:.4 } 100% { opacity:1 } }
+
+  .cb-svg { width:100%; height:100%; display:block; position:relative; z-index:1; }
+
+  .cb-flicker  { animation: cb-flicker 3.4s 0.0s infinite; transform-origin: center; }
+  .cb-flicker2 { animation: cb-flicker 3.1s 0.8s infinite; transform-origin: center; }
+  .cb-flicker3 { animation: cb-flicker 3.6s 1.4s infinite; transform-origin: center; }
+  @keyframes cb-flicker {
+    0%, 16%, 24%, 38%, 100% { opacity:1 }
+    19%, 21%, 41%, 43%       { opacity:.25 }
+  }
+
+  .cb-pulse   { animation: cb-pulse 1.4s ease-in-out infinite; transform-origin: center; }
+  .cb-pulse2  { animation: cb-pulse 1.8s ease-in-out infinite .3s; transform-origin: center; }
+  @keyframes cb-pulse {
+    0%, 100% { opacity:.7; transform: scale(1) }
+    50%      { opacity:1;  transform: scale(1.06) }
+  }
+
+  .cb-blink-a { animation: cb-blink 0.9s steps(2) infinite; }
+  .cb-blink-b { animation: cb-blink 1.3s steps(2) .15s infinite; }
+  .cb-blink-c { animation: cb-blink 0.7s steps(2) .35s infinite; }
+  @keyframes cb-blink { 0%, 49% { opacity:1 } 50%, 100% { opacity:.15 } }
+
+  .cb-chase   { animation: cb-chase 1.6s linear infinite; }
+  @keyframes cb-chase {
+    0%, 100% { fill:#ff2d8d; filter:drop-shadow(0 0 6px #ff2d8d) }
+    50%      { fill:#3a1422; filter:none }
+  }
+
+  .cb-marquee-band  { overflow:hidden; }
+  .cb-marquee-track { animation: cb-marquee 5s linear infinite; transform-box: fill-box; }
+  @keyframes cb-marquee {
+    0%   { transform: translateX(0) }
+    100% { transform: translateX(-50%) }
+  }
+
+  .cb-arrow { animation: cb-arrow 1s ease-in-out infinite; transform-origin: center; }
+  @keyframes cb-arrow {
+    0%, 100% { transform: translateY(0) }
+    50%      { transform: translateY(4px) }
+  }
+
+  .cb-spin { animation: cb-spin 6s linear infinite; transform-origin: center; transform-box: fill-box; }
+  @keyframes cb-spin { 0% { transform: rotate(0deg) } 100% { transform: rotate(360deg) } }
+
+  .cb-beam {
+    position:absolute; left:50%; bottom:50%;
+    width:6px; height:300%;
+    transform-origin: 50% 100%;
+    background: linear-gradient(0deg, rgba(255,45,141,.55), rgba(255,45,141,0));
+    filter: blur(6px);
+    animation: cb-beam 5.5s ease-in-out infinite;
+    pointer-events:none; z-index:0;
+  }
+  .cb-beam.two { background: linear-gradient(0deg, rgba(0,240,255,.45), rgba(0,240,255,0));
+                  animation: cb-beam 6.5s ease-in-out infinite .8s reverse; }
+  @keyframes cb-beam {
+    0%, 100% { transform: translateX(-50%) rotate(-40deg) }
+    50%      { transform: translateX(-50%) rotate( 40deg) }
+  }
+
+  .cb-crowd { animation: cb-crowd 2.2s ease-in-out infinite; transform-origin: center; transform-box: fill-box; }
+  @keyframes cb-crowd {
+    0%, 100% { transform: translateY(0) }
+    50%      { transform: translateY(-2px) }
+  }
+
+  .cb-smoke { animation: cb-smoke 4s linear infinite; transform-box: fill-box; transform-origin: center; }
+  .cb-smoke.two { animation-delay: 1.2s; animation-duration: 5s; }
+  .cb-smoke.three { animation-delay: 2.4s; animation-duration: 6s; }
+  @keyframes cb-smoke {
+    0%   { opacity:0; transform: translate(0, 0)    scale(.5) }
+    20%  { opacity:.6 }
+    100% { opacity:0; transform: translate(-8px, -80px) scale(1.6) }
+  }
+  `;
+
+  const VERT = ['新', '乐', '园'];
+
+  const FLOORS = [
+    { label: 'F6 LA FIN',   sign: 'LA FIN · 顶楼' },
+    { label: 'F5 FRiENDS',  sign: 'FRiENDS' },
+    { label: 'F4 DIRTY',    sign: '★ DIRTY HOUSE ★ UNDERGROUND ★ ' },
+    { label: 'F3 RADI',     sign: 'RADI' },
+    { label: 'F2 HUSH',     sign: 'HUSH' },
+    { label: 'F1 SOBER',    sign: 'SOBER COMPANY' }
+  ];
+
+  function ClubBuilding() {
+    const W = 360, H = 540;
+    const bx = 36, by = 30, bw = W - 72, bh = H - 90;
+    const floorH = bh / 6;
+
+    return (
+      <div className="cb">
+        <style>{css}</style>
+        <div className="cb-stars" />
+        <span className="cb-beam" />
+        <span className="cb-beam two" />
+
+        <svg className="cb-svg" viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="xMidYMid meet">
+          <defs>
+            <linearGradient id="cb-facade" x1="0" x2="0" y1="0" y2="1">
+              <stop offset="0%"  stopColor="#1a0d18" />
+              <stop offset="50%" stopColor="#120712" />
+              <stop offset="100%" stopColor="#0a0509" />
+            </linearGradient>
+            <linearGradient id="cb-window" x1="0" x2="0" y1="0" y2="1">
+              <stop offset="0%"  stopColor="#ffd17a" />
+              <stop offset="100%" stopColor="#e89a3d" />
+            </linearGradient>
+            <linearGradient id="cb-pink" x1="0" x2="1" y1="0" y2="0">
+              <stop offset="0%"   stopColor="#ff2d8d" />
+              <stop offset="100%" stopColor="#ff6db0" />
+            </linearGradient>
+            <radialGradient id="cb-door" cx="50%" cy="100%" r="80%">
+              <stop offset="0%"  stopColor="#ffcf7a" stopOpacity=".95" />
+              <stop offset="60%" stopColor="#ff7a3d" stopOpacity=".55" />
+              <stop offset="100%" stopColor="#ff2d8d" stopOpacity="0" />
+            </radialGradient>
+            <filter id="cb-glow" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="2.5" result="blur" />
+              <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+          </defs>
+
+          {/* === smoke puffs from rooftop chimneys === */}
+          <g>
+            <circle className="cb-smoke" cx={bx + 60} cy={by - 6} r="10" fill="rgba(255,255,255,.16)" />
+            <circle className="cb-smoke two" cx={bx + 80} cy={by - 2} r="12" fill="rgba(255,255,255,.12)" />
+            <circle className="cb-smoke three" cx={bx + 100} cy={by - 8} r="10" fill="rgba(255,255,255,.14)" />
+          </g>
+
+          {/* === ROOFTOP CROWN === */}
+          <g transform={`translate(${W/2}, ${by - 2})`}>
+            <g className="cb-spin">
+              <circle cx="0" cy="0" r="20" fill="none"
+                      stroke="#ff2d8d" strokeWidth="1" strokeDasharray="3 5" opacity=".6" />
+            </g>
+            <circle cx="0" cy="0" r="6" fill="#ff2d8d" className="cb-pulse" filter="url(#cb-glow)" />
+          </g>
+
+          {/* === BUILDING FACADE === */}
+          <rect x={bx} y={by} width={bw} height={bh}
+                fill="url(#cb-facade)" stroke="rgba(255,45,141,.35)" strokeWidth="1.3" />
+          {Array.from({length:5}).map((_, i) => (
+            <line key={i}
+                  x1={bx} y1={by + (i+1)*floorH}
+                  x2={bx + bw} y2={by + (i+1)*floorH}
+                  stroke="rgba(255,200,255,.12)" strokeWidth="1" />
+          ))}
+
+          {/* === VERTICAL SIDE SIGN — INS (red neon) === */}
+          <g transform={`translate(${bx + bw + 6}, ${by + 24})`}>
+            <rect x="-4" y="-6" width="22" height="180" rx="2"
+                  fill="rgba(255,45,141,.08)" stroke="#ff2d8d" strokeWidth="1" />
+            <text x="7" y="36" textAnchor="middle" fontSize="32"
+                  fill="#ff2d8d" filter="url(#cb-glow)" className="cb-flicker">I</text>
+            <text x="7" y="76" textAnchor="middle" fontSize="32"
+                  fill="#ff2d8d" filter="url(#cb-glow)" className="cb-flicker2">N</text>
+            <text x="7" y="116" textAnchor="middle" fontSize="32"
+                  fill="#ff2d8d" filter="url(#cb-glow)" className="cb-flicker3">S</text>
+            <line x1="7" y1="130" x2="7" y2="166" stroke="#ff2d8d" strokeWidth="1" opacity=".5" />
+          </g>
+
+          {/* === VERTICAL SIDE SIGN — 新乐园 (cyan) === */}
+          <g transform={`translate(${bx - 22}, ${by + 24})`}>
+            <rect x="-4" y="-6" width="22" height="120" rx="2"
+                  fill="rgba(0,240,255,.06)" stroke="#00f0ff" strokeWidth="1" />
+            {VERT.map((ch, i) => (
+              <text key={i} x="7" y={20 + i * 32} textAnchor="middle" fontSize="22"
+                    fontFamily="'Noto Sans SC', sans-serif"
+                    fill="#00f0ff" filter="url(#cb-glow)"
+                    className={i === 0 ? 'cb-blink-a' : i === 1 ? 'cb-blink-b' : 'cb-blink-c'}>{ch}</text>
+            ))}
+          </g>
+
+          {/* === FLOOR 6 (LA FIN · FRESHMAN) === */}
+          {(() => {
+            const y = by;
+            return (
+              <g key="f6">
+                <text x={bx + 12} y={y + 14} fontFamily="'JetBrains Mono', monospace"
+                      fontSize="7" fill="rgba(255,255,255,.4)" letterSpacing="1.2">F6 · LA FIN</text>
+                <text x={bx + bw/2} y={y + floorH/2 + 6} textAnchor="middle"
+                      fontSize="22" fill="#00f0ff" filter="url(#cb-glow)" className="cb-pulse">
+                  LA FIN
+                </text>
+                <text x={bx + bw/2} y={y + floorH/2 + 22} textAnchor="middle"
+                      fontFamily="'JetBrains Mono', monospace" fontSize="7"
+                      fill="rgba(0,240,255,.7)" letterSpacing="2">K-POP · EDM</text>
+                <text x={bx + 14} y={y + floorH/2 + 8} fontSize="14" fill="#00f0ff" className="cb-blink-a">✦</text>
+                <text x={bx + bw - 22} y={y + floorH/2 + 8} fontSize="14" fill="#00f0ff" className="cb-blink-c">✦</text>
+              </g>
+            );
+          })()}
+
+          {/* === FLOOR 5 (FRiENDS · social) === */}
+          {(() => {
+            const y = by + floorH * 1;
+            return (
+              <g key="f5">
+                <text x={bx + 12} y={y + 14} fontFamily="'JetBrains Mono', monospace"
+                      fontSize="7" fill="rgba(255,255,255,.4)" letterSpacing="1.2">F5 · FRiENDS</text>
+                <text x={bx + bw/2} y={y + floorH/2 + 8} textAnchor="middle"
+                      fontSize="22" fill="#ffcf7a" filter="url(#cb-glow)" letterSpacing="1">
+                  FRiENDS
+                </text>
+                <text x={bx + bw/2} y={y + floorH/2 + 24} textAnchor="middle"
+                      fontFamily="'JetBrains Mono', monospace" fontSize="7"
+                      fill="rgba(255,207,122,.7)" letterSpacing="2">SOCIAL · 互动</text>
+                {[0,1,2].map(i => (
+                  <circle key={i} cx={bx + 16 + i*8} cy={y + floorH - 8} r="2.5"
+                          fill="#ffcf7a" className={`cb-blink-${['a','b','c'][i]}`} />
+                ))}
+                {[0,1,2].map(i => (
+                  <circle key={`r${i}`} cx={bx + bw - 16 - i*8} cy={y + floorH - 8} r="2.5"
+                          fill="#ffcf7a" className={`cb-blink-${['c','a','b'][i]}`} />
+                ))}
+              </g>
+            );
+          })()}
+
+          {/* === FLOOR 4 (DIRTY HOUSE / CULTURE) — scrolling marquee === */}
+          {(() => {
+            const y = by + floorH * 2;
+            const marqText = '★ DIRTY HOUSE ★ UNDERGROUND ★ CULTURE CLUB ★ ';
+            return (
+              <g key="f4">
+                <text x={bx + 12} y={y + 14} fontFamily="'JetBrains Mono', monospace"
+                      fontSize="7" fill="rgba(255,255,255,.4)" letterSpacing="1.2">F4 · DIRTY</text>
+                <g>
+                  <rect x={bx + 6} y={y + floorH/2 - 10} width={bw - 12} height="20"
+                        fill="#ff2d8d" filter="url(#cb-glow)" />
+                  <clipPath id="cb-mq-clip">
+                    <rect x={bx + 6} y={y + floorH/2 - 10} width={bw - 12} height="20" />
+                  </clipPath>
+                  <g clipPath="url(#cb-mq-clip)">
+                    <g className="cb-marquee-track">
+                      <text x={bx + 10} y={y + floorH/2 + 4}
+                            fontFamily="'Anton', sans-serif" fontSize="13"
+                            fill="#070407" letterSpacing="0.5">
+                        {marqText.repeat(4)}
+                      </text>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            );
+          })()}
+
+          {/* === FLOOR 3 (RADI · EDM powerhouse) === */}
+          {(() => {
+            const y = by + floorH * 3;
+            return (
+              <g key="f3">
+                <text x={bx + 12} y={y + 14} fontFamily="'JetBrains Mono', monospace"
+                      fontSize="7" fill="rgba(255,255,255,.4)" letterSpacing="1.2">F3 · RADI</text>
+                <text x={bx + bw/2} y={y + floorH/2 + 4} textAnchor="middle"
+                      fontSize="26" fill="#ff2d8d" filter="url(#cb-glow)"
+                      letterSpacing="4" className="cb-flicker3">
+                  RADI
+                </text>
+                <text x={bx + bw/2} y={y + floorH/2 + 22} textAnchor="middle"
+                      fontFamily="'JetBrains Mono', monospace" fontSize="7"
+                      fill="rgba(255,45,141,.7)" letterSpacing="2">EDM · BASS · 3F–5F</text>
+                {[0,1,2,3].map(i => (
+                  <rect key={`eqL${i}`} x={bx + 14 + i*4} y={y + floorH - 18}
+                        width="2" height="10" fill="#ff2d8d"
+                        className={`cb-blink-${['a','b','c','a'][i]}`}
+                        style={{ animationDelay: `${i*0.1}s` }} />
+                ))}
+                {[0,1,2,3].map(i => (
+                  <rect key={`eqR${i}`} x={bx + bw - 22 + i*4} y={y + floorH - 18}
+                        width="2" height="10" fill="#ff2d8d"
+                        className={`cb-blink-${['c','a','b','c'][i]}`}
+                        style={{ animationDelay: `${i*0.12}s` }} />
+                ))}
+              </g>
+            );
+          })()}
+
+          {/* === FLOOR 2 (HUSH · hip-hop) — chaser lights === */}
+          {(() => {
+            const y = by + floorH * 4;
+            const N = 8;
+            return (
+              <g key="f2">
+                <text x={bx + 12} y={y + 14} fontFamily="'JetBrains Mono', monospace"
+                      fontSize="7" fill="rgba(255,255,255,.4)" letterSpacing="1.2">F2 · HUSH</text>
+                <text x={bx + bw/2} y={y + floorH/2 + 4} textAnchor="middle"
+                      fontSize="26" fill="#ff2d8d" filter="url(#cb-glow)"
+                      letterSpacing="4" className="cb-flicker2">
+                  HUSH
+                </text>
+                <text x={bx + bw/2} y={y + floorH/2 + 22} textAnchor="middle"
+                      fontFamily="'JetBrains Mono', monospace" fontSize="7"
+                      fill="rgba(255,45,141,.7)" letterSpacing="2">HIP-HOP · POP</text>
+                {Array.from({length: N}).map((_, i) => (
+                  <circle key={i}
+                          cx={bx + 16 + i * ((bw - 32) / (N - 1))}
+                          cy={y + floorH - 12}
+                          r="3"
+                          fill="#ff2d8d"
+                          className="cb-chase"
+                          style={{ animationDelay: `${(i * 1.6 / N).toFixed(2)}s` }} />
+                ))}
+              </g>
+            );
+          })()}
+
+          {/* === FLOOR 1 (SOBER COMPANY · Japanese cocktail lounge) === */}
+          {(() => {
+            const y = by + floorH * 5;
+            return (
+              <g key="f1">
+                <text x={bx + 12} y={y + 14} fontFamily="'JetBrains Mono', monospace"
+                      fontSize="7" fill="rgba(255,255,255,.4)" letterSpacing="1.2">F1 · SOBER</text>
+                <ellipse cx={bx + bw/2} cy={y + floorH - 4}
+                         rx={bw * 0.36} ry={floorH * 0.65}
+                         fill="url(#cb-door)" className="cb-pulse2" />
+                <text x={bx + bw/2} y={y + floorH/2 - 2} textAnchor="middle"
+                      fontSize="15" fill="#ffcf7a" filter="url(#cb-glow)"
+                      letterSpacing="2.5">SOBER CO.</text>
+                <text x={bx + bw/2} y={y + floorH/2 + 12} textAnchor="middle"
+                      fontFamily="'JetBrains Mono', monospace" fontSize="7"
+                      fill="rgba(255,207,122,.85)" letterSpacing="3">カクテル · COCKTAILS</text>
+                <path d={`M ${bx + bw/2 - 26} ${y + floorH}
+                          L ${bx + bw/2 - 26} ${y + 28}
+                          Q ${bx + bw/2} ${y + 16} ${bx + bw/2 + 26} ${y + 28}
+                          L ${bx + bw/2 + 26} ${y + floorH}`}
+                      fill="none" stroke="#ffcf7a" strokeWidth="1.2" filter="url(#cb-glow)" opacity=".6" />
+                <g className="cb-pulse">
+                  <circle cx={bx + bw/2 - 42} cy={y + floorH - 14} r="3" fill="#ff6db0" filter="url(#cb-glow)" />
+                </g>
+                <g className="cb-pulse2">
+                  <circle cx={bx + bw/2 + 42} cy={y + floorH - 14} r="3" fill="#ff6db0" filter="url(#cb-glow)" />
+                </g>
+                <g className="cb-crowd">
+                  {[0,1,2,3,4,5].map(i => {
+                    const cxv = bx + 22 + i * ((bw - 44) / 5);
+                    return (
+                      <g key={i} transform={`translate(${cxv}, ${y + floorH - 6})`}>
+                        <circle cx="0" cy="-4" r="2.6" fill="#08020b" />
+                        <rect x="-3" y="-2" width="6" height="6" fill="#08020b" rx="1" />
+                      </g>
+                    );
+                  })}
+                </g>
+              </g>
+            );
+          })()}
+
+          {/* === WINDOWS — flickering lights across the facade === */}
+          {(() => {
+            const rows = [1.7, 2.7, 3.7, 4.7];
+            const cols = 5;
+            const out = [];
+            rows.forEach((r, ri) => {
+              for (let c = 0; c < cols; c++) {
+                const x = bx + 18 + c * ((bw - 36) / (cols - 1));
+                const y = by + r * floorH * 0.5 + 24;
+                if (y > by + bh - 36) continue;
+                const cls = ['cb-blink-a','cb-blink-b','cb-blink-c'][(ri*cols + c) % 3];
+                out.push(
+                  <rect key={`w-${ri}-${c}`}
+                        x={x - 3} y={y - 3} width="6" height="6"
+                        fill="url(#cb-window)" opacity=".85"
+                        className={cls}
+                        style={{ animationDelay: `${((ri*cols + c) * 0.13).toFixed(2)}s` }} />
+                );
+              }
+            });
+            return <>{out}</>;
+          })()}
+
+          {/* === GROUND === */}
+          <rect x="0" y={by + bh} width={W} height={H - by - bh}
+                fill="#040108" opacity=".7" />
+          <line x1="0" y1={by + bh} x2={W} y2={by + bh}
+                stroke="rgba(255,45,141,.35)" strokeWidth="1" />
+          <ellipse cx={W/2} cy={by + bh + 18} rx={bw * 0.32} ry="8"
+                   fill="url(#cb-door)" opacity=".5" className="cb-pulse2" />
+        </svg>
+
+        <div style={{
+          position:'absolute', left:14, bottom:10,
+          fontFamily:"'JetBrains Mono', monospace", fontSize:10,
+          color:'#00f0ff', letterSpacing:'.22em'
+        }}>INS · 上海 · 六层</div>
+        <div style={{
+          position:'absolute', right:14, bottom:10,
+          fontFamily:"'JetBrains Mono', monospace", fontSize:10,
+          color:'rgba(244,238,246,.5)', letterSpacing:'.22em'
+        }}>LIVE NOW</div>
+      </div>
+    );
+  }
+
+  window.ClubBuilding = ClubBuilding;
+})();
+</script>
+
+<!-- ─────────────────────────  VARIATION A — NEON PULSE  ───────────────────────── -->
+<script type="text/babel">
+// Variation A — NEON PULSE
+// Hot magenta + cyan on near-black. Rave energy. Anton display + Space Grotesk body.
+(function () {
+  const W = 1280;
+
+  const css = `
+  .vA { width:${W}px; background:#070407; color:#f4eef6;
+        font-family:'Space Grotesk', -apple-system, sans-serif;
+        position:relative; overflow:hidden;
+        --pink:#ff2d8d; --cyan:#00f0ff; --ink:#070407; --paper:#f4eef6;
+        --dim:rgba(244,238,246,.55); --line:rgba(244,238,246,.12); }
+  .vA.live { overflow:visible; }
+  .vA .display { font-family:'Anton', 'Space Grotesk', sans-serif;
+                 font-weight:400; letter-spacing:-.01em; line-height:.92;
+                 text-transform:uppercase; }
+  .vA .mono { font-family:'JetBrains Mono', ui-monospace, monospace;
+              font-size:11px; letter-spacing:.18em; text-transform:uppercase; }
+
+  .vA::before { content:""; position:absolute; inset:0; pointer-events:none; z-index:2;
+                background: repeating-linear-gradient(0deg, rgba(255,255,255,.012) 0 1px, transparent 1px 3px); }
+
+  /* ── HERO ────────────────────────────────────────── */
+  .vA-hero { position:relative; height:1080px; padding:36px 56px 56px;
+             display:flex; flex-direction:column;
+             background:
+               radial-gradient(ellipse 70% 50% at 78% 20%, rgba(255,45,141,.32), transparent 60%),
+               radial-gradient(ellipse 60% 40% at 18% 85%, rgba(0,240,255,.22), transparent 60%),
+               #070407;
+             overflow:hidden; }
+  .vA-hero::after { content:""; position:absolute; inset:0;
+    background: radial-gradient(circle at 50% 50%, transparent 40%, rgba(0,0,0,.55) 100%);
+    pointer-events:none; }
+
+  .vA-nav { display:flex; justify-content:space-between; align-items:center;
+            position:relative; z-index:3;
+            animation: vA-fade 1s .1s both; }
+  .vA-nav-mark { display:flex; gap:10px; align-items:baseline; }
+  .vA-nav-mark .dot { width:10px; height:10px; border-radius:50%;
+                      background:var(--pink); box-shadow:0 0 18px var(--pink); }
+  .vA-nav-links { display:flex; gap:28px; }
+  .vA-nav-links span { color:var(--dim); }
+  .vA-nav-cta { color:var(--ink); background:var(--paper); padding:10px 18px;
+                border-radius:999px; font-weight:600; font-size:13px;
+                letter-spacing:.02em; }
+
+  .vA-hero-mid { flex:1; display:grid; grid-template-columns: 1fr 360px;
+                 align-items:end; gap:48px; position:relative; z-index:3; padding-top:72px; }
+
+  .vA-right { display:flex; flex-direction:column; gap:24px; height:100%;
+              justify-content:flex-end; }
+  .vA-club { position:relative; width:100%; height:430px;
+             animation: vA-rise 1.1s .9s both; }
+  .vA-kicker { display:flex; align-items:center; gap:14px; color:var(--cyan);
+               animation: vA-rise 1s .25s both; }
+  .vA-kicker .bar { width:38px; height:1px; background:var(--cyan); box-shadow:0 0 8px var(--cyan); }
+
+  .vA-h1 { font-size:184px; margin:24px 0 0;
+           white-space:pre-line;
+           animation: vA-rise 1.1s .35s both; }
+  .vA-h1 .pink { color:var(--pink); text-shadow:0 0 22px rgba(255,45,141,.6); }
+  .vA-h1 .out { color:transparent; -webkit-text-stroke:1.5px var(--paper); }
+
+  .vA-sub { font-size:17px; max-width:520px; color:#cfc6d3; line-height:1.5;
+            margin-top:28px; animation: vA-rise 1s .55s both; }
+
+  .vA-cta-row { display:flex; gap:14px; margin-top:30px;
+                animation: vA-rise 1s .7s both; }
+  .vA-btn { padding:16px 26px; border-radius:999px; font-weight:600; font-size:14px;
+            letter-spacing:.02em; display:inline-flex; align-items:center; gap:10px; }
+  .vA-btn.primary { background:var(--pink); color:var(--ink);
+                    box-shadow:0 0 0 1px var(--pink), 0 10px 40px -10px var(--pink); }
+  .vA-btn.ghost { color:var(--paper); border:1px solid rgba(244,238,246,.25); background:rgba(244,238,246,.04); }
+
+  .vA-portrait { position:relative; width:100%; height:430px;
+                 background:
+                   radial-gradient(ellipse 80% 60% at 50% 40%, rgba(255,45,141,.32), transparent 70%),
+                   radial-gradient(ellipse 70% 80% at 60% 100%, rgba(0,240,255,.18), transparent 70%),
+                   #120612;
+                 border:1px solid rgba(244,238,246,.14);
+                 box-shadow:0 30px 80px -20px rgba(255,45,141,.4),
+                            0 0 0 1px rgba(0,240,255,.18) inset;
+                 overflow:hidden;
+                 animation: vA-rise 1.1s .8s both; }
+  .vA-portrait .ph { position:absolute; inset:0; width:100%; height:100%;
+                      object-fit:cover; object-position: 58% 26%;
+                      filter: contrast(1.04) saturate(1.05); }
+  .vA-portrait::after { content:""; position:absolute; inset:0;
+                        background: linear-gradient(180deg, transparent 55%, rgba(7,4,7,.85));
+                        pointer-events:none; }
+  .vA-portrait .tag { position:absolute; left:18px; bottom:14px; z-index:2;
+                       font-family:'JetBrains Mono', monospace; font-size:11px;
+                       color:var(--paper); letter-spacing:.18em; }
+  .vA-portrait .corner { position:absolute; top:14px; left:18px; z-index:2;
+                          font-family:'JetBrains Mono', monospace; font-size:10px;
+                          color:rgba(244,238,246,.55); letter-spacing:.22em; }
+  .vA-portrait .cornerR { position:absolute; top:14px; right:18px; z-index:2;
+                           font-family:'JetBrains Mono', monospace; font-size:10px;
+                           color:#ff2d8d; letter-spacing:.22em;
+                           display:inline-flex; align-items:center; gap:6px; }
+  .vA-portrait .cornerR::before { content:""; width:6px; height:6px; border-radius:50%;
+                                   background:#ff2d8d; box-shadow:0 0 8px #ff2d8d;
+                                   animation: vA-fade 1.2s infinite alternate; }
+  .vA-portrait-tag { font-family:'JetBrains Mono', monospace; font-size:11px;
+                     color:var(--paper); letter-spacing:.18em; }
+
+  .vA-hero-foot { display:flex; justify-content:space-between; align-items:end;
+                  position:relative; z-index:3; padding-top:48px;
+                  animation: vA-fade 1s .9s both; }
+  .vA-hero-foot .big { font-family:'Anton', sans-serif; font-size:96px; line-height:.85;
+                       color:transparent; -webkit-text-stroke:1px rgba(255,45,141,.45); }
+  .vA-hero-foot .mono { color:var(--dim); }
+
+  /* ── MARQUEE ──────────────────────────────────────── */
+  .vA-marquee { background:var(--pink); color:var(--ink); padding:18px 0;
+                font-family:'Anton', sans-serif; font-size:28px; letter-spacing:.04em;
+                text-transform:uppercase; white-space:nowrap; overflow:hidden;
+                border-top:1px solid #000; border-bottom:1px solid #000; }
+  .vA-marquee .track { display:inline-flex; gap:40px; animation: vA-scroll 28s linear infinite; }
+  .vA-marquee .star { color:var(--cyan); }
+
+  /* ── ABOUT ───────────────────────────────────────── */
+  .vA-section { padding:96px 56px; position:relative; }
+  .vA-tag { font-family:'JetBrains Mono', monospace; font-size:11px;
+            letter-spacing:.22em; text-transform:uppercase; color:var(--cyan); }
+  .vA-h2 { font-family:'Anton', sans-serif; font-size:88px; line-height:.92;
+           text-transform:uppercase; margin:20px 0 0; white-space:pre-line; }
+
+  .vA-about { display:grid; grid-template-columns: 1fr 1fr; gap:64px; align-items:start; }
+  .vA-about-body { font-size:17px; line-height:1.55; color:#d9d2dc; max-width:480px; }
+  .vA-stats { display:grid; grid-template-columns: 1fr 1fr; gap:0;
+              border-top:1px solid var(--line); }
+  .vA-stat { padding:22px 0; border-bottom:1px solid var(--line); }
+  .vA-stat:nth-child(odd) { padding-right:24px; border-right:1px solid var(--line); }
+  .vA-stat:nth-child(even) { padding-left:24px; }
+  .vA-stat .v { font-family:'Anton', sans-serif; font-size:54px; line-height:1;
+                color:var(--paper); }
+  .vA-stat .k { font-family:'JetBrains Mono', monospace; font-size:11px;
+                letter-spacing:.2em; text-transform:uppercase; color:var(--dim); margin-top:8px; }
+
+  /* ── SERVICES ────────────────────────────────────── */
+  .vA-services { display:grid; grid-template-columns: 1fr 1fr; gap:24px; margin-top:56px; }
+  .vA-svc { position:relative; padding:36px; height:520px;
+            border:1px solid rgba(244,238,246,.14);
+            background:#0d0810; display:flex; flex-direction:column; overflow:hidden; }
+  .vA-svc.ins { background:
+                  radial-gradient(ellipse 60% 50% at 70% 0%, rgba(255,45,141,.35), transparent 60%),
+                  #110509; }
+  .vA-svc.ktv { background:
+                  radial-gradient(ellipse 60% 50% at 30% 100%, rgba(0,240,255,.28), transparent 60%),
+                  #050e12; }
+  .vA-svc-label { font-family:'JetBrains Mono', monospace; font-size:11px;
+                  letter-spacing:.22em; text-transform:uppercase; color:var(--dim); }
+  .vA-svc-name { font-family:'Anton', sans-serif; font-size:128px; line-height:.88;
+                 margin-top:14px; }
+  .vA-svc.ins .vA-svc-name { color:var(--pink); text-shadow:0 0 30px rgba(255,45,141,.55); }
+  .vA-svc.ktv .vA-svc-name { color:var(--cyan); text-shadow:0 0 30px rgba(0,240,255,.55); }
+  .vA-svc-sub { font-size:14px; letter-spacing:.06em; text-transform:uppercase;
+                color:var(--paper); margin-top:8px; }
+  .vA-svc-body { font-size:15px; color:#c7c1ca; line-height:1.55; margin-top:18px;
+                 max-width:430px; }
+  .vA-svc-stats { margin-top:auto; display:flex; gap:32px; padding-top:24px;
+                  border-top:1px solid rgba(244,238,246,.1); }
+  .vA-svc-stats .k { font-family:'JetBrains Mono', monospace; font-size:10px;
+                     letter-spacing:.2em; color:var(--dim); text-transform:uppercase; }
+  .vA-svc-stats .v { font-size:14px; color:var(--paper); margin-top:4px;
+                     letter-spacing:.04em; }
+
+  /* ── WHY ─────────────────────────────────────────── */
+  .vA-why { display:grid; grid-template-columns: repeat(4, 1fr); gap:0; margin-top:56px;
+            border-top:1px solid var(--line); }
+  .vA-why-cell { padding:32px 24px 0 0; border-right:1px solid var(--line);
+                 min-height:200px; }
+  .vA-why-cell:last-child { border-right:none; padding-right:0; }
+  .vA-why-cell:not(:last-child) { padding-right:24px; }
+  .vA-why-cell .arr { color:var(--pink); font-size:22px; }
+  .vA-why-cell .t { font-family:'Anton', sans-serif; font-size:30px; line-height:1;
+                    margin-top:14px; text-transform:uppercase; }
+  .vA-why-cell .b { font-size:14px; color:#bdb7c2; line-height:1.55; margin-top:12px; }
+
+  /* ── STEPS ───────────────────────────────────────── */
+  .vA-steps-section { background:
+                        linear-gradient(180deg, #070407 0%, #110a14 100%);
+                      border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+  .vA-steps { display:grid; grid-template-columns: repeat(4, 1fr); gap:0; margin-top:56px;
+              position:relative; }
+  .vA-steps::before { content:""; position:absolute; top:36px; left:0; right:0; height:1px;
+                      background: linear-gradient(90deg, transparent, var(--cyan) 20%, var(--pink) 80%, transparent);
+                      opacity:.5; }
+  .vA-step { padding-right:24px; position:relative; }
+  .vA-step .n { font-family:'Anton', sans-serif; font-size:48px; line-height:1;
+                color:var(--cyan); display:inline-block; background:#0a0710;
+                padding:0 14px 0 0; position:relative; z-index:1; }
+  .vA-step .t { font-family:'Anton', sans-serif; font-size:26px; line-height:1;
+                text-transform:uppercase; margin-top:28px; }
+  .vA-step .b { font-size:14px; color:#bdb7c2; line-height:1.55; margin-top:12px; }
+
+  /* ── CONTACT ─────────────────────────────────────── */
+  .vA-contact { position:relative; padding:120px 56px; overflow:hidden;
+                background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(255,45,141,.28), transparent 60%), #070407; }
+  .vA-contact-h2 { font-family:'Anton', sans-serif; font-size:160px; line-height:.9;
+                   text-transform:uppercase; }
+  .vA-contact-h2 .out { color:transparent; -webkit-text-stroke:1.5px var(--pink); }
+  .vA-contact-sub { font-size:18px; color:#d9d2dc; max-width:520px; margin-top:24px; line-height:1.5; }
+  .vA-contact-cards { display:grid; grid-template-columns: 1fr 1fr 1.4fr; gap:18px; margin-top:48px; }
+  .vA-cc { padding:24px; border:1px solid rgba(244,238,246,.14); background:rgba(255,255,255,.02); }
+  .vA-cc .mono { color:var(--dim); }
+  .vA-cc .id { font-family:'Anton', sans-serif; font-size:36px; margin-top:14px; }
+  .vA-cc.cta { background:var(--pink); color:var(--ink); border-color:var(--pink);
+               display:flex; align-items:center; justify-content:space-between;
+               box-shadow:0 20px 60px -10px rgba(255,45,141,.5); }
+  .vA-cc.cta .label { font-family:'Anton', sans-serif; font-size:36px; line-height:1; }
+  .vA-cc.cta .arrow { font-size:42px; }
+
+  /* ── FOOTER ──────────────────────────────────────── */
+  .vA-foot { padding:32px 56px; display:flex; justify-content:space-between;
+             border-top:1px solid var(--line); }
+  .vA-foot .mono { color:var(--dim); }
+
+  /* ── animations ──────────────────────────────────── */
+  @keyframes vA-fade { from { opacity:0 } to { opacity:1 } }
+  @keyframes vA-rise { from { opacity:0; transform:translateY(24px) } to { opacity:1; transform:none } }
+  @keyframes vA-scroll { from { transform:translateX(0) } to { transform:translateX(-50%) } }
+  @keyframes vA-flicker {
+    0%, 18%, 22%, 25%, 53%, 57%, 100% { opacity:1 }
+    20%, 24%, 55% { opacity:.4 }
+  }
+  @keyframes vA-glitch-in {
+    0%   { opacity:0; clip-path: inset(0 100% 0 0); transform: translateX(-30px) skewX(-8deg); filter:hue-rotate(80deg) }
+    35%  { opacity:1; clip-path: inset(0 60% 0 0); transform: translateX(-12px) skewX(-3deg); filter:hue-rotate(40deg) }
+    55%  { opacity:1; clip-path: inset(0 0 0 0); transform: translateX(4px) skewX(0); filter:hue-rotate(0deg) }
+    62%  { opacity:.5; transform: translateX(-3px) }
+    70%  { opacity:1; transform: none }
+    100% { opacity:1; transform: none; filter:hue-rotate(0deg) }
+  }
+  @keyframes vA-burst {
+    0%   { opacity:0; transform: scale(.6) }
+    40%  { opacity:.9; transform: scale(1.2) }
+    70%  { opacity:.4; transform: scale(1.5) }
+    100% { opacity:0; transform: scale(1.8) }
+  }
+  @keyframes vA-sweep {
+    0% { transform:translateX(-110%) skewX(-20deg); opacity:0 }
+    30% { opacity:.9 }
+    100% { transform:translateX(220%) skewX(-20deg); opacity:0 }
+  }
+  @keyframes vA-glow-pulse {
+    0%, 100% { text-shadow:0 0 18px rgba(255,45,141,.45) }
+    50%      { text-shadow:0 0 36px rgba(255,45,141,.85), 0 0 80px rgba(255,45,141,.35) }
+  }
+  .vA-flicker { animation: vA-flicker 4s 1.2s infinite, vA-glow-pulse 2.6s 1.4s infinite; }
+  .vA-h1 .pink { animation: vA-glitch-in 1.1s .35s both; }
+
+  .vA-burst { position:absolute; left:-40px; top:120px; width:520px; height:520px;
+              background: radial-gradient(circle, rgba(255,45,141,.55), transparent 60%);
+              pointer-events:none; animation: vA-burst 1.4s .25s both; }
+  .vA-sweep { position:absolute; inset:0; pointer-events:none; overflow:hidden; }
+  .vA-sweep::after { content:""; position:absolute; top:0; bottom:0; width:35%;
+                     background: linear-gradient(90deg, transparent, rgba(0,240,255,.18), transparent);
+                     animation: vA-sweep 1.6s .8s both; }
+
+  .vA-replay { display:inline-flex; align-items:center; gap:8px; padding:8px 14px;
+               border:1px solid rgba(244,238,246,.25); border-radius:999px;
+               font-family:'JetBrains Mono', monospace; font-size:11px;
+               letter-spacing:.18em; text-transform:uppercase; color:var(--paper);
+               background:rgba(255,255,255,.04); cursor:pointer; user-select:none; }
+  .vA-replay:hover { background:rgba(255,45,141,.18); border-color:var(--pink); }
+  .vA-replay .play { width:14px; height:14px; border-radius:50%; background:var(--pink);
+                     display:inline-flex; align-items:center; justify-content:center;
+                     color:var(--ink); font-size:8px; }
+  `;
+
+  function VariationA({ lang = 'en', videoMode = 'static' }) {
+    const t = window.JERRIC_CONTENT[lang];
+    const [introKey, setIntroKey] = React.useState(0);
+    const replay = () => setIntroKey(k => k + 1);
+    return (
+      <>
+        <style>{css}</style>
+        <div className={`vA${videoMode === 'live' ? ' live' : ''}`}>
+          {/* HERO */}
+          <section className="vA-hero" key={introKey}>
+            <div className="vA-sweep" />
+            <nav className="vA-nav mono">
+              <div className="vA-nav-mark">
+                <span className="dot" />
+                <span style={{ color: 'var(--paper)' }}>JERRIC / SH</span>
+              </div>
+              <div className="vA-nav-links">
+                <span>About</span><span>Venues</span><span>How</span><span>Contact</span>
+              </div>
+              <div style={{ display:'flex', gap:10, alignItems:'center' }}>
+                <span className="vA-replay" onClick={replay}><span className="play">▶</span>Replay intro</span>
+                <span className="vA-nav-cta">{t.heroCTA}</span>
+              </div>
+            </nav>
+
+            <div className="vA-hero-mid">
+              <div style={{ position:'relative' }}>
+                <div className="vA-burst" />
+                <div className="vA-kicker mono"><span className="bar" />{t.heroKicker}</div>
+                <h1 className="vA-h1 display">
+                  <span className="pink vA-flicker">{t.heroLead.split('\n')[0]}</span>{'\n'}
+                  <span className="out">{t.heroLead.split('\n')[1]}</span>
+                </h1>
+                <p className="vA-sub">{t.heroSub}</p>
+                <div className="vA-cta-row">
+                  <span className="vA-btn primary">{t.heroCTA} →</span>
+                  <span className="vA-btn ghost">{t.heroCTA2}</span>
+                </div>
+              </div>
+              <div className="vA-right">
+                <div className="vA-portrait">
+                  <img className="ph" src="images/jerric-portrait.png" alt="Jerric" />
+                  <span className="corner">PORTRAIT / 01</span>
+                  <span className="cornerR">LIVE</span>
+                  <span className="tag">{t.role.toUpperCase()}</span>
+                </div>
+                {window.ClubBuilding ? (
+                  <div className="vA-club"><window.ClubBuilding /></div>
+                ) : null}
+              </div>
+            </div>
+
+            <div className="vA-hero-foot">
+              <div className="mono">SHANGHAI · 31.23°N 121.47°E</div>
+              <div className="big">{t.city.toUpperCase()}</div>
+              <div className="mono">{t.citySub}</div>
+            </div>
+          </section>
+
+          {/* KANPAI POUR ANIMATION */}
+          {window.VideoScrub ? <window.VideoScrub mode={videoMode} /> : null}
+
+          {/* MARQUEE */}
+          <div className="vA-marquee">
+            <div className="track">
+              {[0,1].map(rep => (
+                <React.Fragment key={rep}>
+                  {t.marquee.map((m, i) => (
+                    <React.Fragment key={i}>
+                      <span>{m}</span><span className="star">✦</span>
+                    </React.Fragment>
+                  ))}
+                </React.Fragment>
+              ))}
+            </div>
+          </div>
+
+          {/* ABOUT */}
+          <section className="vA-section">
+            <div className="vA-about">
+              <div>
+                <div className="vA-tag">{t.aboutTag}</div>
+                <h2 className="vA-h2">{t.aboutTitle}</h2>
+              </div>
+              <div>
+                <p className="vA-about-body">{t.aboutBody}</p>
+                <div className="vA-stats" style={{ marginTop: 40 }}>
+                  {t.aboutStats.map((s, i) => (
+                    <div className="vA-stat" key={i}>
+                      <div className="v">{s.v}</div>
+                      <div className="k">{s.k}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* SERVICES */}
+          <section className="vA-section" style={{ paddingTop: 0 }}>
+            <div style={{ display:'flex', justifyContent:'space-between', alignItems:'end' }}>
+              <div>
+                <div className="vA-tag">{t.servicesTag}</div>
+                <h2 className="vA-h2">{t.servicesTitle}</h2>
+              </div>
+              <div className="mono" style={{ color:'var(--dim)' }}>02 / 05</div>
+            </div>
+            <div className="vA-services">
+              {[t.serviceINS, t.serviceKTV].map((s, i) => (
+                <div className={`vA-svc ${i === 0 ? 'ins' : 'ktv'}`} key={i}>
+                  <div className="vA-svc-label">{s.label}</div>
+                  <div className="vA-svc-name">{s.name}</div>
+                  <div className="vA-svc-sub">{s.sub}</div>
+                  <p className="vA-svc-body">{s.body}</p>
+                  <div className="vA-svc-stats">
+                    {s.stats.map((row, j) => (
+                      <div key={j}>
+                        <div className="k">{row[0]}</div>
+                        <div className="v">{row[1]}</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* WHY */}
+          <section className="vA-section" style={{ paddingTop: 0 }}>
+            <div>
+              <div className="vA-tag">{t.whyTag}</div>
+              <h2 className="vA-h2">{t.whyTitle}</h2>
+            </div>
+            <div className="vA-why">
+              {t.why.map((w, i) => (
+                <div className="vA-why-cell" key={i}>
+                  <div className="arr">{w.n}</div>
+                  <div className="t">{w.t}</div>
+                  <div className="b">{w.b}</div>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* STEPS */}
+          <section className="vA-section vA-steps-section">
+            <div>
+              <div className="vA-tag">{t.stepsTag}</div>
+              <h2 className="vA-h2">{t.stepsTitle}</h2>
+            </div>
+            <div className="vA-steps">
+              {t.steps.map((s, i) => (
+                <div className="vA-step" key={i}>
+                  <span className="n">{s.n}</span>
+                  <div className="t">{s.t}</div>
+                  <div className="b">{s.b}</div>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* CONTACT */}
+          <section className="vA-contact">
+            <div className="vA-tag">{t.contactTag}</div>
+            <h2 className="vA-contact-h2">
+              <span>{t.contactTitle.split(' ')[0]}</span>{' '}
+              <span className="out">{t.contactTitle.split(' ').slice(1).join(' ') || '·'}</span>
+            </h2>
+            <p className="vA-contact-sub">{t.contactSub}</p>
+            <div className="vA-contact-cards">
+              <div className="vA-cc">
+                <div className="mono">{t.contactWeChat}</div>
+                <div className="id">{t.contactWeChatId}</div>
+              </div>
+              <div className="vA-cc">
+                <div className="mono">{t.contactIG}</div>
+                <div className="id">{t.contactIGId}</div>
+              </div>
+              <div className="vA-cc cta">
+                <span className="label">{t.contactCTA}</span>
+                <span className="arrow">→</span>
+              </div>
+            </div>
+          </section>
+
+          {/* FOOTER */}
+          <footer className="vA-foot">
+            <span className="mono">{t.footRights}</span>
+            <span className="mono">{t.footQuote}</span>
+          </footer>
+        </div>
+      </>
+    );
+  }
+
+  window.VariationA = VariationA;
+})();
+</script>
+
+<!-- ─────────────────────────  MOUNT  ───────────────────────── -->
+<script type="text/babel">
+function Root() {
+  const [lang, setLang] = React.useState('en');
+  return (
+    <>
+      <window.VariationA lang={lang} videoMode="live" />
+      <div className="lang-toggle">
+        <button className={lang === 'en' ? 'active' : ''} onClick={() => setLang('en')}>EN</button>
+        <button className={lang === 'zh' ? 'active' : ''} onClick={() => setLang('zh')}>中文</button>
+      </div>
+    </>
+  );
+}
+
+function mount() {
+  if (!window.VariationA || !window.VideoScrub || !window.ClubBuilding) {
+    return setTimeout(mount, 30);
+  }
+  const root = ReactDOM.createRoot(document.getElementById('root'));
+  root.render(<Root />);
+  setTimeout(() => {
+    const sp = document.getElementById('splash');
+    if (sp) { sp.classList.add('gone'); setTimeout(() => sp.remove(), 600); }
+  }, 400);
+}
+mount();
+</script>
+</body>
+</html>
