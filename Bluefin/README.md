@@ -22,8 +22,8 @@ Plain static files — no build step. Open `index.html` directly or serve the fo
 All imagery and the hero video are **owned, locally-stored assets generated with
 Higgsfield AI** (no external hot-linking). Generated 2026-06-14.
 
-- `assets/video/hero-ocean.mp4` / `.webm` — Seedance 2.0, cinematic underwater loop (5s, 16:9)
-- `assets/video/sushi-cut.mp4` — Seedance 2.0, yanagiba slicing a maki roll; **scrubbed to scroll** in the Craft section (all-keyframe encode for smooth seeking)
+- `assets/video/hero-ocean.mp4` / `.webm` — Seedance 2.0, photoreal hero: a bluefin tuna school under sun-shafts that dissolves into the warm hinoki sushi counter (5s loop, 16:9)
+- `assets/video/sushi-cut.mp4` — Seedance 2.0, a yanagiba slicing bluefin nigiri; **scrubbed to scroll** in the Craft section (all-keyframe encode for smooth seeking)
 - `assets/img/dish-*.webp` — GPT Image 2, signature dish photography
 - `assets/img/space-*.webp` — GPT Image 2, interior / ambiance shots
 

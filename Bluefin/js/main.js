@@ -73,8 +73,25 @@
   var cutVideo = document.getElementById('cutVideo');
   var cutStage = document.querySelector('.cut-stage');
   var cutReady = false;
-  if (cutVideo) {
-    cutVideo.addEventListener('loadedmetadata', function () { cutReady = true; updateDepth(); });
+  if (cutVideo && !reduce) {
+    // A video that is only ever seeked (never played) keeps showing its poster and
+    // won't paint seeked frames. Prime it with a muted play→pause so scrubbing renders.
+    var primeCut = function () {
+      if (cutReady) return;
+      var done = function () { cutReady = true; cutVideo.removeAttribute('poster'); updateDepth(); };
+      var pr = cutVideo.play();
+      if (pr && pr.then) {
+        pr.then(function () { cutVideo.pause(); cutVideo.currentTime = 0; done(); }).catch(done);
+      } else {
+        try { cutVideo.pause(); } catch (e) {}
+        done();
+      }
+    };
+    if (cutVideo.readyState >= 2) primeCut();
+    else cutVideo.addEventListener('canplay', primeCut, { once: true });
+    // fallback: also prime on the first user interaction in case autoplay was deferred
+    window.addEventListener('scroll', primeCut, { once: true, passive: true });
+    window.addEventListener('pointerdown', primeCut, { once: true });
   }
 
   function updateDepth() {
