@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Bluefin — Cuisine d'Art · Ulaanbaatar</title>
+<meta name="description" content="Bluefin Cuisine d'Art — premium Japanese sushi & contemporary fine dining in Ulaanbaatar, Mongolia. #14 of 407 restaurants · Travelers' Choice. Open daily 12:00–00:00."/>
+<meta property="og:title" content="Bluefin — Cuisine d'Art"/>
+<meta property="og:description" content="Japanese sushi & contemporary fine dining in the heart of Ulaanbaatar. A descent into the deep."/>
+<meta property="og:image" content="assets/video/hero-poster.jpg"/>
+<link rel="icon" href="../favicon.ico"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&family=Shippori+Mincho+B1:wght@400;600;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="css/styles.css"/>
+</head>
+<body>
+
+<canvas id="ocean" aria-hidden="true"></canvas>
+<div class="depth-tint" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+
+<div class="depth-meter" id="depthMeter" aria-hidden="true">
+  <div class="dm-read">DEPTH</div>
+  <div class="dm-track"><b></b></div>
+  <div class="dm-read"><b id="depthRead">0</b> m</div>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a class="brand" href="#surface">
+    <span class="brand-mark">青</span>
+    <span class="brand-name"><b>BLUEFIN</b><i>Cuisine d'Art</i></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">Story</a></li>
+    <li><a href="#craft">Craft</a></li>
+    <li><a href="#dishes">Dishes</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#space">Space</a></li>
+    <li><a href="#visit">Visit</a></li>
+  </ul>
+  <a class="nav-cta" href="#visit">Reserve</a>
+  <button class="nav-burger" id="burger" aria-label="Open menu"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about">Story</a>
+  <a href="#craft">Craft</a>
+  <a href="#dishes">Dishes</a>
+  <a href="#menu">Menu</a>
+  <a href="#space">Space</a>
+  <a href="#visit">Visit</a>
+</div>
+
+<!-- HERO / SURFACE -->
+<header id="surface" class="hero">
+  <div class="hero-media">
+    <video autoplay muted loop playsinline poster="assets/video/hero-poster.jpg">
+      <source src="assets/video/hero-ocean.webm" type="video/webm"/>
+      <source src="assets/video/hero-ocean.mp4" type="video/mp4"/>
+    </video>
+    <div class="hero-grad"></div>
+  </div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Ulaanbaatar · Mongolia</div>
+    <h1 class="hero-title"><span>BLUE</span>FIN</h1>
+    <div class="hero-jp">ブルーフィン · クイジーヌ · ダール</div>
+    <p class="hero-tag">Japanese Sushi &amp; Contemporary Fine Dining</p>
+    <div class="hero-actions">
+      <a class="btn btn-fill" href="#dishes">Explore the Menu</a>
+      <a class="btn btn-line" href="#visit">Reserve a Table</a>
+    </div>
+  </div>
+  <a class="hero-scroll" href="#about"><span>Descend</span><i></i></a>
+</header>
+
+<main>
+
+<!-- ABOUT / THE DESCENT -->
+<section id="about" class="band">
+  <div class="band-depth">20<small>m</small></div>
+  <div class="wrap about">
+    <div class="about-copy">
+      <span class="eyebrow reveal">Our Story</span>
+      <h2 class="h-disp reveal" style="--d:.08s">Where art<br>meets <em>cuisine</em></h2>
+      <p class="lead reveal" style="--d:.16s">Nestled on Chinggis Avenue in the heart of Ulaanbaatar, Bluefin Cuisine d'Art is more than a restaurant — it is a living gallery, where Japanese culinary precision meets a curated collection of fine art.</p>
+      <p class="reveal" style="--d:.22s">Every plate is composed with the discipline of ikebana. Our chefs bring together the ocean's finest bluefin tuna, locally-sourced Mongolian lamb, and seasonal ingredients to create dishes that honour both tradition and imagination. The open kitchen is a stage; every evening, theatre unfolds.</p>
+      <div class="stats reveal" style="--d:.3s">
+        <div class="stat"><b data-count="4.4">0</b><span>TripAdvisor<br>Rating</span></div>
+        <div class="stat"><b>#14</b><span>of 407<br>in Ulaanbaatar</span></div>
+        <div class="stat"><b>TC</b><span>Travelers'<br>Choice</span></div>
+      </div>
+    </div>
+    <div class="about-media reveal" style="--d:.18s">
+      <img src="assets/img/space-dining.webp" alt="Bluefin dining room"/>
+      <div class="about-badge"><b>★</b> Travelers' Choice Award</div>
+    </div>
+  </div>
+</section>
+
+<!-- CRAFT / THE CUT -->
+<section id="craft" class="band">
+  <div class="band-depth">80<small>m</small></div>
+  <div class="wrap">
+    <div class="craft-hd">
+      <span class="eyebrow reveal">The Art of the Cut</span>
+      <h2 class="h-disp reveal" style="--d:.08s">A discipline of <em>precision</em></h2>
+    </div>
+    <div class="steps">
+      <div class="step reveal" style="--d:.05s">
+        <div class="step-dot"></div>
+        <div class="step-kanji">巻</div>
+        <div class="step-no">STEP 01</div>
+        <div class="step-title">The Roll</div>
+        <p>Rice seasoned with exact proportions of vinegar, sugar and salt; nori chosen for its deep ocean aroma.</p>
+      </div>
+      <div class="step reveal" style="--d:.14s">
+        <div class="step-dot"></div>
+        <div class="step-kanji">庖</div>
+        <div class="step-no">STEP 02</div>
+        <div class="step-title">The Knife</div>
+        <p>A single-edge yanagiba blade. Each stroke one fluid, pulling motion — never a saw.</p>
+      </div>
+      <div class="step reveal" style="--d:.23s">
+        <div class="step-dot"></div>
+        <div class="step-kanji">切</div>
+        <div class="step-no">STEP 03</div>
+        <div class="step-title">The Cut</div>
+        <p>The blade descends in one decisive stroke, revealing the vibrant heart of the fish.</p>
+      </div>
+      <div class="step reveal" style="--d:.32s">
+        <div class="step-dot"></div>
+        <div class="step-kanji">盛</div>
+        <div class="step-no">STEP 04</div>
+        <div class="step-title">The Plate</div>
+        <p>Arranged with the care of ikebana. Colour, height, spacing — the plate is a canvas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DISHES / SIGNATURE -->
+<section id="dishes" class="band">
+  <div class="band-depth">180<small>m</small></div>
+  <div class="wrap dish-wrap">
+    <div class="dish-stage reveal">
+      <div class="dish-glow"></div>
+      <div class="dish-ring"></div>
+      <div class="dish-ring r2"></div>
+      <img id="dishPhoto" class="dish-photo" src="assets/img/dish-otoro.webp" alt="Otoro Bluefin Nigiri"/>
+    </div>
+    <div class="dish-list reveal" style="--d:.12s">
+      <span class="eyebrow">Signature Creations</span>
+      <div class="dish-head">
+        <div id="dishName" class="dish-name">Otoro Bluefin Nigiri</div>
+        <div id="dishJp" class="dish-jp">大トロ握り</div>
+        <p id="dishDesc" class="dish-desc">The signature. Marbled fatty bluefin tuna over seasoned rice, a brush of soy and a whisper of gold leaf.</p>
+        <div id="dishTags" class="dish-tags">
+          <span class="tag">Signature</span><span class="tag">Bluefin</span>
+        </div>
+      </div>
+      <div class="dish-options">
+        <button class="dish-opt active" data-name="Otoro Bluefin Nigiri" data-jp="大トロ握り" data-tags="Signature|Bluefin" data-img="assets/img/dish-otoro.webp" data-desc="The signature. Marbled fatty bluefin tuna over seasoned rice, a brush of soy and a whisper of gold leaf.">
+          <span class="num">01</span><span class="lbl">Otoro Bluefin Nigiri</span><span class="arr">→</span>
+        </button>
+        <button class="dish-opt" data-name="Chef's Sushi Selection" data-jp="板前のにぎり寿司" data-tags="Fresh Fish|Seasonal" data-img="assets/img/dish-sushi.webp" data-desc="Handcrafted nigiri and maki by our master chef — a precise harmony of rice, fresh fish and seasoning.">
+          <span class="num">02</span><span class="lbl">Chef's Sushi Selection</span><span class="arr">→</span>
+        </button>
+        <button class="dish-opt" data-name="Chicken Teriyaki" data-jp="チキンテリヤキ" data-tags="Popular|Signature" data-img="assets/img/dish-teriyaki.webp" data-desc="Tender chicken glazed in our house teriyaki, with steamed rice and seasonal vegetables. A perennial favourite.">
+          <span class="num">03</span><span class="lbl">Chicken Teriyaki</span><span class="arr">→</span>
+        </button>
+        <button class="dish-opt" data-name="Bacon-Wrapped Fish" data-jp="ベーコン包み魚" data-tags="Chef Pick|&quot;Amazing&quot;" data-img="assets/img/dish-bacon.webp" data-desc="Pan-seared ocean fish wrapped in house-smoked bacon, finished with a citrus reduction — bold yet refined.">
+          <span class="num">04</span><span class="lbl">Bacon-Wrapped Fish</span><span class="arr">→</span>
+        </button>
+        <button class="dish-opt" data-name="Mongolian Tasting Set" data-jp="モンゴルセット" data-tags="Local Fusion|Tasting" data-img="assets/img/dish-mongolian.webp" data-desc="A curated set celebrating the finest Mongolian flavours — our fusion of local ingredients and Japanese technique.">
+          <span class="num">05</span><span class="lbl">Mongolian Tasting Set</span><span class="arr">→</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU / THE CARTE -->
+<section id="menu" class="band">
+  <div class="band-depth">320<small>m</small></div>
+  <div class="wrap">
+    <div class="menu-hd">
+      <span class="eyebrow reveal">The Carte</span>
+      <h2 class="h-disp reveal" style="--d:.08s">Our <em>signatures</em></h2>
+    </div>
+    <div class="menu-cols">
+      <div class="menu-col">
+        <div class="menu-group reveal">
+          <div class="menu-cat">Sushi &amp; Sashimi</div>
+          <div class="m-item"><div class="m-main"><div class="m-name">Chef's Sushi Selection <i>板前のにぎり寿司</i></div><div class="m-desc">Handcrafted nigiri &amp; maki, available select evenings.</div></div></div>
+          <div class="m-item"><div class="m-main"><div class="m-name">Otoro Bluefin Nigiri <i>大トロ握り</i></div><div class="m-desc">Marbled fatty bluefin, soy glaze, gold leaf.</div></div></div>
+          <div class="m-item"><div class="m-main"><div class="m-name">Assorted Sashimi <i>お造り盛り合わせ</i></div><div class="m-desc">The day's freshest catch, simply presented.</div></div></div>
+        </div>
+        <div class="menu-group reveal" style="--d:.1s">
+          <div class="menu-cat">Sets</div>
+          <div class="m-item"><div class="m-main"><div class="m-name">Mongolian Tasting Set <i>モンゴルセット</i></div><div class="m-desc">A curated fusion of local flavours and Japanese technique.</div></div></div>
+        </div>
+      </div>
+      <div class="menu-col">
+        <div class="menu-group reveal" style="--d:.06s">
+          <div class="menu-cat">From the Kitchen</div>
+          <div class="m-item"><div class="m-main"><div class="m-name">Chicken Teriyaki <i>チキンテリヤキ</i></div><div class="m-desc">House teriyaki, steamed rice, seasonal vegetables.</div></div></div>
+          <div class="m-item"><div class="m-main"><div class="m-name">Bacon-Wrapped Fish <i>ベーコン包み魚</i></div><div class="m-desc">Smoked bacon, citrus reduction — reviewers call it "amazing."</div></div></div>
+        </div>
+        <div class="menu-group reveal" style="--d:.14s">
+          <div class="menu-cat">Bar</div>
+          <div class="m-item"><div class="m-main"><div class="m-name">Sake &amp; Full Bar <i>酒</i></div><div class="m-desc">A considered list of sake, wine and spirits.</div></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="m-note reveal">Seasonal market menu · selections rotate · ask your server</div>
+  </div>
+</section>
+
+<!-- SPACE / GALLERY -->
+<section id="space" class="band">
+  <div class="band-depth">520<small>m</small></div>
+  <div class="wrap">
+    <div class="space-hd">
+      <div>
+        <span class="eyebrow reveal">Inside Bluefin</span>
+        <h2 class="h-disp reveal" style="--d:.08s">The space &amp; <em>the gallery</em></h2>
+        <p class="lead reveal" style="--d:.16s">A hidden world-class art gallery sits above the dining room — guests call it a stunning surprise. Below, the open kitchen glows like a tide pool in the dark.</p>
+      </div>
+      <a class="btn btn-line reveal" style="--d:.2s" href="https://www.tripadvisor.com/Restaurant_Review-g293956-d8546565-Reviews-Bluefin_Cuisine_d_Art-Ulaanbaatar.html" target="_blank" rel="noopener">View all photos</a>
+    </div>
+    <div class="gallery reveal" style="--d:.12s">
+      <div class="gal gal-tall"><img src="assets/img/space-art.webp" alt="Art gallery wall"/><span class="gal-lbl">Art Gallery</span></div>
+      <div class="gal gal-wide"><img src="assets/img/space-counter.webp" alt="Omakase counter"/><span class="gal-lbl">Omakase Counter</span></div>
+      <div class="gal"><img src="assets/img/space-detail.webp" alt="Table setting"/><span class="gal-lbl">The Detail</span></div>
+      <div class="gal"><img src="assets/img/space-dining.webp" alt="Dining room"/><span class="gal-lbl">Dining Room</span></div>
+      <div class="gal gal-wide"><img src="assets/video/hero-poster.jpg" alt="Bluefin atmosphere"/><span class="gal-lbl">Cuisine d'Art</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews" class="band">
+  <div class="band-depth">700<small>m</small></div>
+  <div class="wrap">
+    <div class="rev-hd">
+      <div class="ta-badge reveal"><span class="nm">TripAdvisor</span><span class="stars">★★★★★</span><span class="sc">4.4</span></div>
+      <span class="eyebrow reveal" style="--d:.06s">Guest Experiences</span>
+      <h2 class="h-disp reveal" style="--d:.12s">What our <em>guests</em> say</h2>
+    </div>
+    <div class="rev-grid">
+      <div class="rev-card reveal">
+        <div class="stars">★★★★★</div>
+        <div class="rev-title">Amazing place with great service</div>
+        <p class="rev-text">Very unassuming from outside but lovely inside. Really professional service and all food fantastic. Sushi was really good — so good we had dinner twice and lunch. Best place we tried in UB.</p>
+        <div class="rev-auth"><span class="who">Mike A · St. Albans, UK</span><span class="when">Oct 2024</span></div>
+      </div>
+      <div class="rev-card reveal" style="--d:.1s">
+        <div class="stars">★★★★★</div>
+        <div class="rev-title">Gallery upstairs is a hidden gem</div>
+        <p class="rev-text">Of the many good restaurants we ate at in Mongolia, this was my favourite. Wonderful presentation. I couldn't believe I was in Mongolia. Hidden world-class art gallery upstairs — stunning.</p>
+        <div class="rev-auth"><span class="who">JanetBa · Issaquah, WA</span><span class="when">Aug 2018</span></div>
+      </div>
+      <div class="rev-card reveal" style="--d:.2s">
+        <div class="stars">★★★★☆</div>
+        <div class="rev-title">Excellent lunch &amp; exceptional value</div>
+        <p class="rev-text">Regularly come here for lunch — quality of food is amazing, value for money exceptional and great service. Tip: arrive 10–15 minutes before noon to beat the rush!</p>
+        <div class="rev-auth"><span class="who">AdyFlo · Ulaanbaatar</span><span class="when">Feb 2019</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VISIT -->
+<section id="visit" class="band">
+  <div class="band-depth">900<small>m</small></div>
+  <div class="wrap">
+    <span class="eyebrow reveal">Find Us</span>
+    <h2 class="h-disp reveal" style="--d:.08s;margin-bottom:48px">Visit <em>Bluefin</em></h2>
+    <div class="visit-grid">
+      <div class="map-frame reveal">
+        <iframe title="Bluefin map" loading="lazy" allowfullscreen src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2674.0!2d106.9162!3d47.9160!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5d9692ae9fb26b85%3A0x5f3c3b37bfcb7c4c!2sBluefin%20Cuisine%20d&#39;Art!5e0!3m2!1sen!2smn!4v1700000000000!5m2!1sen!2smn"></iframe>
+        <div class="map-tag"><b>Bluefin Cuisine d'Art</b><span>1 Khoroo, Chinggis Avenue, Ulaanbaatar</span></div>
+      </div>
+      <div class="visit-info reveal" style="--d:.12s">
+        <div class="cblk"><div class="lab">Address</div><div class="val">1 Khoroo, Chinggis Avenue<br>Ulaanbaatar, Mongolia</div></div>
+        <div class="cblk"><div class="lab">Phone</div><div class="val"><a href="tel:+97670002267">+976 7000 2267</a></div><div class="sub"><a href="tel:75752277">7575-2277</a></div></div>
+        <div class="cblk"><div class="lab">Hours</div><div class="val">Daily · 12:00 — 00:00</div></div>
+        <div class="cblk"><div class="lab">Delivery</div><div class="pills"><span class="pill">Tok Tok</span><span class="pill">FreshPack</span></div></div>
+        <div class="cblk" style="border-bottom:0"><div class="lab">Follow</div>
+          <div class="socials">
+            <a href="https://www.facebook.com/BluefinSushiBarMongolia/" target="_blank" rel="noopener" aria-label="Facebook">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            </a>
+            <a href="https://www.tripadvisor.com/Restaurant_Review-g293956-d8546565-Reviews-Bluefin_Cuisine_d_Art-Ulaanbaatar.html" target="_blank" rel="noopener" aria-label="TripAdvisor">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3l1.5 4.5H18l-3.5 2.5 1.5 4.5L12 14l-4 2.5 1.5-4.5L6 9.5h4.5z"/></svg>
+            </a>
+          </div>
+        </div>
+        <a class="btn btn-fill visit-cta" href="tel:+97670002267">Reserve a Table</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="foot">
+    <div class="foot-brand"><b>BLUEFIN</b><i>ブルーフィン · ウランバートル</i></div>
+    <ul class="foot-links">
+      <li><a href="#about">Story</a></li>
+      <li><a href="#craft">Craft</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#visit">Reserve</a></li>
+    </ul>
+  </div>
+  <div class="foot-copy">© 2026 Bluefin Cuisine d'Art · Cuisine d'Art · Ulaanbaatar, Mongolia</div>
+</footer>
+
+<script src="js/ocean.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
