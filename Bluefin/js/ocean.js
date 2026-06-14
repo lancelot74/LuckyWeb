@@ -142,6 +142,16 @@
     else if (!reduce) { running = true; last = 0; requestAnimationFrame(frame); }
   });
 
+  // pause while the hero fully covers the canvas (it's occluded — no point drawing)
+  var heroEl = document.getElementById('surface');
+  if (heroEl && 'IntersectionObserver' in window && !reduce) {
+    new IntersectionObserver(function (es) {
+      var covered = es[0].intersectionRatio > 0.55;
+      if (covered) { running = false; }
+      else if (!running && !document.hidden) { running = true; last = 0; requestAnimationFrame(frame); }
+    }, { threshold: [0, 0.55, 1] }).observe(heroEl);
+  }
+
   var rt;
   window.addEventListener('resize', function () {
     clearTimeout(rt);

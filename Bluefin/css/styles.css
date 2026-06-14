@@ -61,8 +61,7 @@ ul{list-style:none}
   opacity:calc(.25 + var(--depth)*.7);
 }
 .grain{
-  position:fixed;inset:0;z-index:9998;pointer-events:none;opacity:.04;
-  mix-blend-mode:soft-light;
+  position:fixed;inset:0;z-index:9998;pointer-events:none;opacity:.03;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size:180px;
 }
@@ -210,8 +209,8 @@ nav.solid{
 
 /* hero scroll-scrub "dive" — bound to --hp (0 at top → 1 after one viewport),
    reverses automatically because it tracks scroll position, not a one-shot trigger */
-.hero-media{transform-origin:center;will-change:transform;
-  transform:scale(calc(1 + var(--hp,0)*.2)) translateY(calc(var(--hp,0)*5vh))}
+.hero-media{transform-origin:center;will-change:transform;backface-visibility:hidden;
+  transform:translateZ(0) scale(calc(1 + var(--hp,0)*.08)) translateY(calc(var(--hp,0)*4vh))}
 .hero-media::after{content:'';position:absolute;inset:0;pointer-events:none;
   background:var(--abyss);opacity:calc(var(--hp,0)*.62)}
 .hero-inner{will-change:transform,opacity;
