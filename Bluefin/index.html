@@ -16,6 +16,17 @@
 </head>
 <body>
 
+<!-- ENTRANCE — traditional sliding shoji doors that part on load -->
+<div id="entrance" aria-hidden="true">
+  <div class="door door-l"></div>
+  <div class="door door-r"></div>
+  <div class="entrance-mark">
+    <span class="entrance-seal">青</span>
+    <span class="entrance-name">BLUEFIN</span>
+    <span class="entrance-sub">Cuisine d'Art</span>
+  </div>
+</div>
+
 <canvas id="ocean" aria-hidden="true"></canvas>
 <div class="depth-tint" aria-hidden="true"></div>
 <div class="grain" aria-hidden="true"></div>
@@ -107,42 +118,34 @@
       <span class="eyebrow reveal">The Art of the Cut</span>
       <h2 class="h-disp reveal" style="--d:.08s">A discipline of <em>precision</em></h2>
     </div>
-    <div class="cut-stage reveal" style="--d:.12s">
-      <video id="cutVideo" muted playsinline preload="auto" poster="assets/video/cut-poster.jpg">
-        <source src="assets/video/sushi-cut.mp4" type="video/mp4"/>
-      </video>
-      <div class="cut-hint"><span>Scroll to slice</span></div>
-    </div>
-    <div class="steps">
-      <div class="step reveal" style="--d:.05s">
-        <div class="step-dot"></div>
-        <div class="step-kanji">巻</div>
-        <div class="step-no">STEP 01</div>
-        <div class="step-title">The Roll</div>
-        <p>Rice seasoned with exact proportions of vinegar, sugar and salt; nori chosen for its deep ocean aroma.</p>
-      </div>
-      <div class="step reveal" style="--d:.14s">
-        <div class="step-dot"></div>
-        <div class="step-kanji">庖</div>
-        <div class="step-no">STEP 02</div>
-        <div class="step-title">The Knife</div>
-        <p>A single-edge yanagiba blade. Each stroke one fluid, pulling motion — never a saw.</p>
-      </div>
-      <div class="step reveal" style="--d:.23s">
-        <div class="step-dot"></div>
-        <div class="step-kanji">切</div>
-        <div class="step-no">STEP 03</div>
-        <div class="step-title">The Cut</div>
-        <p>The blade descends in one decisive stroke, revealing the vibrant heart of the fish.</p>
-      </div>
-      <div class="step reveal" style="--d:.32s">
-        <div class="step-dot"></div>
-        <div class="step-kanji">盛</div>
-        <div class="step-no">STEP 04</div>
-        <div class="step-title">The Plate</div>
-        <p>Arranged with the care of ikebana. Colour, height, spacing — the plate is a canvas.</p>
+  </div>
+
+  <div class="craft-stage" id="craftStage">
+    <div class="craft-pin">
+      <div class="craft-frame">
+        <canvas id="craftCanvas" aria-label="A piece of bluefin sushi being made, scene by scene"></canvas>
+        <div class="craft-overlay" aria-hidden="true">
+          <div class="craft-cap" id="craftCap">
+            <span class="craft-kanji" id="capKanji">握</span>
+            <span class="craft-cap-txt">
+              <b class="craft-step" id="capStep">Step 01 — The Form</b>
+              <span class="craft-desc" id="capDesc">Seasoned rice pressed by hand into a perfect base for the marbled bluefin.</span>
+            </span>
+          </div>
+          <div class="craft-progress"><i id="craftBar"></i></div>
+        </div>
+        <div class="craft-hint" id="craftHint"><span>Scroll to follow the craft</span></div>
       </div>
     </div>
+  </div>
+
+  <div class="wrap craft-fallback">
+    <ol class="craft-steps">
+      <li><b>握 · The Form</b><span>Seasoned rice pressed by hand into a perfect base for the marbled bluefin.</span></li>
+      <li><b>庖 · The Knife</b><span>A single-edge yanagiba, honed to a mirror, readied over the piece.</span></li>
+      <li><b>切 · The Cut</b><span>One decisive pulling stroke reveals the vibrant heart of the fish.</span></li>
+      <li><b>盛 · The Plate</b><span>Arranged with the care of ikebana — colour, height, spacing.</span></li>
+    </ol>
   </div>
 </section>
 
@@ -327,5 +330,6 @@
 
 <script src="js/ocean.js"></script>
 <script src="js/main.js"></script>
+<script src="js/craft.js"></script>
 </body>
 </html>

@@ -42,7 +42,7 @@ body{
   font-size:16px;
   line-height:1.6;
   -webkit-font-smoothing:antialiased;
-  overflow-x:hidden;
+  overflow-x:clip;
   position:relative;
 }
 img{display:block;max-width:100%;height:auto}
@@ -66,6 +66,31 @@ ul{list-style:none}
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size:180px;
 }
+
+/* ---------- entrance: traditional sliding shoji doors ---------- */
+#entrance{position:fixed;inset:0;z-index:10000;pointer-events:none;overflow:hidden}
+.door{position:absolute;top:0;bottom:0;width:50.6%;will-change:transform;
+  background:
+    repeating-linear-gradient(0deg,rgba(58,39,16,.5) 0 2px,transparent 2px 84px),
+    repeating-linear-gradient(90deg,rgba(58,39,16,.5) 0 2px,transparent 2px 66px),
+    linear-gradient(135deg,#efe6d1,#dccfb0);
+  box-shadow:inset 0 0 150px rgba(120,86,44,.3);
+  border:13px solid #43301a}
+.door-l{left:0;border-right-width:6px;animation:doorL 2.1s cubic-bezier(.76,0,.18,1) forwards}
+.door-r{right:0;border-left-width:6px;animation:doorR 2.1s cubic-bezier(.76,0,.18,1) forwards}
+@keyframes doorL{0%,26%{transform:translateX(0)}100%{transform:translateX(-101%)}}
+@keyframes doorR{0%,26%{transform:translateX(0)}100%{transform:translateX(101%)}}
+.entrance-mark{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:14px;text-align:center;
+  animation:markOut .7s var(--ease) .2s forwards}
+@keyframes markOut{to{opacity:0;transform:scale(.92)}}
+.entrance-seal{width:94px;height:94px;border:2px solid #6b4e2e;border-radius:50%;
+  display:grid;place-items:center;font-family:var(--jp);font-size:2.6rem;color:#3a2710}
+.entrance-name{font-family:var(--disp);font-weight:600;font-size:1.9rem;letter-spacing:.42em;
+  text-indent:.42em;color:#2a1c0c}
+.entrance-sub{font-family:var(--mono);font-size:.6rem;letter-spacing:.4em;text-indent:.4em;color:#5c4424;text-transform:uppercase}
+html.intro,html.intro body{overflow:hidden}
+@media(prefers-reduced-motion:reduce){#entrance{display:none}}
 
 /* depth meter (right rail) */
 .depth-meter{
@@ -237,33 +262,38 @@ nav.solid{
 /* ---------- craft (the catch) ---------- */
 .craft-hd{text-align:center;max-width:680px;margin:0 auto 70px}
 .craft-hd .eyebrow{justify-content:center}
-.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative}
-.steps::before{content:'';position:absolute;left:0;right:0;top:54px;height:1px;
-  background:linear-gradient(90deg,transparent,var(--line-2),transparent)}
-.step{position:relative;padding:0 22px;text-align:center}
-.step-dot{width:11px;height:11px;border-radius:50%;background:var(--abyss);border:1px solid var(--biolum);
-  margin:48px auto 0;position:relative;z-index:2;transition:.4s var(--ease)}
-.step:hover .step-dot{background:var(--biolum);box-shadow:0 0 16px var(--biolum)}
-.step-kanji{font-family:var(--jp);font-size:2.4rem;color:var(--biolum);margin:26px 0 6px;line-height:1}
-.step-no{font-size:.62rem;letter-spacing:.3em;color:var(--mute)}
-.step-title{font-family:var(--disp);font-size:1.5rem;color:var(--foam);margin:10px 0 12px}
-.step p{font-size:.86rem;color:var(--mist);margin:0 auto;max-width:26ch;line-height:1.7}
 
-/* ---------- craft: scroll-scrubbed cut video ---------- */
-.cut-stage{position:relative;max-width:960px;margin:0 auto 60px;aspect-ratio:16/9;
-  overflow:hidden;border:1px solid var(--line-2);border-radius:8px;background:#000}
-.cut-stage video{width:100%;height:100%;object-fit:cover;display:block;
-  filter:saturate(1.05) contrast(1.04)}
-.cut-stage::after{content:'';position:absolute;inset:0;pointer-events:none;z-index:2;
+/* ---------- craft: pinned image-sequence scroll-story ---------- */
+.craft-stage{position:relative;height:360vh}
+.craft-pin{position:sticky;top:0;height:100vh;height:100svh;
+  display:flex;align-items:center;justify-content:center;padding:0 max(20px,5vw)}
+.craft-frame{position:relative;width:min(960px,92vw);aspect-ratio:16/9;margin:0 auto;
+  border:1px solid var(--line-2);border-radius:8px;overflow:hidden;background:#000}
+.craft-frame canvas{display:block;width:100%;height:100%}
+.craft-frame::after{content:'';position:absolute;inset:0;pointer-events:none;z-index:2;
   box-shadow:inset 0 0 90px rgba(3,7,13,.7);
-  background:linear-gradient(180deg,rgba(3,7,13,.3),transparent 28%,transparent 72%,rgba(3,7,13,.55))}
-.cut-stage::before{content:'';position:absolute;left:0;bottom:0;height:2px;z-index:3;
-  width:calc(var(--cp,0)*100%);background:var(--biolum);box-shadow:0 0 10px var(--biolum);
-  transition:width .08s linear}
-.cut-hint{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);z-index:4;
-  display:flex;align-items:center;gap:10px;font-size:.6rem;letter-spacing:.3em;
-  text-transform:uppercase;color:var(--mist);opacity:calc(1 - var(--cp,0)*4)}
-.cut-hint::before,.cut-hint::after{content:'';width:22px;height:1px;background:var(--line-2)}
+  background:linear-gradient(180deg,rgba(3,7,13,.45),transparent 26%,transparent 64%,rgba(3,7,13,.85))}
+.craft-overlay{position:absolute;inset:0;z-index:3;pointer-events:none}
+.craft-cap{position:absolute;left:clamp(18px,4vw,40px);bottom:clamp(22px,5vh,46px);
+  display:flex;align-items:center;gap:18px;max-width:min(60ch,88%);
+  transition:opacity .17s var(--ease),transform .17s var(--ease)}
+.craft-cap.swap{opacity:0;transform:translateY(10px)}
+.craft-kanji{font-family:var(--jp);font-size:clamp(2.4rem,5vw,3.4rem);color:var(--biolum);line-height:1;flex-shrink:0}
+.craft-cap-txt{display:flex;flex-direction:column;gap:7px}
+.craft-step{font-family:var(--mono);font-weight:400;font-size:.64rem;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--biolum)}
+.craft-desc{font-family:var(--disp);font-size:clamp(1.2rem,2.4vw,1.7rem);color:var(--foam);line-height:1.25}
+.craft-progress{position:absolute;left:0;bottom:0;width:100%;height:2px;background:rgba(56,225,214,.12);z-index:4}
+.craft-progress i{display:block;height:100%;width:0;background:var(--biolum);box-shadow:0 0 10px var(--biolum)}
+.craft-hint{position:absolute;top:18px;left:50%;transform:translateX(-50%);z-index:4;
+  display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:.6rem;letter-spacing:.3em;
+  text-transform:uppercase;color:var(--mist);transition:opacity .3s}
+.craft-hint::before,.craft-hint::after{content:'';width:22px;height:1px;background:var(--line-2)}
+.craft-fallback{display:none;margin-top:40px}
+.craft-steps{max-width:760px;margin:0 auto;display:grid;gap:18px}
+.craft-steps li{display:flex;flex-direction:column;gap:4px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+.craft-steps b{font-family:var(--disp);font-size:1.3rem;color:var(--foam)}
+.craft-steps span{color:var(--mist);font-size:.92rem;line-height:1.6}
 
 /* ---------- dishes (signature) ---------- */
 .dish-wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(36px,5vw,72px);align-items:center}
@@ -386,9 +416,9 @@ footer{border-top:1px solid var(--line);padding:60px max(20px,5vw) 44px;
   font-size:.68rem;letter-spacing:.1em;color:var(--mute)}
 
 /* ---------- Adaline discipline: monospace micro-labels ---------- */
-.eyebrow,.hero-eyebrow,.step-no,.menu-cat,.cblk .lab,.tag,.pill,
+.eyebrow,.hero-eyebrow,.menu-cat,.cblk .lab,.tag,.pill,
 .gal-lbl,.dm-read,.ta-badge .nm,.m-note,.foot-copy,.stat span,
-.dish-opt .num,.hero-scroll,.cut-hint{font-family:var(--mono);font-weight:400}
+.dish-opt .num,.hero-scroll{font-family:var(--mono);font-weight:400}
 
 /* ---------- responsive ---------- */
 @media(max-width:980px){
@@ -402,10 +432,7 @@ footer{border-top:1px solid var(--line);padding:60px max(20px,5vw) 44px;
   .gal-tall{grid-row:span 1}
 }
 @media(max-width:620px){
-  .steps{grid-template-columns:1fr 1fr;gap:36px 0}
-  .steps::before{display:none}
-  .step{margin-bottom:10px}
-  .step-dot{margin-top:0}
+  .craft-stage{height:300vh}
   .stats{gap:26px}
   .gallery{grid-template-columns:1fr;grid-auto-rows:200px}
   .gal-wide{grid-column:span 1}
@@ -422,4 +449,9 @@ footer{border-top:1px solid var(--line);padding:60px max(20px,5vw) 44px;
   .hero-media,.hero-inner{transform:none!important;opacity:1!important}
   .hero-media::after{opacity:0!important}
   .dish-ring{animation:none}
+  .craft-stage{height:auto}
+  .craft-pin{position:static;height:auto;padding:0}
+  .craft-frame{margin:0 auto}
+  .craft-overlay,.craft-hint{display:none}
+  .craft-fallback{display:block}
 }

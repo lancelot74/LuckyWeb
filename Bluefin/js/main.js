@@ -6,6 +6,20 @@
   var doc = document.documentElement;
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  /* ---- entrance shoji doors ---- */
+  var entrance = document.getElementById('entrance');
+  if (entrance) {
+    if (reduce) {
+      entrance.remove();
+    } else {
+      doc.classList.add('intro');                 // lock scroll while the doors part
+      window.setTimeout(function () {
+        doc.classList.remove('intro');
+        entrance.remove();
+      }, 2300);
+    }
+  }
+
   /* ---- nav ---- */
   var nav = document.getElementById('nav');
   var burger = document.getElementById('burger');
@@ -69,31 +83,6 @@
   var MAX_DEPTH = 920; // metres at page bottom
   var ticking = false;
 
-  // craft cut video — scrubbed to scroll
-  var cutVideo = document.getElementById('cutVideo');
-  var cutStage = document.querySelector('.cut-stage');
-  var cutReady = false;
-  if (cutVideo && !reduce) {
-    // A video that is only ever seeked (never played) keeps showing its poster and
-    // won't paint seeked frames. Prime it with a muted play→pause so scrubbing renders.
-    var primeCut = function () {
-      if (cutReady) return;
-      var done = function () { cutReady = true; cutVideo.removeAttribute('poster'); updateDepth(); };
-      var pr = cutVideo.play();
-      if (pr && pr.then) {
-        pr.then(function () { cutVideo.pause(); cutVideo.currentTime = 0; done(); }).catch(done);
-      } else {
-        try { cutVideo.pause(); } catch (e) {}
-        done();
-      }
-    };
-    if (cutVideo.readyState >= 2) primeCut();
-    else cutVideo.addEventListener('canplay', primeCut, { once: true });
-    // fallback: also prime on the first user interaction in case autoplay was deferred
-    window.addEventListener('scroll', primeCut, { once: true, passive: true });
-    window.addEventListener('pointerdown', primeCut, { once: true });
-  }
-
   function updateDepth() {
     var max = doc.scrollHeight - window.innerHeight;
     var p = max > 0 ? Math.min(window.scrollY / max, 1) : 0;
@@ -108,21 +97,6 @@
       var hh = hero.offsetHeight || window.innerHeight;
       var hp = Math.min(Math.max(window.scrollY / hh, 0), 1);
       doc.style.setProperty('--hp', hp.toFixed(3));
-    }
-    // craft cut — scrub video time to the stage's travel through the viewport; reverses on scroll up
-    if (cutVideo && cutStage && cutReady && !reduce) {
-      var r = cutStage.getBoundingClientRect();
-      var vh = window.innerHeight;
-      var cp = (vh - r.top) / (vh + r.height);
-      cp = Math.min(Math.max(cp, 0), 1);
-      doc.style.setProperty('--cp', cp.toFixed(3));
-      var dur = cutVideo.duration;
-      if (dur) {
-        var tt = cp * (dur - 0.05);
-        if (Math.abs(cutVideo.currentTime - tt) > 0.03) {
-          try { cutVideo.currentTime = tt; } catch (e) {}
-        }
-      }
     }
     ticking = false;
   }
