@@ -69,6 +69,14 @@
   var MAX_DEPTH = 920; // metres at page bottom
   var ticking = false;
 
+  // craft cut video — scrubbed to scroll
+  var cutVideo = document.getElementById('cutVideo');
+  var cutStage = document.querySelector('.cut-stage');
+  var cutReady = false;
+  if (cutVideo) {
+    cutVideo.addEventListener('loadedmetadata', function () { cutReady = true; updateDepth(); });
+  }
+
   function updateDepth() {
     var max = doc.scrollHeight - window.innerHeight;
     var p = max > 0 ? Math.min(window.scrollY / max, 1) : 0;
@@ -83,6 +91,21 @@
       var hh = hero.offsetHeight || window.innerHeight;
       var hp = Math.min(Math.max(window.scrollY / hh, 0), 1);
       doc.style.setProperty('--hp', hp.toFixed(3));
+    }
+    // craft cut — scrub video time to the stage's travel through the viewport; reverses on scroll up
+    if (cutVideo && cutStage && cutReady && !reduce) {
+      var r = cutStage.getBoundingClientRect();
+      var vh = window.innerHeight;
+      var cp = (vh - r.top) / (vh + r.height);
+      cp = Math.min(Math.max(cp, 0), 1);
+      doc.style.setProperty('--cp', cp.toFixed(3));
+      var dur = cutVideo.duration;
+      if (dur) {
+        var tt = cp * (dur - 0.05);
+        if (Math.abs(cutVideo.currentTime - tt) > 0.03) {
+          try { cutVideo.currentTime = tt; } catch (e) {}
+        }
+      }
     }
     ticking = false;
   }

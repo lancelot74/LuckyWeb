@@ -249,6 +249,22 @@ nav.solid{
 .step-title{font-family:var(--disp);font-size:1.5rem;color:var(--foam);margin:10px 0 12px}
 .step p{font-size:.86rem;color:var(--mist);margin:0 auto;max-width:26ch;line-height:1.7}
 
+/* ---------- craft: scroll-scrubbed cut video ---------- */
+.cut-stage{position:relative;max-width:960px;margin:0 auto 60px;aspect-ratio:16/9;
+  overflow:hidden;border:1px solid var(--line-2);background:#000}
+.cut-stage video{width:100%;height:100%;object-fit:cover;display:block;
+  filter:saturate(1.05) contrast(1.04)}
+.cut-stage::after{content:'';position:absolute;inset:0;pointer-events:none;z-index:2;
+  box-shadow:inset 0 0 90px rgba(3,7,13,.7);
+  background:linear-gradient(180deg,rgba(3,7,13,.3),transparent 28%,transparent 72%,rgba(3,7,13,.55))}
+.cut-stage::before{content:'';position:absolute;left:0;bottom:0;height:2px;z-index:3;
+  width:calc(var(--cp,0)*100%);background:var(--biolum);box-shadow:0 0 10px var(--biolum);
+  transition:width .08s linear}
+.cut-hint{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);z-index:4;
+  display:flex;align-items:center;gap:10px;font-size:.6rem;letter-spacing:.3em;
+  text-transform:uppercase;color:var(--mist);opacity:calc(1 - var(--cp,0)*4)}
+.cut-hint::before,.cut-hint::after{content:'';width:22px;height:1px;background:var(--line-2)}
+
 /* ---------- dishes (signature) ---------- */
 .dish-wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(36px,5vw,72px);align-items:center}
 .dish-stage{position:relative;display:grid;place-items:center;aspect-ratio:1;max-width:520px;margin:0 auto;width:100%}
