@@ -65,6 +65,7 @@
   /* ---- depth meter + descent tint ---- */
   var meter = document.getElementById('depthMeter');
   var readout = document.getElementById('depthRead');
+  var hero = document.getElementById('surface');
   var MAX_DEPTH = 920; // metres at page bottom
   var ticking = false;
 
@@ -76,6 +77,12 @@
     if (meter) {
       if (window.scrollY > window.innerHeight * 0.6) meter.classList.add('show');
       else meter.classList.remove('show');
+    }
+    // hero "dive" scrub — 0 at top, 1 once scrolled a full viewport; reverses on scroll up
+    if (hero && !reduce) {
+      var hh = hero.offsetHeight || window.innerHeight;
+      var hp = Math.min(Math.max(window.scrollY / hh, 0), 1);
+      doc.style.setProperty('--hp', hp.toFixed(3));
     }
     ticking = false;
   }
