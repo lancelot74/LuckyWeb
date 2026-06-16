@@ -11,10 +11,8 @@ function initHero(hero) {
   initHeadline(hero);
   initCountUp(hero);
 
-  const scrub = hero.querySelector('.hero-scrub');
   const poster = hero.querySelector('.hero-poster');
   const video = hero.querySelector('.hero-video');
-  scrub.style.display = 'none'; // scrub canvas retired in favour of an autoplay intro
 
   if (reduce) { poster.style.display = 'block'; return; } // static final (lit) frame
 
