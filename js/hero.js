@@ -76,9 +76,6 @@ function initCountUp(hero) {
 
 function initScrub(hero, canvas, poster) {
   const count = parseInt(hero.dataset.frames, 10) || 120;
-  // HOLD: keep the opening frame (full laptop in view) for the first slice of the pinned
-  // scroll, so the visitor takes in the whole hero before the transformation begins.
-  const HOLD = 0.22;
   const ctx = canvas.getContext('2d');
   const frames = [];
   let loaded = 0;
@@ -103,11 +100,13 @@ function initScrub(hero, canvas, poster) {
   }
 
   window.gsap.registerPlugin(window.ScrollTrigger);
+  // Non-pinned scrub: the page keeps scrolling normally while the laptop builds the site
+  // as the hero moves up through the viewport. The build finishes a touch before the hero
+  // leaves, so the completed site is on screen rather than only at the exit.
   window.ScrollTrigger.create({
-    trigger: hero, start: 'top top', end: '+=260%', pin: true, scrub: 0.4,
+    trigger: hero, start: 'top top', end: 'bottom top', scrub: 0.5,
     onUpdate: (self) => {
-      const p = self.progress;
-      const mapped = p <= HOLD ? 0 : (p - HOLD) / (1 - HOLD); // hold, then scrub frames 0→last
+      const mapped = Math.min(1, self.progress / 0.85);
       drawFrame(frameIndexForProgress(mapped, count));
     },
   });
