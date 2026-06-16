@@ -7,7 +7,7 @@ export const STRINGS = {
     hero_eyebrow:'Independent studio — est. 2026',
     hero_h1_html:'Websites for businesses that <em>mean it.</em>',
     hero_sub:"We design and build calm, considered websites for restaurants, shops, and small studios — usually in a week, sometimes faster.",
-    hero_cta1:'Start a project', hero_cta2:'See our work',
+    hero_cta1:'Start a project', hero_cta2:'See our work', hero_cue:'⇅ Scroll to transform',
     meta1_l:'Founded', meta2_l:'Sites shipped', meta3_l:'Avg. turnaround', meta3_v:'6 days',
     lbl_services:'Services / 01',
     services_title_html:'What we <em>do</em>, end to end.',
@@ -41,7 +41,7 @@ export const STRINGS = {
     form_details:'Project details', form_note:'We reply within one working day.', form_submit:'Send message',
     footer_brand_p:'An independent studio designing and building websites for small businesses.',
     ft_studio:'Studio', ft_connect:'Connect', ft_lang:'Language', ft_system:'System', ft_uptime:'Uptime · 99.98%', ft_built:'Built in-house', ft_instagram:'Instagram',
-    footer_copy:'© 2025 LuckyWeb. All rights reserved.',
+    footer_copy:'© LuckyWeb 2026 — built, not templated',
     footer_loc:'Designed & built in-house.',
   },
   zh: {

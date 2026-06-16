@@ -25,7 +25,32 @@
   </nav>
 
   <main>
-    <header class="hero" id="hero"><!-- Task 12 --></header>
+    <header class="hero" id="hero" data-frames="121">
+      <canvas class="hero-particles" aria-hidden="true"></canvas>
+      <canvas class="hero-scrub" aria-hidden="true"></canvas>
+      <img class="hero-poster" src="assets/hero/hero-poster.webp" alt="" aria-hidden="true">
+      <video class="hero-video" playsinline muted loop preload="none" poster="assets/hero/hero-poster.webp" aria-hidden="true">
+        <source src="assets/hero/hero.webm" type="video/webm">
+        <source src="assets/hero/hero.mp4" type="video/mp4">
+      </video>
+      <div class="hero-inner wrap">
+        <div class="eyebrow"><span class="mono" data-t="hero_eyebrow">Independent studio</span><span class="bar"></span><span class="mono">Est. 2026</span></div>
+        <h1 class="hero-h1" data-t="hero_h1_html">Websites for businesses that <em>mean it.</em></h1>
+        <div class="hero-mid">
+          <p class="hero-sub r" data-t="hero_sub"></p>
+          <div class="hero-acts r">
+            <a class="btn" href="#contact"><span data-t="hero_cta1">Start a project</span> →</a>
+            <a class="btn ghost" href="#work" data-t="hero_cta2">See our work</a>
+          </div>
+        </div>
+        <div class="hero-stats">
+          <div class="stat r"><div class="stat-n" data-count="40" data-suffix="+">0</div><div class="mono" data-t="meta2_l">Sites shipped</div></div>
+          <div class="stat r"><div class="stat-n" data-count="6" data-suffix=" days">0</div><div class="mono" data-t="meta3_l">Avg. turnaround</div></div>
+          <div class="stat r"><div class="stat-n serif">2026</div><div class="mono" data-t="meta1_l">Founded</div></div>
+        </div>
+      </div>
+      <div class="hero-cue mono" data-t="hero_cue">⇅ Scroll to transform</div>
+    </header>
     <section id="services" class="section"><!-- Task 13 --></section>
     <section id="work" class="section work-band"><!-- Task 14 --></section>
     <section id="process" class="section"><!-- Task 13 --></section>
