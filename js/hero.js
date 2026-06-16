@@ -100,14 +100,11 @@ function initScrub(hero, canvas, poster) {
   }
 
   window.gsap.registerPlugin(window.ScrollTrigger);
-  // Non-pinned scrub: the page keeps scrolling normally while the laptop builds the site
-  // as the hero moves up through the viewport. The build finishes a touch before the hero
-  // leaves, so the completed site is on screen rather than only at the exit.
+  // Pin the hero and scrub the build to completion, then release. On load the opening frame
+  // (full laptop) is on screen; the first scroll engages the pin and the laptop immediately
+  // starts building — NO hold — so the lock always feels purposeful, then the page resumes.
   window.ScrollTrigger.create({
-    trigger: hero, start: 'top top', end: 'bottom top', scrub: 0.5,
-    onUpdate: (self) => {
-      const mapped = Math.min(1, self.progress / 0.85);
-      drawFrame(frameIndexForProgress(mapped, count));
-    },
+    trigger: hero, start: 'top top', end: '+=200%', pin: true, scrub: 0.5,
+    onUpdate: (self) => drawFrame(frameIndexForProgress(self.progress, count)),
   });
 }
