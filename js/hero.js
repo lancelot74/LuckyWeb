@@ -1,4 +1,5 @@
 // js/hero.js
+import { frameIndexForProgress } from './lib/scrub.js';
 import { particleCount, stepParticle } from './lib/particles.js';
 import { prefersReducedMotion } from './lib/env.js';
 
@@ -11,17 +12,20 @@ function initHero(hero) {
   initHeadline(hero);
   initCountUp(hero);
 
+  const isMobile = window.matchMedia('(max-width:760px)').matches;
+  const scrub = hero.querySelector('.hero-scrub');
   const poster = hero.querySelector('.hero-poster');
   const video = hero.querySelector('.hero-video');
 
-  if (reduce) { poster.style.display = 'block'; return; } // static final (lit) frame
-
-  // Play the transformation ONCE on load so the whole animation is visible up front,
-  // then hold on the final finished-website frame. Falls back to the poster if autoplay is blocked.
-  poster.style.display = 'none';
-  video.loop = false;
-  video.style.display = 'block';
-  video.play().catch(() => { video.style.display = 'none'; poster.style.display = 'block'; });
+  if (reduce) { scrub.style.display = 'none'; poster.style.display = 'block'; return; } // static final frame
+  if (isMobile || !window.gsap || !window.ScrollTrigger) {
+    // Mobile / no-GSAP fallback: poster + looping video (no pinned scrub)
+    scrub.style.display = 'none'; poster.style.display = 'none';
+    video.loop = true; video.style.display = 'block';
+    video.play().catch(() => { video.style.display = 'none'; poster.style.display = 'block'; });
+    return;
+  }
+  initScrub(hero, scrub, poster);
 }
 
 function initParticles(canvas) {
@@ -37,7 +41,7 @@ function initParticles(canvas) {
     }));
   };
   size(); addEventListener('resize', size);
-  if (reduce) { draw(); return; }      // single static frame
+  if (reduce) { draw(); return; } // single static frame
   // run the rAF loop only while the hero is on-screen (saves CPU/battery once scrolled past)
   let running = false, rafId;
   const tick = () => { if (!running) return; draw(); rafId = requestAnimationFrame(tick); };
@@ -56,7 +60,6 @@ function initParticles(canvas) {
 function initHeadline(hero) {
   const h1 = hero.querySelector('.hero-h1');
   if (!h1 || reduce || !window.gsap) return;
-  // wrap each line-word group already present; animate the whole h1 up once
   window.gsap.from(h1, { yPercent: 12, opacity: 0, duration: 1.0, ease: 'power3.out', delay: 0.1 });
 }
 
@@ -68,5 +71,44 @@ function initCountUp(hero) {
     const step = (t) => { t0 = t0 || t; const p = Math.min((t - t0) / 1100, 1); const e = 1 - Math.pow(1 - p, 3);
       el.textContent = Math.round(to * e) + suf; if (p < 1) requestAnimationFrame(step); };
     requestAnimationFrame(step);
+  });
+}
+
+function initScrub(hero, canvas, poster) {
+  const count = parseInt(hero.dataset.frames, 10) || 120;
+  // HOLD: keep the opening frame (full laptop in view) for the first slice of the pinned
+  // scroll, so the visitor takes in the whole hero before the transformation begins.
+  const HOLD = 0.22;
+  const ctx = canvas.getContext('2d');
+  const frames = [];
+  let loaded = 0;
+  const pad = (i) => String(i).padStart(3, '0');
+  for (let i = 1; i <= count; i++) {
+    const img = new Image();
+    img.src = `assets/hero/frame-${pad(i)}.webp`;
+    img.onload = () => { loaded++; if (loaded === 1) drawFrame(0); };
+    frames.push(img);
+  }
+  const fit = () => { canvas.width = hero.offsetWidth; canvas.height = hero.offsetHeight; };
+  fit(); addEventListener('resize', fit);
+  poster.style.display = 'none';
+
+  function drawFrame(idx) {
+    const img = frames[idx]; if (!img || !img.complete || !img.naturalWidth) return;
+    const cw = canvas.width, ch = canvas.height;
+    const scale = Math.max(cw / img.naturalWidth, ch / img.naturalHeight);
+    const dw = img.naturalWidth * scale, dh = img.naturalHeight * scale;
+    ctx.clearRect(0, 0, cw, ch);
+    ctx.drawImage(img, (cw - dw) / 2, (ch - dh) / 2, dw, dh);
+  }
+
+  window.gsap.registerPlugin(window.ScrollTrigger);
+  window.ScrollTrigger.create({
+    trigger: hero, start: 'top top', end: '+=260%', pin: true, scrub: 0.4,
+    onUpdate: (self) => {
+      const p = self.progress;
+      const mapped = p <= HOLD ? 0 : (p - HOLD) / (1 - HOLD); // hold, then scrub frames 0→last
+      drawFrame(frameIndexForProgress(mapped, count));
+    },
   });
 }

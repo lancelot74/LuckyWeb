@@ -7,7 +7,7 @@ export const STRINGS = {
     hero_eyebrow:'Independent studio — est. 2026',
     hero_h1_html:'Websites for businesses that <em>mean it.</em>',
     hero_sub:"We design and build calm, considered websites for restaurants, shops, and small studios — usually in a week, sometimes faster.",
-    hero_cta1:'Start a project', hero_cta2:'See our work', hero_cue:'Scroll ↓',
+    hero_cta1:'Start a project', hero_cta2:'See our work', hero_cue:'Scroll to transform ↓',
     meta1_l:'Founded', meta2_l:'Sites shipped', meta3_l:'Avg. turnaround', meta3_v:'6 days',
     lbl_services:'Services / 01',
     services_title_html:'What we <em>do</em>, end to end.',
