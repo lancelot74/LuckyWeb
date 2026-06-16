@@ -75,6 +75,7 @@ function initCountUp(hero) {
 }
 
 function initScrub(hero, canvas, poster) {
+  hero.classList.add('is-scrub'); // tall section + sticky stage = native-scroll lead-in, then locked build
   const count = parseInt(hero.dataset.frames, 10) || 120;
   const ctx = canvas.getContext('2d');
   const frames = [];
@@ -86,7 +87,7 @@ function initScrub(hero, canvas, poster) {
     img.onload = () => { loaded++; if (loaded === 1) drawFrame(0); };
     frames.push(img);
   }
-  const fit = () => { canvas.width = hero.offsetWidth; canvas.height = hero.offsetHeight; };
+  const fit = () => { canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight; };
   fit(); addEventListener('resize', fit);
   poster.style.display = 'none';
 
@@ -99,12 +100,18 @@ function initScrub(hero, canvas, poster) {
     ctx.drawImage(img, (cw - dw) / 2, (ch - dh) / 2, dw, dh);
   }
 
+  // Sticky stage in a tall section → fully native scroll (no jacking). A short lead-in keeps
+  // the full laptop in view as you start scrolling, then the build scrubs to completion while
+  // the stage stays locked on screen, then the section scrolls away to the content below.
+  const LEAD = 0.15; // hold the opening frame for the first 15% of the runway
+  const DONE = 0.9;  // finish the build by 90%, hold it, then let the stage scroll off
   window.gsap.registerPlugin(window.ScrollTrigger);
-  // Pin the hero and scrub the build to completion, then release. On load the opening frame
-  // (full laptop) is on screen; the first scroll engages the pin and the laptop immediately
-  // starts building — NO hold — so the lock always feels purposeful, then the page resumes.
   window.ScrollTrigger.create({
-    trigger: hero, start: 'top top', end: '+=200%', pin: true, scrub: 0.5,
-    onUpdate: (self) => drawFrame(frameIndexForProgress(self.progress, count)),
+    trigger: hero, start: 'top top', end: 'bottom bottom', scrub: 0.5,
+    onUpdate: (self) => {
+      const p = self.progress;
+      const m = p <= LEAD ? 0 : Math.min(1, (p - LEAD) / (DONE - LEAD));
+      drawFrame(frameIndexForProgress(m, count));
+    },
   });
 }
