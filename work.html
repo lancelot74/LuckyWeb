@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LuckyWeb — Websites for businesses that mean it</title>
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Inter+Tight:wght@400;450;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <nav class="nav">
+    <a class="brand" href="index.html">LuckyWeb</a>
+    <a class="lnk" href="#work" data-t="nav_work">Work</a>
+    <a class="lnk" href="#process" data-t="nav_process">Process</a>
+    <a class="cta" href="#contact" data-t="hero_cta1">Start a project</a>
+    <div class="lang">
+      <button class="lang-btn active" data-lang="en">EN</button>
+      <button class="lang-btn" data-lang="zh">ZH</button>
+      <button class="lang-btn" data-lang="mn">MN</button>
+      <button class="lang-btn" data-lang="hy">HY</button>
+    </div>
+  </nav>
+
+  <main class="work-page">
+    <section class="section">
+      <div class="wrap">
+        <div class="eyebrow"><span class="mono" style="color:var(--accent)">/ Selected work</span><span class="bar"></span></div>
+        <h1 class="section-title">A few of the sites <em>we've built.</em></h1>
+      </div>
+    </section>
+
+    <section class="section work-band">
+      <div class="wrap">
+        <div class="mono r" style="margin-bottom:18px">Featured</div>
+        <div class="work-feature">
+          <a class="card wcard r" href="Bluefin/"><div class="card-media" data-loop="assets/work/bluefin"><img src="images/bluefin.png" alt="Bluefin website"></div><div class="card-meta"><span class="card-name">Bluefin</span><span class="card-cat">Restaurant</span></div></a>
+          <a class="card wcard r" href="soopork.html"><div class="card-media" data-loop="assets/work/soopork"><img src="images/soopork.png" alt="SooPork website"></div><div class="card-meta"><span class="card-name">SooPork</span><span class="card-cat">Restaurant</span></div></a>
+          <a class="card wcard r" href="zielobar.html"><div class="card-media" data-loop="assets/work/zielo"><img src="images/zielo.png" alt="Zielo Bar website"></div><div class="card-meta"><span class="card-name">Zielo Bar</span><span class="card-cat">Bar</span></div></a>
+          <a class="card wcard r" href="https://luckywebtemplate.org" target="_blank" rel="noopener"><div class="card-media" data-loop="assets/work/etuga"><img src="images/etuga.png" alt="Etuga"></div><div class="card-meta"><span class="card-name">Etuga</span><span class="card-cat">Guesthouse</span></div></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="mono r" style="margin-bottom:18px">More work</div>
+        <div class="work-more">
+          <a class="card r" href="cafedelolita.html"><div class="card-media"><img src="images/jerric-portrait.png" alt="Café de Lolita"></div><div class="card-meta"><span class="card-name">Café de Lolita</span><span class="card-cat">Café</span></div></a>
+          <a class="card r" href="niji.html"><div class="card-media placeholder"></div><div class="card-meta"><span class="card-name">Niji</span><span class="card-cat">Restaurant</span></div></a>
+          <a class="card r" href="cottoncatcafe.html"><div class="card-media placeholder"></div><div class="card-meta"><span class="card-name">Cotton Cat</span><span class="card-cat">Café</span></div></a>
+          <a class="card r" href="brooklyncoffee.html"><div class="card-media placeholder"></div><div class="card-meta"><span class="card-name">Brooklyn Coffee</span><span class="card-cat">Café</span></div></a>
+          <a class="card r" href="hqcoffee.html"><div class="card-media placeholder"></div><div class="card-meta"><span class="card-name">HQ Coffee</span><span class="card-cat">Café</span></div></a>
+          <a class="card r" href="miransrestaurant.html"><div class="card-media placeholder"></div><div class="card-meta"><span class="card-name">Miran's</span><span class="card-cat">Restaurant</span></div></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap" style="text-align:center">
+        <h2 class="section-title">Your site, <em>next.</em></h2>
+        <a class="btn" href="index.html#contact" style="margin-top:20px"><span data-t="hero_cta1">Start a project</span> →</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer wrap">
+    <span class="mono" data-t="footer_copy">© LuckyWeb 2026 — built, not templated</span><span class="px"></span>
+    <span class="mono">info@luckyweb.org</span>
+  </footer>
+
+  <!-- CDN motion libs (no build) -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
+  <script type="module" src="js/main.js"></script>
+  <script type="module" src="js/hero.js"></script>
+  <script type="module" src="js/work-preview.js"></script>
+</body>
+</html>

@@ -1,6 +1,7 @@
 // js/main.js
 import { STRINGS, LANGS, applyTranslations } from './lib/i18n.js';
 import { prefersReducedMotion } from './lib/env.js';
+import { navigateWithTransition } from './lib/transitions.js';
 
 const reduce = prefersReducedMotion(window);
 
@@ -54,4 +55,9 @@ document.addEventListener('DOMContentLoaded', () => {
   initReveals();
   initSmoothScroll();
   initForm();
+  document.querySelectorAll('a[href$=".html"], a.brand, a.work-all').forEach((a) => {
+    const href = a.getAttribute('href');
+    if (!href || a.target === '_blank' || href.startsWith('http')) return;
+    a.addEventListener('click', (e) => { e.preventDefault(); navigateWithTransition(href, { doc: document, loc: location }); });
+  });
 });

@@ -122,3 +122,12 @@ img,canvas,video{display:block;max-width:100%}
 .wcard .card-cat{color:var(--dark-muted)}
 .work-all{margin-top:28px;border-color:var(--cream);color:var(--cream)}
 @media (max-width:760px){.work-feature{grid-template-columns:1fr}}
+
+/* ===== Work page ===== */
+.work-page{padding-top:90px}
+.work-more{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:30px}
+.work-more .card-media{aspect-ratio:16/10}
+.work-more .card-media img{width:100%;height:100%;object-fit:cover}
+.card-media.placeholder{background:repeating-linear-gradient(45deg,#e7ddc6,#e7ddc6 8px,#ddd0b3 8px,#ddd0b3 16px)}
+@media (max-width:760px){.work-more{grid-template-columns:1fr 1fr}}
+@media (max-width:480px){.work-more{grid-template-columns:1fr}}
