@@ -51,10 +51,57 @@
       </div>
       <div class="hero-cue mono" data-t="hero_cue">⇅ Scroll to transform</div>
     </header>
-    <section id="services" class="section"><!-- Task 13 --></section>
+    <section id="services" class="section">
+      <div class="wrap">
+        <div class="eyebrow"><span class="mono" data-t="lbl_services">Services / 01</span><span class="bar"></span></div>
+        <h2 class="section-title r" data-t="services_title_html">What we <em>do</em>, end to end.</h2>
+        <p class="section-lede r" data-t="services_lede"></p>
+        <div class="svc-grid">
+          <div class="svc r"><span class="svc-num">01</span><h3 class="svc-title" data-t="svc1_title">Design</h3><p class="svc-desc" data-t="svc1_desc"></p></div>
+          <div class="svc r"><span class="svc-num">02</span><h3 class="svc-title" data-t="svc2_title">Development</h3><p class="svc-desc" data-t="svc2_desc"></p></div>
+          <div class="svc r"><span class="svc-num">03</span><h3 class="svc-title" data-t="svc3_title">E-commerce</h3><p class="svc-desc" data-t="svc3_desc"></p></div>
+          <div class="svc r"><span class="svc-num">04</span><h3 class="svc-title" data-t="svc4_title">Launch &amp; care</h3><p class="svc-desc" data-t="svc4_desc"></p></div>
+        </div>
+      </div>
+    </section>
     <section id="work" class="section work-band"><!-- Task 14 --></section>
-    <section id="process" class="section"><!-- Task 13 --></section>
-    <section id="contact" class="section"><!-- Task 13 --></section>
+    <section id="process" class="section">
+      <div class="wrap">
+        <div class="eyebrow"><span class="mono" data-t="lbl_process">How it works / 03</span><span class="bar"></span></div>
+        <h2 class="section-title r" data-t="process_title_html">Quietly fast, <em>honestly priced.</em></h2>
+        <p class="section-lede r" data-t="process_lede"></p>
+        <div class="proc-grid">
+          <div class="proc r"><div class="mono">Step 01</div><h3 data-t="ps1_t">Brief</h3><p data-t="ps1_d"></p></div>
+          <div class="proc r"><div class="mono">Step 02</div><h3 data-t="ps2_t">Design</h3><p data-t="ps2_d"></p></div>
+          <div class="proc r"><div class="mono">Step 03</div><h3 data-t="ps3_t">Build</h3><p data-t="ps3_d"></p></div>
+          <div class="proc r"><div class="mono">Step 04</div><h3 data-t="ps4_t">Launch</h3><p data-t="ps4_d"></p></div>
+        </div>
+        <div class="proc-quote r">
+          <p class="quote-text serif" data-t="quote_html"></p>
+          <a class="btn" href="#contact"><span data-t="process_cta">Request a quote</span> →</a>
+        </div>
+      </div>
+    </section>
+    <section id="contact" class="section">
+      <div class="wrap contact-grid">
+        <div class="contact-side">
+          <div class="eyebrow"><span class="mono" data-t="lbl_contact">Contact / 04</span><span class="bar"></span></div>
+          <h2 class="section-title r" data-t="contact_title_html">Let's talk about <em>your project.</em></h2>
+          <p class="r" data-t="contact_lede"></p>
+          <div class="contact-detail mono">
+            <div class="row"><span data-t="c_email">Email</span><a href="mailto:info@luckyweb.org">info@luckyweb.org</a></div>
+            <div class="row"><span data-t="c_hours">Hours</span><span data-t="c_hours_v">Mon–Fri, 09:00–18:00</span></div>
+          </div>
+        </div>
+        <form class="contact-form" id="contact-form" novalidate>
+          <label><span data-t="f_name">Name</span><input name="name" required></label>
+          <label><span data-t="f_email">Email</span><input name="email" type="email" required></label>
+          <label><span data-t="f_msg">Project</span><textarea name="message" rows="4" required></textarea></label>
+          <button class="btn" type="submit"><span data-t="f_send">Send</span> →</button>
+          <p class="form-note mono" id="form-note" role="status"></p>
+        </form>
+      </div>
+    </section>
   </main>
 
   <footer class="footer wrap">
