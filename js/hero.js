@@ -100,11 +100,11 @@ function initScrub(hero, canvas, poster) {
   }
 
   window.gsap.registerPlugin(window.ScrollTrigger);
-  // Pin the hero and scrub the build to completion, then release. On load the opening frame
-  // (full laptop) is on screen; the first scroll engages the pin and the laptop immediately
-  // starts building — NO hold — so the lock always feels purposeful, then the page resumes.
+  // Lock the hero (pin) and scrub the full build while it stays put, so the WHOLE laptop is on
+  // screen for the entire animation, then release to the page. Content sits up top and the frame
+  // is bottom-anchored, so nothing covers the laptop and neither base nor lid is cropped.
   window.ScrollTrigger.create({
-    trigger: hero, start: 'top top', end: '+=200%', pin: true, scrub: 0.5,
+    trigger: hero, start: 'top top', end: '+=220%', pin: true, scrub: 0.5,
     onUpdate: (self) => drawFrame(frameIndexForProgress(self.progress, count)),
   });
 }
