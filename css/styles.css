@@ -79,7 +79,7 @@ img,canvas,video{display:block;max-width:100%}
 .hero-poster{z-index:0}
 .hero-video{z-index:0;display:none}
 .hero::after{content:"";position:absolute;inset:0;z-index:2;background:linear-gradient(180deg,rgba(22,20,15,.74) 0%,rgba(22,20,15,.28) 40%,transparent 66%)}
-.hero-inner{position:relative;z-index:3;width:100%;padding-top:118px;padding-bottom:24px}
+.hero-inner{position:relative;z-index:3;width:100%;padding-top:30px;padding-bottom:24px}
 .hero-h1{font-family:var(--font-display);font-weight:400;font-size:clamp(58px,12.5vw,168px);line-height:.9;letter-spacing:-.028em;margin:18px 0 0;max-width:14ch}
 .hero-h1 em{font-style:italic;color:var(--accent)}
 .hero-mid{display:flex;justify-content:space-between;align-items:flex-end;gap:36px;margin-top:34px;border-top:1px solid rgba(236,230,216,.18);padding-top:22px}
