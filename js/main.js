@@ -26,7 +26,7 @@ function initReveals() {
 
 function initSmoothScroll() {
   if (reduce || !window.Lenis) return;
-  const lenis = new window.Lenis({ duration: 1.1, smoothWheel: true });
+  const lenis = new window.Lenis({ lerp: 0.1, smoothWheel: true });
   function raf(t) { lenis.raf(t); requestAnimationFrame(raf); }
   requestAnimationFrame(raf);
   if (window.ScrollTrigger) lenis.on('scroll', window.ScrollTrigger.update);

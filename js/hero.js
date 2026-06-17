@@ -1,6 +1,6 @@
 // js/hero.js
 import { frameIndexForProgress } from './lib/scrub.js';
-import { particleCount, stepParticle } from './lib/particles.js';
+import { particleCount } from './lib/particles.js';
 import { prefersReducedMotion } from './lib/env.js';
 
 const reduce = prefersReducedMotion(window);
@@ -51,8 +51,15 @@ function initParticles(canvas) {
   }, { threshold: 0 }).observe(canvas);
   function draw() {
     ctx.clearRect(0, 0, w, h);
-    pts = pts.map((p) => stepParticle(p, w, h));
-    for (const p of pts) { ctx.globalAlpha = p.a; ctx.fillStyle = '#C7451B'; ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 7); ctx.fill(); }
+    ctx.fillStyle = '#C7451B';
+    // Move + wrap in place (mirrors stepParticle, inlined to avoid allocating a fresh array +
+    // object for every particle on every frame — that GC churn is what made scrolling feel heavy).
+    for (let i = 0; i < pts.length; i++) {
+      const p = pts[i];
+      p.x += p.vx; if (p.x < 0) p.x = w; else if (p.x > w) p.x = 0;
+      p.y += p.vy; if (p.y < 0) p.y = h; else if (p.y > h) p.y = 0;
+      ctx.globalAlpha = p.a; ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 7); ctx.fill();
+    }
     ctx.globalAlpha = 1;
   }
 }
@@ -85,6 +92,7 @@ function initScrub(hero, canvas, poster) {
   const pad = (i) => String(i).padStart(3, '0');
   for (let i = 1; i <= count; i++) {
     const img = new Image();
+    img.decoding = 'async'; // decode off the main thread so the 121-frame preload doesn't jank load
     img.src = `assets/hero/frame-${pad(i)}.webp`;
     if (i === 1) img.onload = () => drawFrame(0); // closed laptop paints the moment it arrives
     frames.push(img);
@@ -117,7 +125,7 @@ function initScrub(hero, canvas, poster) {
   // then the build scrubs to completion. Content sits up top and the frame is bottom-anchored, so
   // nothing covers the laptop and neither base nor lid is cropped.
   st = window.ScrollTrigger.create({
-    trigger: hero, start: 'top top', end: '+=240%', pin: true, scrub: 0.5,
+    trigger: hero, start: 'top top', end: '+=240%', pin: true, scrub: 0.3,
     onUpdate: (self) => render(self.progress),
   });
   render(0); // resting state after setup: closed laptop, regardless of the setup progress sweep
