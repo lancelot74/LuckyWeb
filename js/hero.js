@@ -76,19 +76,31 @@ function initCountUp(hero) {
 
 function initScrub(hero, canvas, poster) {
   const count = parseInt(hero.dataset.frames, 10) || 120;
+  // HOLD: the closed laptop holds for the first slice of the locked scroll, so the visitor scrolls
+  // down a bit and takes in the whole machine BEFORE the build begins — the lock engages, then the
+  // animation "starts a bit lower". Frame 0 is the closed laptop; the build runs across the rest.
+  const HOLD = 0.15;
   const ctx = canvas.getContext('2d');
   const frames = [];
-  let loaded = 0;
   const pad = (i) => String(i).padStart(3, '0');
   for (let i = 1; i <= count; i++) {
     const img = new Image();
     img.src = `assets/hero/frame-${pad(i)}.webp`;
-    img.onload = () => { loaded++; if (loaded === 1) drawFrame(0); };
+    if (i === 1) img.onload = () => drawFrame(0); // closed laptop paints the moment it arrives
     frames.push(img);
   }
-  const fit = () => { canvas.width = hero.offsetWidth; canvas.height = hero.offsetHeight; };
+  let st = null;
+  // Map scroll progress → frame: hold the closed laptop for the first HOLD slice, then build.
+  const render = (p) => {
+    const mapped = p <= HOLD ? 0 : (p - HOLD) / (1 - HOLD);
+    drawFrame(frameIndexForProgress(mapped, count));
+  };
+  // Resizing the canvas (incl. ScrollTrigger's pin refresh) clears it, so repaint from LIVE progress
+  // — never a stale index (ScrollTrigger sweeps progress to 1 during pin setup, which we must ignore).
+  const fit = () => { canvas.width = hero.offsetWidth; canvas.height = hero.offsetHeight; render(st ? st.progress : 0); };
   fit(); addEventListener('resize', fit);
   poster.style.display = 'none';
+  if (frames[0].complete && frames[0].naturalWidth) render(0); // already cached → paint closed laptop
 
   function drawFrame(idx) {
     const img = frames[idx]; if (!img || !img.complete || !img.naturalWidth) return;
@@ -100,11 +112,13 @@ function initScrub(hero, canvas, poster) {
   }
 
   window.gsap.registerPlugin(window.ScrollTrigger);
-  // Lock the hero (pin) and scrub the full build while it stays put, so the WHOLE laptop is on
-  // screen for the entire animation, then release to the page. Content sits up top and the frame
-  // is bottom-anchored, so nothing covers the laptop and neither base nor lid is cropped.
-  window.ScrollTrigger.create({
-    trigger: hero, start: 'top top', end: '+=220%', pin: true, scrub: 0.5,
-    onUpdate: (self) => drawFrame(frameIndexForProgress(self.progress, count)),
+  // Lock the hero (pin) so the WHOLE laptop stays on screen for the entire build, then release to
+  // the page. The first HOLD slice keeps the closed laptop on screen (scroll down a bit first),
+  // then the build scrubs to completion. Content sits up top and the frame is bottom-anchored, so
+  // nothing covers the laptop and neither base nor lid is cropped.
+  st = window.ScrollTrigger.create({
+    trigger: hero, start: 'top top', end: '+=240%', pin: true, scrub: 0.5,
+    onUpdate: (self) => render(self.progress),
   });
+  render(0); // resting state after setup: closed laptop, regardless of the setup progress sweep
 }
