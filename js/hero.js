@@ -17,7 +17,17 @@ function initHero(hero) {
   const poster = hero.querySelector('.hero-poster');
   const video = hero.querySelector('.hero-video');
 
-  if (reduce) { scrub.style.display = 'none'; poster.style.display = 'block'; return; } // static final frame
+  // On phones, use the portrait phone-build asset (the HTML keeps the landscape laptop for the
+  // desktop no-GSAP fallback). Set it before any branch returns so every fallback shows portrait.
+  if (isMobile) {
+    poster.src = 'assets/hero/hero-phone-poster.webp';
+    video.poster = 'assets/hero/hero-phone-poster.webp';
+    video.innerHTML =
+      '<source src="assets/hero/hero-phone.webm" type="video/webm">' +
+      '<source src="assets/hero/hero-phone.mp4" type="video/mp4">';
+    video.load();
+  }
+  if (reduce) { scrub.style.display = 'none'; poster.style.display = 'block'; return; } // static frame
   if (isMobile || !window.gsap || !window.ScrollTrigger) {
     // Mobile / no-GSAP fallback: poster + looping video (no pinned scrub)
     scrub.style.display = 'none'; poster.style.display = 'none';
