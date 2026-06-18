@@ -87,7 +87,7 @@ img,canvas,video{display:block;max-width:100%}
 .hero-video{z-index:0;display:none}
 .hero::after{content:"";position:absolute;inset:0;z-index:2;background:linear-gradient(180deg,rgba(22,20,15,.74) 0%,rgba(22,20,15,.28) 40%,transparent 66%)}
 .hero-inner{position:relative;z-index:3;width:100%;padding-top:30px;padding-bottom:24px}
-.hero-h1{font-family:var(--font-display);font-weight:400;font-size:clamp(58px,12.5vw,168px);line-height:.9;letter-spacing:-.028em;margin:18px 0 0;max-width:14ch}
+.hero-h1{font-family:var(--font-display);font-weight:400;font-size:clamp(46px,12.5vw,168px);line-height:.9;letter-spacing:-.028em;margin:18px 0 0;max-width:14ch}
 .hero-h1 em{font-style:italic;color:var(--accent)}
 .hero-mid{display:flex;justify-content:space-between;align-items:flex-end;gap:36px;margin-top:34px;border-top:1px solid rgba(236,230,216,.18);padding-top:22px}
 .hero-sub{max-width:42ch;font-size:17px;color:#cfc8ba}
@@ -99,7 +99,12 @@ img,canvas,video{display:block;max-width:100%}
 .hero-stats .stat + .stat{border-left:1px solid rgba(236,230,216,.18)}
 .stat-n{font-family:var(--font-display);font-size:clamp(36px,5vw,64px);line-height:.9}
 .hero-cue{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);z-index:3;color:#cfc8ba}
-@media (max-width:680px){.hero-mid,.hero-stats{flex-direction:column;align-items:flex-start}.hero-stats .stat + .stat{border-left:0;border-top:1px solid rgba(236,230,216,.18)}}
+@media (max-width:680px){
+  .hero-mid,.hero-stats{flex-direction:column;align-items:flex-start}
+  .hero-stats .stat + .stat{border-left:0;border-top:1px solid rgba(236,230,216,.18)}
+  .hero-inner{padding-top:20px}
+  .section{padding:60px 0}
+}
 
 /* ===== Services + Process + Contact ===== */
 .svc-grid,.proc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--hair);border:1px solid var(--hair);margin-top:40px}
