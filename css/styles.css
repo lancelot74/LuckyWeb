@@ -66,8 +66,15 @@ img,canvas,video{display:block;max-width:100%}
 .footer .px{display:inline-block;width:16px;height:16px;background:repeating-conic-gradient(var(--ink) 0 25%,var(--accent) 0 50%) 0 0/6px 6px;image-rendering:pixelated;vertical-align:middle;margin-left:8px}
 
 @media (max-width:680px){
-  .nav{gap:12px;padding-left:16px}
+  .nav{gap:10px;padding:4px 8px 4px 16px}
   .nav a.lnk{display:none}
+  .lang{gap:0;margin-left:2px}
+  .lang button{padding:0 8px;min-height:40px;display:inline-flex;align-items:center}
+  .nav .cta{padding:10px 13px}
+}
+@media (max-width:380px){
+  .nav .brand{font-size:17px}
+  .nav .cta{font-size:12px;padding:8px 11px}
 }
 
 /* ===== Hero ===== */
