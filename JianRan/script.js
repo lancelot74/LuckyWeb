@@ -8,7 +8,7 @@
   /* ---------- Language ---------- */
   var toggle = document.getElementById('langToggle');
   var translatable = document.querySelectorAll('[data-en]');
-  var figures = Array.prototype.slice.call(document.querySelectorAll('#gallery .ph'));
+  var figures = Array.prototype.slice.call(document.querySelectorAll('.ph'));
 
   function applyLang(lang) {
     currentLang = lang;
