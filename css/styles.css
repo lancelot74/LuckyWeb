@@ -99,6 +99,7 @@ img,canvas,video{display:block;max-width:100%}
 .hero-stats .stat + .stat{border-left:1px solid rgba(236,230,216,.18)}
 .stat-n{font-family:var(--font-display);font-size:clamp(36px,5vw,64px);line-height:.9}
 .hero-cue{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);z-index:3;color:#cfc8ba}
+@media (max-width:760px){.hero-video{object-position:center}}
 @media (max-width:680px){
   .hero-mid,.hero-stats{flex-direction:column;align-items:flex-start}
   .hero-stats .stat + .stat{border-left:0;border-top:1px solid rgba(236,230,216,.18)}
