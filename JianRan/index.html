@@ -8,32 +8,32 @@
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-  <!-- ===== Header ===== -->
-  <header class="site-header" id="top">
-    <div class="container header-inner">
-      <a href="#top" class="brand">简然 <span class="brand-en">JianRan</span></a>
+  <!-- ===== Top bar ===== -->
+  <header class="topbar" id="top">
+    <div class="bar-inner">
+      <a href="#top" class="wordmark">简然建材 <span class="wordmark-en">JIANRAN</span></a>
 
       <nav class="nav" id="nav">
-        <a href="#projects" data-en="Projects" data-zh="项目">Projects</a>
+        <a href="#work" data-en="Work" data-zh="项目">Work</a>
         <a href="#designs" data-en="Designs" data-zh="设计">Designs</a>
-        <a href="#source" data-en="What We Source" data-zh="采购范围">What We Source</a>
+        <a href="#source" data-en="Sourcing" data-zh="采购">Sourcing</a>
         <a href="#process" data-en="Process" data-zh="流程">Process</a>
         <a href="#about" data-en="About" data-zh="关于">About</a>
         <a href="#contact" data-en="Contact" data-zh="联系">Contact</a>
       </nav>
 
-      <div class="header-actions">
+      <div class="bar-actions">
         <button class="lang-toggle" id="langToggle" aria-label="Switch language">
           <span data-lang="en">EN</span><span class="sep">/</span><span data-lang="zh">中文</span>
         </button>
-        <a class="btn btn-wa" href="https://wa.me/8613727347201" target="_blank" rel="noopener">
-          <svg viewBox="0 0 32 32" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M16 3C9.4 3 4 8.4 4 15c0 2.1.6 4.1 1.6 5.9L4 29l8.3-1.6c1.7.9 3.7 1.4 5.7 1.4 6.6 0 12-5.4 12-12S22.6 3 16 3zm0 21.8c-1.8 0-3.5-.5-5-1.4l-.4-.2-4.9 1 1-4.8-.2-.4c-1-1.6-1.5-3.4-1.5-5.3 0-5.5 4.5-10 10-10s10 4.5 10 10-4.5 10.1-10 10.1zm5.5-7.4c-.3-.2-1.8-.9-2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.1-.2.2-.3.2-.6.1-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.5c.2-.2.2-.3.3-.5.1-.2.1-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.3 5.2 4.6.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4-.1-.2-.3-.3-.6-.4z"/></svg>
-          <span>WhatsApp</span>
+        <a class="pill pill-wa" href="https://wa.me/8613727347201" target="_blank" rel="noopener">
+          <svg viewBox="0 0 32 32" width="15" height="15" aria-hidden="true"><path fill="currentColor" d="M16 3C9.4 3 4 8.4 4 15c0 2.1.6 4.1 1.6 5.9L4 29l8.3-1.6c1.7.9 3.7 1.4 5.7 1.4 6.6 0 12-5.4 12-12S22.6 3 16 3zm0 21.8c-1.8 0-3.5-.5-5-1.4l-.4-.2-4.9 1 1-4.8-.2-.4c-1-1.6-1.5-3.4-1.5-5.3 0-5.5 4.5-10 10-10s10 4.5 10 10-4.5 10.1-10 10.1zm5.5-7.4c-.3-.2-1.8-.9-2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.1-.2.2-.3.2-.6.1-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.5c.2-.2.2-.3.3-.5.1-.2.1-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.3 5.2 4.6.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4-.1-.2-.3-.3-.6-.4z"/></svg>
+          <span data-en="WhatsApp" data-zh="WhatsApp">WhatsApp</span>
         </a>
         <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
           <span></span><span></span><span></span>
@@ -44,177 +44,189 @@
 
   <!-- ===== Hero ===== -->
   <section class="hero" id="hero">
-    <img class="hero-bg" src="assets/hero-kitchen.jpg" alt="">
-    <div class="hero-overlay"></div>
-    <div class="container hero-content">
-      <span class="eyebrow" data-en="Building materials & furniture · Shanghai" data-zh="建材与家具 · 上海">Building materials &amp; furniture · Shanghai</span>
-      <h1 data-en="Beautiful materials, brought to you." data-zh="优质建材，直送全球。">Beautiful materials, brought to you.</h1>
-      <p class="hero-sub" data-en="Any building material or piece of furniture — sourced, made, and shipped from China." data-zh="任何建筑材料与家具——从中国采购、生产、发往全球。">Any building material or piece of furniture — sourced, made, and shipped from China.</p>
+    <img class="hero-bg" id="heroBg" src="assets/hero-kitchen.jpg" alt="">
+    <div class="hero-scrim"></div>
+    <div class="hero-title">
+      <span class="eyebrow eyebrow-light" data-en="Building materials & furniture — Shanghai, China" data-zh="建材与家具 · 中国·上海">Building materials &amp; furniture — Shanghai, China</span>
+      <h1 class="display" data-en="Sourced." data-zh="采购">Sourced.</h1>
+      <p class="hero-sub" data-en="Any building material or piece of furniture — made in China, shipped to your site worldwide." data-zh="任何建材与家具——在中国制造，发往全球您的工地。">Any building material or piece of furniture — made in China, shipped to your site worldwide.</p>
       <div class="hero-cta">
-        <a class="btn btn-wa btn-lg" href="https://wa.me/8613727347201" target="_blank" rel="noopener" data-en="Message us on WhatsApp →" data-zh="WhatsApp 联系我们 →">Message us on WhatsApp →</a>
-        <a class="btn btn-ghost btn-lg" href="#projects" data-en="View projects" data-zh="查看项目">View projects</a>
+        <a class="pill pill-wa pill-lg" href="https://wa.me/8613727347201" target="_blank" rel="noopener" data-en="Message us on WhatsApp" data-zh="WhatsApp 联系我们">Message us on WhatsApp</a>
+        <a class="pill pill-ghost-light pill-lg" href="#work" data-en="See the work" data-zh="查看项目">See the work</a>
+      </div>
+    </div>
+    <div class="hero-thumbs" id="heroThumbs" aria-label="Switch hero image">
+      <button class="hthumb is-active" data-hero="assets/hero-kitchen.jpg"><img src="assets/hero-kitchen.jpg" alt="" loading="lazy"></button>
+      <button class="hthumb" data-hero="assets/designs/design-sea-06.jpg"><img src="assets/designs/design-sea-06.jpg" alt="" loading="lazy"></button>
+      <button class="hthumb" data-hero="assets/designs/design-na-03.jpg"><img src="assets/designs/design-na-03.jpg" alt="" loading="lazy"></button>
+      <button class="hthumb" data-hero="assets/designs/design-sea-04.jpg"><img src="assets/designs/design-sea-04.jpg" alt="" loading="lazy"></button>
+    </div>
+  </section>
+
+  <!-- ===== Statement ===== -->
+  <section class="band statement">
+    <span class="eyebrow" data-en="What we do" data-zh="我们做什么">What we do</span>
+    <h2 class="heading" data-en="Any material, any piece of furniture — sourced and made in China, shipped to your site." data-zh="任何材料，任何家具——在中国采购与制造，直送您的工地。">Any material, any piece of furniture — sourced and made in China, shipped to your site.</h2>
+  </section>
+
+  <hr class="rule">
+
+  <!-- ===== Sourcing ===== -->
+  <section class="band" id="source">
+    <span class="eyebrow" data-en="What we source" data-zh="采购范围">What we source</span>
+    <h2 class="heading heading-sm" data-en="Source anything — one partner." data-zh="一站采购，应有尽有。">Source anything — one partner.</h2>
+    <p class="lead" data-en="Finished furniture — and the boards, hardware, and surfaces it's built from. From a single tile to a full fit-out, if it goes into a building we can source it." data-zh="成品家具，以及制作家具的板材、五金与饰面。从一块瓷砖到整屋精装，只要用于建筑，我们都能采购。">Finished furniture — and the boards, hardware, and surfaces it's built from. From a single tile to a full fit-out, if it goes into a building we can source it.</p>
+
+    <div class="source-cols">
+      <div class="source-col">
+        <span class="col-label" data-en="Building materials" data-zh="建筑材料">Building materials</span>
+        <ul class="hlist">
+          <li data-en="Stone & sintered stone" data-zh="岩板与石材">Stone &amp; sintered stone</li>
+          <li data-en="Flooring" data-zh="地板">Flooring</li>
+          <li data-en="Tile" data-zh="瓷砖">Tile</li>
+          <li data-en="Doors & windows" data-zh="门窗">Doors &amp; windows</li>
+          <li data-en="Wall panels" data-zh="墙板">Wall panels</li>
+          <li data-en="Lighting" data-zh="灯具">Lighting</li>
+        </ul>
+      </div>
+      <div class="source-col">
+        <span class="col-label" data-en="Furniture & the materials to build it" data-zh="家具与制作材料">Furniture &amp; the materials to build it</span>
+        <ul class="hlist">
+          <li data-en="Wardrobes" data-zh="衣柜">Wardrobes</li>
+          <li data-en="Kitchen cabinetry" data-zh="橱柜">Kitchen cabinetry</li>
+          <li data-en="Display & storage" data-zh="储物展示柜">Display &amp; storage</li>
+          <li data-en="Custom furniture" data-zh="定制家具">Custom furniture</li>
+          <li data-en="Boards, panels & cabinet hardware" data-zh="板材、面板与柜体五金">Boards, panels &amp; cabinet hardware</li>
+          <li data-en="Stone & quartz worktops" data-zh="石英石台面">Stone &amp; quartz worktops</li>
+        </ul>
       </div>
     </div>
   </section>
 
-  <!-- ===== Positioning strip ===== -->
-  <div class="strip">
-    <div class="container strip-inner">
-      <span data-en="Shanghai-based" data-zh="立足上海">Shanghai-based</span>
-      <span class="dot">·</span>
-      <span data-en="Direct factory sourcing" data-zh="工厂直采">Direct factory sourcing</span>
-      <span class="dot">·</span>
-      <span data-en="Worldwide shipping" data-zh="全球发货">Worldwide shipping</span>
-    </div>
-  </div>
+  <hr class="rule">
 
-  <!-- ===== What We Source ===== -->
-  <section class="section" id="source">
-    <div class="container">
-      <h2 class="section-title" data-en="Source anything — one partner" data-zh="一站采购，应有尽有">Source anything — one partner</h2>
-      <p class="section-sub" data-en="Finished furniture — and the boards, hardware, and surfaces it's built from. From a single tile to a full fit-out, if it goes into a building we can source it." data-zh="成品家具，以及制作家具的板材、五金与饰面。从一块瓷砖到整屋精装，只要用于建筑，我们都能采购。">Finished furniture — and the boards, hardware, and surfaces it's built from. From a single tile to a full fit-out, if it goes into a building we can source it.</p>
+  <!-- ===== Recent work ===== -->
+  <section class="band" id="work">
+    <span class="eyebrow" data-en="Recent work" data-zh="近期项目">Recent work</span>
+    <h2 class="heading heading-sm" data-en="Real fit-outs we've delivered." data-zh="我们已交付的真实案例。">Real fit-outs we've delivered.</h2>
+    <p class="lead" data-en="A selection of completed projects — click any image to enlarge." data-zh="部分已完成项目——点击图片查看大图。">A selection of completed projects — click any image to enlarge.</p>
 
-      <div class="cat-group">
-        <h3 class="cat-label" data-en="Building materials" data-zh="建筑材料">Building materials</h3>
-        <div class="chips">
-          <span class="chip" data-en="Stone & sintered stone" data-zh="岩板与石材">Stone &amp; sintered stone</span>
-          <span class="chip" data-en="Flooring" data-zh="地板">Flooring</span>
-          <span class="chip" data-en="Tile" data-zh="瓷砖">Tile</span>
-          <span class="chip" data-en="Doors & windows" data-zh="门窗">Doors &amp; windows</span>
-          <span class="chip" data-en="Wall panels" data-zh="墙板">Wall panels</span>
-          <span class="chip" data-en="Lighting" data-zh="灯具">Lighting</span>
-        </div>
-      </div>
-
-      <div class="cat-group">
-        <h3 class="cat-label" data-en="Furniture & the materials to build it" data-zh="家具与制作材料">Furniture &amp; the materials to build it</h3>
-        <div class="chips">
-          <span class="chip" data-en="Wardrobes" data-zh="衣柜">Wardrobes</span>
-          <span class="chip" data-en="Kitchen cabinetry" data-zh="橱柜">Kitchen cabinetry</span>
-          <span class="chip" data-en="Display & storage" data-zh="储物展示柜">Display &amp; storage</span>
-          <span class="chip" data-en="Custom furniture" data-zh="定制家具">Custom furniture</span>
-          <span class="chip" data-en="TV & feature walls" data-zh="电视背景墙">TV &amp; feature walls</span>
-          <span class="chip" data-en="Boards & panels" data-zh="板材">Boards &amp; panels</span>
-          <span class="chip" data-en="Cabinet hardware" data-zh="柜体五金">Cabinet hardware</span>
-          <span class="chip" data-en="Stone & quartz worktops" data-zh="石英石台面">Stone &amp; quartz worktops</span>
-          <span class="chip chip-more" data-en="+ more on request" data-zh="更多可定制">+ more on request</span>
-        </div>
-      </div>
+    <div class="grid grid-work" id="gallery">
+      <figure class="ph" data-caption-en="Display & wine cabinet" data-caption-zh="酒柜与展示柜"><img src="assets/projects/project-01.jpg" alt="Display & wine cabinet" loading="lazy"></figure>
+      <figure class="ph" data-caption-en="Kitchen cabinetry" data-caption-zh="整体橱柜"><img src="assets/projects/project-02.jpg" alt="Kitchen cabinetry" loading="lazy"></figure>
+      <figure class="ph" data-caption-en="Entrance & wall paneling" data-caption-zh="玄关与木饰面"><img src="assets/projects/project-03.jpg" alt="Entrance & wall paneling" loading="lazy"></figure>
+      <figure class="ph" data-caption-en="TV feature wall" data-caption-zh="电视背景墙"><img src="assets/projects/project-04.jpg" alt="TV feature wall" loading="lazy"></figure>
+      <figure class="ph" data-caption-en="Sintered-stone feature wall" data-caption-zh="岩板背景墙"><img src="assets/projects/project-05.jpg" alt="Sintered-stone feature wall" loading="lazy"></figure>
+      <figure class="ph" data-caption-en="Slatted wall panels" data-caption-zh="格栅墙板"><img src="assets/projects/project-06.jpg" alt="Slatted wall panels" loading="lazy"></figure>
+      <figure class="ph" data-caption-en="Wardrobe & display niche" data-caption-zh="衣柜与展示位"><img src="assets/projects/project-07.jpg" alt="Wardrobe & display niche" loading="lazy"></figure>
+      <figure class="ph" data-caption-en="Walk-in wardrobe" data-caption-zh="步入式衣柜"><img src="assets/projects/project-08.jpg" alt="Walk-in wardrobe" loading="lazy"></figure>
+      <figure class="ph" data-caption-en="Bedroom wardrobe" data-caption-zh="卧室衣柜"><img src="assets/projects/project-09.jpg" alt="Bedroom wardrobe" loading="lazy"></figure>
+      <figure class="ph" data-caption-en="Walk-in wardrobe" data-caption-zh="衣帽间"><img src="assets/projects/project-10.jpg" alt="Walk-in wardrobe" loading="lazy"></figure>
     </div>
   </section>
 
-  <!-- ===== Featured Projects ===== -->
-  <section class="section section-alt" id="projects">
-    <div class="container">
-      <h2 class="section-title" data-en="Recent work" data-zh="近期项目">Recent work</h2>
-      <p class="section-sub" data-en="Real fit-outs we've delivered — click any image to enlarge." data-zh="我们已交付的真实案例——点击图片查看大图。">Real fit-outs we've delivered — click any image to enlarge.</p>
-
-      <div class="gallery" id="gallery">
-        <figure class="ph" data-caption-en="Display & wine cabinet" data-caption-zh="酒柜与展示柜"><img src="assets/projects/project-01.jpg" alt="Display & wine cabinet" loading="lazy"></figure>
-        <figure class="ph" data-caption-en="Kitchen cabinetry" data-caption-zh="整体橱柜"><img src="assets/projects/project-02.jpg" alt="Kitchen cabinetry" loading="lazy"></figure>
-        <figure class="ph" data-caption-en="Entrance & wall paneling" data-caption-zh="玄关与木饰面"><img src="assets/projects/project-03.jpg" alt="Entrance & wall paneling" loading="lazy"></figure>
-        <figure class="ph" data-caption-en="TV feature wall" data-caption-zh="电视背景墙"><img src="assets/projects/project-04.jpg" alt="TV feature wall" loading="lazy"></figure>
-        <figure class="ph" data-caption-en="Sintered-stone feature wall" data-caption-zh="岩板背景墙"><img src="assets/projects/project-05.jpg" alt="Sintered-stone feature wall" loading="lazy"></figure>
-        <figure class="ph" data-caption-en="Slatted wall panels" data-caption-zh="格栅墙板"><img src="assets/projects/project-06.jpg" alt="Slatted wall panels" loading="lazy"></figure>
-        <figure class="ph" data-caption-en="Wardrobe & display niche" data-caption-zh="衣柜与展示位"><img src="assets/projects/project-07.jpg" alt="Wardrobe & display niche" loading="lazy"></figure>
-        <figure class="ph" data-caption-en="Walk-in wardrobe" data-caption-zh="步入式衣柜"><img src="assets/projects/project-08.jpg" alt="Walk-in wardrobe" loading="lazy"></figure>
-        <figure class="ph" data-caption-en="Bedroom wardrobe" data-caption-zh="卧室衣柜"><img src="assets/projects/project-09.jpg" alt="Bedroom wardrobe" loading="lazy"></figure>
-        <figure class="ph" data-caption-en="Walk-in wardrobe" data-caption-zh="衣帽间"><img src="assets/projects/project-10.jpg" alt="Walk-in wardrobe" loading="lazy"></figure>
-      </div>
-    </div>
-  </section>
+  <hr class="rule">
 
   <!-- ===== Designs / catalog ===== -->
-  <section class="section" id="designs">
-    <div class="container">
-      <h2 class="section-title" data-en="Designs you can source" data-zh="可采购设计选款">Designs you can source</h2>
-      <p class="section-sub" data-en="Cabinetry & furniture designs ready to order and tailor — click any to enlarge." data-zh="可直接下单并定制的橱柜与家具设计——点击查看大图。">Cabinetry &amp; furniture designs ready to order and tailor — click any to enlarge.</p>
+  <section class="band" id="designs">
+    <span class="eyebrow" data-en="Designs you can source" data-zh="可采购设计选款">Designs you can source</span>
+    <h2 class="heading heading-sm" data-en="Cabinetry & furniture, ready to order and tailor." data-zh="可直接下单并定制的橱柜与家具。">Cabinetry &amp; furniture, ready to order and tailor.</h2>
+    <p class="lead" data-en="Designs we can source and build for your market — click any to enlarge." data-zh="可为您的市场采购并制作的设计——点击查看大图。">Designs we can source and build for your market — click any to enlarge.</p>
 
-      <div class="design-group">
-        <h3 class="market-label" data-en="Styled for North American homes" data-zh="适合北美市场">Styled for North American homes</h3>
-        <div class="gallery designs">
-          <figure class="ph" data-caption-en="Grey shaker kitchen" data-caption-zh="灰色简约橱柜"><img src="assets/designs/design-na-01.jpg" alt="Grey shaker kitchen" loading="lazy"></figure>
-          <figure class="ph" data-caption-en="Dark wood island kitchen" data-caption-zh="深木色中岛厨房"><img src="assets/designs/design-na-02.jpg" alt="Dark wood island kitchen" loading="lazy"></figure>
-          <figure class="ph" data-caption-en="Olive green classic kitchen" data-caption-zh="橄榄绿经典厨房"><img src="assets/designs/design-na-03.jpg" alt="Olive green classic kitchen" loading="lazy"></figure>
-          <figure class="ph" data-caption-en="Grey kitchen with island" data-caption-zh="灰调中岛厨房"><img src="assets/designs/design-na-04.jpg" alt="Grey kitchen with island" loading="lazy"></figure>
-          <figure class="ph" data-caption-en="Two-tone classic kitchen" data-caption-zh="双色经典厨房"><img src="assets/designs/design-na-05.jpg" alt="Two-tone classic kitchen" loading="lazy"></figure>
-          <figure class="ph" data-caption-en="Cream glass-front kitchen" data-caption-zh="奶油色玻璃门厨柜"><img src="assets/designs/design-na-06.jpg" alt="Cream glass-front kitchen" loading="lazy"></figure>
-        </div>
+    <div class="design-group">
+      <span class="col-label" data-en="Styled for North American homes" data-zh="适合北美市场">Styled for North American homes</span>
+      <div class="grid grid-designs">
+        <figure class="ph" data-caption-en="Grey shaker kitchen" data-caption-zh="灰色简约橱柜"><img src="assets/designs/design-na-01.jpg" alt="Grey shaker kitchen" loading="lazy"></figure>
+        <figure class="ph" data-caption-en="Dark wood island kitchen" data-caption-zh="深木色中岛厨房"><img src="assets/designs/design-na-02.jpg" alt="Dark wood island kitchen" loading="lazy"></figure>
+        <figure class="ph" data-caption-en="Olive green classic kitchen" data-caption-zh="橄榄绿经典厨房"><img src="assets/designs/design-na-03.jpg" alt="Olive green classic kitchen" loading="lazy"></figure>
+        <figure class="ph" data-caption-en="Grey kitchen with island" data-caption-zh="灰调中岛厨房"><img src="assets/designs/design-na-04.jpg" alt="Grey kitchen with island" loading="lazy"></figure>
+        <figure class="ph" data-caption-en="Two-tone classic kitchen" data-caption-zh="双色经典厨房"><img src="assets/designs/design-na-05.jpg" alt="Two-tone classic kitchen" loading="lazy"></figure>
+        <figure class="ph" data-caption-en="Cream glass-front kitchen" data-caption-zh="奶油色玻璃门厨柜"><img src="assets/designs/design-na-06.jpg" alt="Cream glass-front kitchen" loading="lazy"></figure>
       </div>
+    </div>
 
-      <div class="design-group">
-        <h3 class="market-label" data-en="Styled for Southeast Asia & Australia" data-zh="适合东南亚及澳洲市场">Styled for Southeast Asia &amp; Australia</h3>
-        <div class="gallery designs">
-          <figure class="ph" data-caption-en="Matte modern island kitchen" data-caption-zh="哑光现代中岛厨房"><img src="assets/designs/design-sea-01.jpg" alt="Matte modern island kitchen" loading="lazy"></figure>
-          <figure class="ph" data-caption-en="Modern kitchen, open shelving" data-caption-zh="现代开放层架厨房"><img src="assets/designs/design-sea-02.jpg" alt="Modern kitchen with open shelving" loading="lazy"></figure>
-          <figure class="ph" data-caption-en="Modular cabinet range" data-caption-zh="模块化橱柜系列"><img src="assets/designs/design-sea-03.jpg" alt="Modular cabinet range" loading="lazy"></figure>
-          <figure class="ph" data-caption-en="Cream modern island kitchen" data-caption-zh="奶油色现代中岛厨房"><img src="assets/designs/design-sea-04.jpg" alt="Cream modern island kitchen" loading="lazy"></figure>
-          <figure class="ph" data-caption-en="Wood modern kitchen" data-caption-zh="木纹现代厨房"><img src="assets/designs/design-sea-05.jpg" alt="Wood modern kitchen" loading="lazy"></figure>
-          <figure class="ph" data-caption-en="Dark modern kitchen" data-caption-zh="深色现代厨房"><img src="assets/designs/design-sea-06.jpg" alt="Dark modern kitchen" loading="lazy"></figure>
-        </div>
+    <div class="design-group">
+      <span class="col-label" data-en="Styled for Southeast Asia & Australia" data-zh="适合东南亚及澳洲市场">Styled for Southeast Asia &amp; Australia</span>
+      <div class="grid grid-designs">
+        <figure class="ph" data-caption-en="Matte modern island kitchen" data-caption-zh="哑光现代中岛厨房"><img src="assets/designs/design-sea-01.jpg" alt="Matte modern island kitchen" loading="lazy"></figure>
+        <figure class="ph" data-caption-en="Modern kitchen, open shelving" data-caption-zh="现代开放层架厨房"><img src="assets/designs/design-sea-02.jpg" alt="Modern kitchen with open shelving" loading="lazy"></figure>
+        <figure class="ph" data-caption-en="Modular cabinet range" data-caption-zh="模块化橱柜系列"><img src="assets/designs/design-sea-03.jpg" alt="Modular cabinet range" loading="lazy"></figure>
+        <figure class="ph" data-caption-en="Cream modern island kitchen" data-caption-zh="奶油色现代中岛厨房"><img src="assets/designs/design-sea-04.jpg" alt="Cream modern island kitchen" loading="lazy"></figure>
+        <figure class="ph" data-caption-en="Wood modern kitchen" data-caption-zh="木纹现代厨房"><img src="assets/designs/design-sea-05.jpg" alt="Wood modern kitchen" loading="lazy"></figure>
+        <figure class="ph" data-caption-en="Dark modern kitchen" data-caption-zh="深色现代厨房"><img src="assets/designs/design-sea-06.jpg" alt="Dark modern kitchen" loading="lazy"></figure>
       </div>
     </div>
   </section>
 
-  <!-- ===== How Sourcing Works ===== -->
-  <section class="section" id="process">
-    <div class="container">
-      <h2 class="section-title" data-en="Simple, end-to-end" data-zh="全流程，省心省力">Simple, end-to-end</h2>
-      <p class="section-sub" data-en="You tell us what you need; we handle China." data-zh="您提出需求，中国这端交给我们。">You tell us what you need; we handle China.</p>
+  <hr class="rule">
 
-      <div class="steps">
-        <div class="step"><span class="step-num">01</span><p data-en="Send your list, drawings, or a photo" data-zh="发来清单、图纸或一张照片">Send your list, drawings, or a photo</p></div>
-        <div class="step"><span class="step-num">02</span><p data-en="We source & quote from vetted factories" data-zh="从优选工厂采购并报价">We source &amp; quote from vetted factories</p></div>
-        <div class="step"><span class="step-num">03</span><p data-en="Production & quality check" data-zh="生产并质检">Production &amp; quality check</p></div>
-        <div class="step"><span class="step-num">04</span><p data-en="Export & ship to your site" data-zh="出口并发往您的工地">Export &amp; ship to your site</p></div>
-      </div>
-    </div>
+  <!-- ===== Process ===== -->
+  <section class="band" id="process">
+    <span class="eyebrow" data-en="How it works" data-zh="合作流程">How it works</span>
+    <h2 class="heading heading-sm" data-en="You tell us what you need; we handle China." data-zh="您提出需求，中国这端交给我们。">You tell us what you need; we handle China.</h2>
+
+    <ol class="steps">
+      <li class="step"><span class="step-num">01</span><span class="step-text" data-en="Send your list, drawings, or a photo" data-zh="发来清单、图纸或一张照片">Send your list, drawings, or a photo</span></li>
+      <li class="step"><span class="step-num">02</span><span class="step-text" data-en="We source & quote from vetted factories" data-zh="从优选工厂采购并报价">We source &amp; quote from vetted factories</span></li>
+      <li class="step"><span class="step-num">03</span><span class="step-text" data-en="Production & quality check" data-zh="生产并质检">Production &amp; quality check</span></li>
+      <li class="step"><span class="step-num">04</span><span class="step-text" data-en="Export & ship to your site" data-zh="出口并发往您的工地">Export &amp; ship to your site</span></li>
+    </ol>
   </section>
 
-  <!-- ===== Why JianRan ===== -->
-  <section class="section section-alt" id="why">
-    <div class="container">
-      <h2 class="section-title" data-en="Why contractors work with us" data-zh="为什么承包商选择我们">Why contractors work with us</h2>
-      <div class="why-grid">
-        <div class="why-card"><p data-en="One partner for every material & finish" data-zh="一个伙伴，搞定所有材料与饰面">One partner for every material &amp; finish</p></div>
-        <div class="why-card"><p data-en="Direct factory pricing — no middlemen" data-zh="工厂直供价——没有中间商">Direct factory pricing — no middlemen</p></div>
-        <div class="why-card"><p data-en="Custom joinery & made-to-spec" data-zh="定制木作，按图施作">Custom joinery &amp; made-to-spec</p></div>
-        <div class="why-card"><p data-en="Quality controlled before it ships" data-zh="发货前严格质检">Quality controlled before it ships</p></div>
-      </div>
-    </div>
+  <hr class="rule">
+
+  <!-- ===== Why ===== -->
+  <section class="band" id="why">
+    <span class="eyebrow" data-en="Why JianRan" data-zh="为什么选择简然">Why JianRan</span>
+    <h2 class="heading heading-sm" data-en="What contractors and developers get." data-zh="承包商与开发商获得什么。">What contractors and developers get.</h2>
+
+    <ul class="why">
+      <li><span class="why-no">01</span><span data-en="One partner for every material & finish" data-zh="一个伙伴，搞定所有材料与饰面">One partner for every material &amp; finish</span></li>
+      <li><span class="why-no">02</span><span data-en="Direct factory pricing — no middlemen" data-zh="工厂直供价——没有中间商">Direct factory pricing — no middlemen</span></li>
+      <li><span class="why-no">03</span><span data-en="Custom joinery & made-to-spec" data-zh="定制木作，按图施作">Custom joinery &amp; made-to-spec</span></li>
+      <li><span class="why-no">04</span><span data-en="Quality controlled before it ships" data-zh="发货前严格质检">Quality controlled before it ships</span></li>
+    </ul>
   </section>
+
+  <hr class="rule">
 
   <!-- ===== About ===== -->
-  <section class="section" id="about">
-    <div class="container about-inner">
-      <h2 class="section-title" data-en="About JianRan" data-zh="关于简然">About JianRan</h2>
-      <p class="about-body" data-en="JianRan is a Shanghai-based sourcing partner for building materials and furniture. We help contractors and developers source, manufacture, and ship everything a project needs — direct from China. We've recently begun serving clients worldwide, and we'd love to source your next project." data-zh="简然是一家立足上海的建材与家具采购伙伴。我们帮助承包商与开发商从中国直接采购、生产并运送项目所需的一切。我们近期开始服务全球客户，期待为您的下一个项目供货。">JianRan is a Shanghai-based sourcing partner for building materials and furniture. We help contractors and developers source, manufacture, and ship everything a project needs — direct from China. We've recently begun serving clients worldwide, and we'd love to source your next project.</p>
+  <section class="band split" id="about">
+    <div class="split-label">
+      <span class="eyebrow" data-en="About" data-zh="关于">About</span>
+      <span class="split-head" data-en="Shanghai-based. Sourcing worldwide." data-zh="立足上海，服务全球。">Shanghai-based. Sourcing worldwide.</span>
+    </div>
+    <div class="split-body">
+      <p class="body" data-en="JianRan is a Shanghai-based sourcing partner for building materials and furniture. We help contractors and developers source, manufacture, and ship everything a project needs — direct from China. We've recently begun serving clients worldwide, and we'd love to source your next project." data-zh="简然建材是一家立足上海的建材与家具采购伙伴。我们帮助承包商与开发商从中国直接采购、生产并运送项目所需的一切。我们近期开始服务全球客户，期待为您的下一个项目供货。">JianRan is a Shanghai-based sourcing partner for building materials and furniture. We help contractors and developers source, manufacture, and ship everything a project needs — direct from China. We've recently begun serving clients worldwide, and we'd love to source your next project.</p>
     </div>
   </section>
+
+  <hr class="rule">
 
   <!-- ===== Contact ===== -->
-  <section class="contact" id="contact">
-    <div class="container contact-inner">
-      <h2 data-en="Tell us what you need to source." data-zh="告诉我们您需要采购什么。">Tell us what you need to source.</h2>
-      <p class="contact-sub" data-en="Fastest reply on WhatsApp" data-zh="WhatsApp 回复最快">Fastest reply on WhatsApp</p>
+  <section class="band contact" id="contact">
+    <span class="eyebrow" data-en="Contact" data-zh="联系我们">Contact</span>
+    <h2 class="heading" data-en="Tell us what you need to source." data-zh="告诉我们您需要采购什么。">Tell us what you need to source.</h2>
+    <p class="lead" data-en="Fastest reply on WhatsApp." data-zh="WhatsApp 回复最快。">Fastest reply on WhatsApp.</p>
 
-      <div class="contact-channels">
-        <a class="channel channel-wa" href="https://wa.me/8613727347201" target="_blank" rel="noopener">
-          <svg viewBox="0 0 32 32" width="26" height="26" aria-hidden="true"><path fill="currentColor" d="M16 3C9.4 3 4 8.4 4 15c0 2.1.6 4.1 1.6 5.9L4 29l8.3-1.6c1.7.9 3.7 1.4 5.7 1.4 6.6 0 12-5.4 12-12S22.6 3 16 3zm0 21.8c-1.8 0-3.5-.5-5-1.4l-.4-.2-4.9 1 1-4.8-.2-.4c-1-1.6-1.5-3.4-1.5-5.3 0-5.5 4.5-10 10-10s10 4.5 10 10-4.5 10.1-10 10.1zm5.5-7.4c-.3-.2-1.8-.9-2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.1-.2.2-.3.2-.6.1-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.5c.2-.2.2-.3.3-.5.1-.2.1-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.3 5.2 4.6.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4-.1-.2-.3-.3-.6-.4z"/></svg>
-          <span class="channel-label">WhatsApp</span>
-          <span class="channel-val">+86 137 2734 7201</span>
-        </a>
-        <div class="channel channel-wc is-placeholder" title="Coming soon">
-          <svg viewBox="0 0 32 32" width="26" height="26" aria-hidden="true"><path fill="currentColor" d="M12 5C6.5 5 2 8.7 2 13.3c0 2.6 1.5 4.9 3.8 6.5L5 23l3.3-1.6c.9.2 1.8.4 2.7.4h.7a6.7 6.7 0 0 1-.3-2c0-4 3.9-7.1 8.6-7.1h.8C20.2 8.3 16.5 5 12 5zm-3.3 4.2c.6 0 1.1.5 1.1 1.1s-.5 1.1-1.1 1.1-1.2-.5-1.2-1.1.5-1.1 1.2-1.1zm6.6 0c.6 0 1.1.5 1.1 1.1s-.5 1.1-1.1 1.1-1.2-.5-1.2-1.1.6-1.1 1.2-1.1zM22 14c-4 0-7.2 2.7-7.2 6.1S18 26.1 22 26.1c.8 0 1.6-.1 2.4-.4l2.6 1.3-.7-2.4c1.7-1.2 2.7-3 2.7-4.5 0-3.3-3.2-6.1-7-6.1zm-2.4 4c.5 0 .9.4.9.9s-.4.9-.9.9-1-.4-1-.9.5-.9 1-.9zm4.8 0c.5 0 .9.4.9.9s-.4.9-.9.9-1-.4-1-.9.5-.9 1-.9z"/></svg>
-          <span class="channel-label">WeChat</span>
-          <span class="channel-val" data-en="Coming soon" data-zh="即将开放">Coming soon</span>
-        </div>
+    <div class="channels">
+      <a class="channel channel-wa" href="https://wa.me/8613727347201" target="_blank" rel="noopener">
+        <span class="channel-label" data-en="WhatsApp" data-zh="WhatsApp">WhatsApp</span>
+        <span class="channel-val">+86 137 2734 7201</span>
+        <span class="channel-go" data-en="Message us →" data-zh="发消息 →">Message us →</span>
+      </a>
+      <div class="channel channel-wc is-placeholder">
+        <span class="channel-label" data-en="WeChat" data-zh="微信">WeChat</span>
+        <span class="channel-val" data-en="Coming soon" data-zh="即将开放">Coming soon</span>
+        <span class="channel-go" data-en="WeChat ID to follow" data-zh="微信号即将公布">WeChat ID to follow</span>
       </div>
     </div>
-    <footer class="footer">
-      <div class="container" data-en="简然建材 JianRan · Shanghai, China · Building materials & furniture sourcing · © 2026" data-zh="简然建材 JianRan · 中国·上海 · 建材与家具采购 · © 2026">简然建材 JianRan · Shanghai, China · Building materials &amp; furniture sourcing · © 2026</div>
-    </footer>
   </section>
+
+  <footer class="footer">
+    <span class="foot-mark">简然建材 JIANRAN</span>
+    <span class="foot-meta" data-en="Shanghai, China · Building materials & furniture sourcing · © 2026" data-zh="中国·上海 · 建材与家具采购 · © 2026">Shanghai, China · Building materials &amp; furniture sourcing · © 2026</span>
+  </footer>
 
   <!-- ===== Lightbox ===== -->
   <div class="lightbox" id="lightbox" aria-hidden="true">
