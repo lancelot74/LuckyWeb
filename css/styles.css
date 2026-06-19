@@ -129,6 +129,7 @@ img,canvas,video{display:block;max-width:100%}
 .work-band .section-title,.work-band .section-lede{color:var(--cream)}
 .work-band .eyebrow .bar{background:#322d24}
 .work-feature{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:44px}
+.work-feature > a:last-child:nth-child(odd){grid-column:1/-1}
 .wcard{background:#1b1812;border-color:#322d24;color:var(--cream)}
 .wcard .card-media{aspect-ratio:16/10;background:#13110c}
 .wcard .card-media img,.wcard .card-media video{width:100%;height:100%;object-fit:cover}
