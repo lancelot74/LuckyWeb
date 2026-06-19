@@ -2,38 +2,6 @@
 (function () {
   'use strict';
 
-  var STORAGE_KEY = 'jianran-lang';
-  var currentLang = localStorage.getItem(STORAGE_KEY) || 'en';
-
-  /* ---------- Language ---------- */
-  var toggle = document.getElementById('langToggle');
-  var translatable = document.querySelectorAll('[data-en]');
-  var figures = Array.prototype.slice.call(document.querySelectorAll('.ph'));
-
-  function applyLang(lang) {
-    currentLang = lang;
-    document.documentElement.lang = (lang === 'zh') ? 'zh' : 'en';
-    translatable.forEach(function (el) {
-      var val = el.getAttribute('data-' + lang);
-      if (val !== null) el.textContent = val;
-    });
-    figures.forEach(function (fig) {
-      fig.setAttribute('data-cap', fig.getAttribute('data-caption-' + lang) || '');
-    });
-    if (toggle) {
-      toggle.classList.toggle('lang-en', lang === 'en');
-      toggle.classList.toggle('lang-zh', lang === 'zh');
-    }
-    localStorage.setItem(STORAGE_KEY, lang);
-    if (lightbox.classList.contains('open')) showSlide(lbIndex);
-  }
-
-  if (toggle) {
-    toggle.addEventListener('click', function () {
-      applyLang(currentLang === 'en' ? 'zh' : 'en');
-    });
-  }
-
   /* ---------- Mobile nav ---------- */
   var hamburger = document.getElementById('hamburger');
   var nav = document.getElementById('nav');
@@ -70,6 +38,7 @@
   var lightbox = document.getElementById('lightbox');
   var lbImg = document.getElementById('lbImg');
   var lbCaption = document.getElementById('lbCaption');
+  var figures = Array.prototype.slice.call(document.querySelectorAll('.ph'));
   var lbIndex = 0;
 
   function showSlide(i) {
@@ -79,7 +48,7 @@
     var img = fig.querySelector('img');
     lbImg.src = img.getAttribute('src');
     lbImg.alt = img.getAttribute('alt') || '';
-    lbCaption.textContent = fig.getAttribute('data-caption-' + currentLang) || '';
+    lbCaption.textContent = fig.getAttribute('data-caption') || '';
   }
 
   function openLightbox(i) {
@@ -111,7 +80,4 @@
     else if (e.key === 'ArrowLeft') showSlide(lbIndex - 1);
     else if (e.key === 'ArrowRight') showSlide(lbIndex + 1);
   });
-
-  /* ---------- init ---------- */
-  applyLang(currentLang);
 })();
