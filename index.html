@@ -9,6 +9,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Inter+Tight:wght@400;450;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
+  <!-- Warm the closed first-paint poster + the build's first frame ahead of the GSAP CDN + module -->
+  <link rel="preload" as="image" href="assets/hero/hero-poster-closed.webp">
+  <link rel="preload" as="image" href="assets/hero/frame-001.webp">
 </head>
 <body>
   <nav class="nav">
@@ -25,11 +28,11 @@
   </nav>
 
   <main>
-    <header class="hero" id="hero" data-frames="121">
+    <header class="hero" id="hero" data-frames="76">
       <canvas class="hero-particles" aria-hidden="true"></canvas>
       <canvas class="hero-scrub" aria-hidden="true"></canvas>
-      <img class="hero-poster" src="assets/hero/hero-poster.webp" alt="" aria-hidden="true">
-      <video class="hero-video" playsinline muted preload="none" poster="assets/hero/hero-poster.webp" aria-hidden="true">
+      <img class="hero-poster" src="assets/hero/hero-poster-closed.webp" alt="" aria-hidden="true">
+      <video class="hero-video" playsinline muted preload="none" poster="assets/hero/hero-poster-closed.webp" aria-hidden="true">
         <source src="assets/hero/hero.webm" type="video/webm">
         <source src="assets/hero/hero.mp4" type="video/mp4">
       </video>

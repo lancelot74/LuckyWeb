@@ -27,7 +27,13 @@ function initHero(hero) {
       '<source src="assets/hero/hero-phone.mp4" type="video/mp4">';
     video.load();
   }
-  if (reduce) { scrub.style.display = 'none'; poster.style.display = 'block'; return; } // static frame
+  if (reduce) {
+    // Static frame: the FINISHED/open laptop is the desirable still. The HTML ships the CLOSED frame
+    // as the poster (so the pre-JS load state is never an open-frame flash), so swap to the open frame
+    // here — unless this is a phone, where the branch above already set the portrait phone poster.
+    if (!isMobile) poster.src = 'assets/hero/hero-poster.webp';
+    scrub.style.display = 'none'; poster.style.display = 'block'; return;
+  }
   if (isMobile || !window.gsap || !window.ScrollTrigger) {
     // Mobile / no-GSAP fallback: poster + looping video (no pinned scrub)
     scrub.style.display = 'none'; poster.style.display = 'none';
@@ -92,36 +98,57 @@ function initCountUp(hero) {
 }
 
 function initScrub(hero, canvas, poster) {
-  const count = parseInt(hero.dataset.frames, 10) || 120;
+  const count = parseInt(hero.dataset.frames, 10) || 76;
   // HOLD: the closed laptop holds for the first slice of the locked scroll, so the visitor scrolls
   // down a bit and takes in the whole machine BEFORE the build begins — the lock engages, then the
   // animation "starts a bit lower". Frame 0 is the closed laptop; the build runs across the rest.
   const HOLD = 0.15;
   const ctx = canvas.getContext('2d');
   const frames = [];
+  const decoded = new Array(count).fill(false); // per-frame "safe to draw without a sync decode" gate
   const pad = (i) => String(i).padStart(3, '0');
   for (let i = 1; i <= count; i++) {
     const img = new Image();
-    img.decoding = 'async'; // decode off the main thread so the 121-frame preload doesn't jank load
+    img.decoding = 'async'; // never block the main thread to decode
     img.src = `assets/hero/frame-${pad(i)}.webp`;
-    if (i === 1) img.onload = () => drawFrame(0); // closed laptop paints the moment it arrives
+    const idx = i - 1;
+    // Decode each frame fully (off the main thread) before we let drawFrame touch it. Until then
+    // drawFrame falls back to the nearest already-decoded frame, so we never draw blank and never
+    // force a multi-second synchronous decode inside drawImage while the user is scrolling.
+    img.decode ? img.decode().then(mark, mark) : (img.onload = mark);
+    function mark() { decoded[idx] = true; if (idx === 0) ready(); }
     frames.push(img);
   }
+
+  // READINESS / Z-ORDER GATE: the CLOSED-laptop poster (frame-001, set in the HTML) is the static
+  // load image. The poster comes AFTER the canvas in the DOM and shares z-index:0, so it PAINTS ON
+  // TOP of the (initially blank) canvas and covers it during load. We retire the poster (display:none)
+  // only inside ready() — the instant the canvas has drawn frame-001. Seamless: hero-poster-closed.webp
+  // is byte-identical to frame-001.
+
   let st = null;
+  // Pick the frame to draw, but never draw an undecoded one (would be blank or sync-decode-jank).
+  // Walk down to the nearest lower frame that is decoded; that keeps the build monotonic while the
+  // network catches up, instead of flashing blank or snapping forward to a frame that isn't ready.
+  const safeIndex = (want) => { let i = want; while (i > 0 && !decoded[i]) i--; return decoded[i] ? i : -1; };
   // Map scroll progress → frame: hold the closed laptop for the first HOLD slice, then build.
   const render = (p) => {
     const mapped = p <= HOLD ? 0 : (p - HOLD) / (1 - HOLD);
-    drawFrame(frameIndexForProgress(mapped, count));
+    drawFrame(safeIndex(frameIndexForProgress(mapped, count)));
   };
   // Resizing the canvas (incl. ScrollTrigger's pin refresh) clears it, so repaint from LIVE progress
   // — never a stale index (ScrollTrigger sweeps progress to 1 during pin setup, which we must ignore).
   const fit = () => { canvas.width = hero.offsetWidth; canvas.height = hero.offsetHeight; render(st ? st.progress : 0); };
   fit(); addEventListener('resize', fit);
-  poster.style.display = 'none';
-  if (frames[0].complete && frames[0].naturalWidth) render(0); // already cached → paint closed laptop
+
+  // The frame-001 decode callback (or the cached fast-path) is the ONLY thing that first paints the
+  // canvas and retires the poster. It repaints from LIVE progress, not a hard-coded index, so a late
+  // frame-001 decode can never "snap back to the start" over wherever the user has already scrolled.
+  function ready() { render(st ? st.progress : 0); poster.style.display = 'none'; }
 
   function drawFrame(idx) {
-    const img = frames[idx]; if (!img || !img.complete || !img.naturalWidth) return;
+    if (idx < 0) return; // nothing decoded yet — leave the current canvas contents alone
+    const img = frames[idx]; if (!img.naturalWidth) return;
     const cw = canvas.width, ch = canvas.height;
     const scale = Math.max(cw / img.naturalWidth, ch / img.naturalHeight);
     const dw = img.naturalWidth * scale, dh = img.naturalHeight * scale;
@@ -138,5 +165,5 @@ function initScrub(hero, canvas, poster) {
     trigger: hero, start: 'top top', end: '+=240%', pin: true, scrub: 0.3,
     onUpdate: (self) => render(self.progress),
   });
-  render(0); // resting state after setup: closed laptop, regardless of the setup progress sweep
+  render(st.progress); // resting state after setup, drawn from LIVE progress (not a forced index 0)
 }
