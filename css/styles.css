@@ -119,6 +119,7 @@ img,canvas,video{display:block;max-width:100%}
 .contact-detail{margin-top:24px;display:flex;flex-direction:column;gap:8px}
 .contact-detail .row{display:flex;gap:14px}
 .contact-form{display:flex;flex-direction:column;gap:14px}
+.contact-form .form-head{font-size:22px;color:var(--ink);margin-bottom:4px}
 .contact-form label{display:flex;flex-direction:column;gap:6px}
 .contact-form .mono,.contact-form label span{font-family:var(--font-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
 .contact-form input,.contact-form textarea{font-family:var(--font-body);font-size:16px;padding:12px 14px;border:1px solid var(--hair);border-radius:8px;background:#FAF8F2}

@@ -40,7 +40,7 @@ function initForm() {
     e.preventDefault();
     if (!form.checkValidity()) { note.textContent = 'Please fill every field.'; return; }
     const data = new FormData(form);
-    const body = encodeURIComponent(`From: ${data.get('name')} <${data.get('email')}>\n\n${data.get('message')}`);
+    const body = encodeURIComponent(`From: ${data.get('name')} <${data.get('email')}>\nWhatsApp: ${data.get('whatsapp')}\n\n${data.get('message')}`);
     window.location.href = `mailto:info@luckyweb.org?subject=New%20project%20enquiry&body=${body}`;
     note.textContent = 'Opening your email client…';
   });
