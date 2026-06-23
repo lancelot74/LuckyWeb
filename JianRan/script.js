@@ -1,4 +1,4 @@
-/* ===== JianRan — interactions ===== */
+/* ===== China — interactions ===== */
 (function () {
   'use strict';
 
